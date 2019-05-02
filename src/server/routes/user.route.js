@@ -5,7 +5,7 @@ let userRoutes = express.Router();
 const jwt = require('jsonwebtoken');
 
 //import the user model we going to work with
-let User = require('./models/user.model');
+let User = require('../models/user.model');
 
 //define the store route
 userRoutes.route('/signup').post((req,res) => {
@@ -24,8 +24,8 @@ userRoutes.route('/signup').post((req,res) => {
                 } else {
                     let user = new User({
                         _id: new mongoose.Types.ObjectId(),
-                        firstName: req.body.first_name,
-                        lastName: req.body.last_name,
+                        firstName: req.body.firstName,
+                        lastName: req.body.lastName,
                         password: hash,
                         birthday: req.body.birthday,
                         gender: req.body.gender,
