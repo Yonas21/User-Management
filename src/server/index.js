@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const PORT = 4000;
 const cors = require('cors');
 const mongoose = require('mongoose');
+const morgan  = require('mor')
 
 const config = require('./DB');
 
