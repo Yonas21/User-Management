@@ -11,6 +11,7 @@ import { LoginComponent } from './login/login.component';
 import { HeaderComponent } from './homepage/header/header.component';
 import { FooterComponent } from './homepage/footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { HttpClientModule } from '@angular/common/http';
       FormsModule,
       ReactiveFormsModule,
       AngularFontAwesomeModule,
-      HttpClientModule
+      HttpClientModule,
+      BrowserAnimationsModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

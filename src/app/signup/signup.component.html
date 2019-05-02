@@ -8,20 +8,20 @@
                         <div class="col-6">
                             <div class="input-group">
                                 <label class="label">first name</label>
-                                <input class="input--style-4" type="text" name="first_name" #firstname>
+                                <input class="input--style-4" type="text" name="first_name" #firstName>
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="input-group">
                                 <label class="label">last name</label>
-                                <input class="input--style-4" type="text" name="last_name" #lastname>
+                                <input class="input--style-4" type="text" name="last_name" #lastName>
                             </div>
                         </div>
 
                         <div class="col-6">
                             <div class="input-group">
                                 <label class="label">Password</label>
-                                <input class="input--style-4" type="password" name="password" #password>
+                                <input class="input--style-4" type="password" name="password" #password autocomplete="false">
                             </div>
                         </div>
                     </div>
@@ -73,7 +73,7 @@
                         </div>
                     </div>
                     <div class="p-t-15">
-                        <button type="submit" (click)="addUser(firstname.value, lastname.value,password.value,birthday.value,gender.value,email.value,phoneNo.value,address.value)" class="btn btn--radius-2 btn--blue">Submit</button>
+                        <button type="submit" (click)="addUser(firstName.value, lastName.value,password.value,birthday.value,gender.value,email.value,phoneNo.value,address.value)" class="btn btn--radius-2 btn--blue">Submit</button>
                     </div>
                 </form>
             </div>
