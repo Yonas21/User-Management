@@ -8,7 +8,8 @@ const wishlistSchema = mongoose.Schema({
         required: true
     },
     ownedby: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "users",
         required: true
     }
 },
