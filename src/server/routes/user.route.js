@@ -51,7 +51,7 @@ userRoutes.route('/signup').post((req,res) => {
 
 //log into our account
 userRoutes.route('/login').post((req,res) => {
-    User.find({email: req.body.email})
+    User.find({email: req.body.username})
         .exec()
         .then((user) => {
             if (user.length < 1) {
@@ -60,10 +60,12 @@ userRoutes.route('/login').post((req,res) => {
                 });
             } else {
                 bcrypt.compare(req.body.password,user[0].password, (err, result) => {
+                    
                     if (err) {
                         return res.status(401).json({
                             message: 'Authorization Failed'
                         });
+                        console.log(`${req.body.email} + ${req.body.password}`)
                     }
                     if (result) {
                         const token = jwt.sign({
@@ -79,10 +81,12 @@ userRoutes.route('/login').post((req,res) => {
                             token: token
                         });
                     }
+                
 
                     res.status(401).json({
                         message: 'Authorization Failed'
                     });
+                    console.log(`${req.body.username} + ${req.body.password}`)
                 })
             }
         })

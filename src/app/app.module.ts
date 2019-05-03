@@ -12,6 +12,8 @@ import { HeaderComponent } from './homepage/header/header.component';
 import { FooterComponent } from './homepage/footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgFlashMessagesModule } from 'ng-flash-messages';
+  
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       ReactiveFormsModule,
       AngularFontAwesomeModule,
       HttpClientModule,
-      BrowserAnimationsModule
+      BrowserAnimationsModule,
+      NgFlashMessagesModule.forRoot()
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

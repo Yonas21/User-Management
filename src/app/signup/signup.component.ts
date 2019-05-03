@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService} from '../user.service';
 import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { NgFlashMessagesModule, NgFlashMessageService } from 'ng-flash-messages';
 
 @Component({
   selector: 'app-signup',
@@ -13,7 +14,7 @@ export class SignupComponent implements OnInit {
     createForm: FormGroup;
 
 
-  constructor(private userService: UserService, private router: Router, private fb: FormBuilder) {
+  constructor(private userService: UserService, private router: Router, private fb: FormBuilder,private flashMessage: NgFlashMessageService) {
       this.createForm = this.fb.group({
           firstName: ['', Validators.required],
           lastName: '',
@@ -29,6 +30,12 @@ export class SignupComponent implements OnInit {
 
     addUser(firstName, lastName, password, birthday, gender, email, phoneNo, address) {
       this.userService.addUser(firstName, lastName, password, birthday, gender, email, phoneNo, address).subscribe(() => {
+          this.flashMessage.showFlashMessage({
+            messages: ["user Successfully Registered."],
+            dismissible: true,
+            timeout: false,
+            type: 'info'
+          })
           this.router.navigate(['/home']);
       });
     }

@@ -75,6 +75,9 @@
                     <div class="p-t-15">
                         <button type="submit" (click)="addUser(firstName.value, lastName.value,password.value,birthday.value,gender.value,email.value,phoneNo.value,address.value)" class="btn btn--radius-2 btn--blue">Submit</button>
                     </div>
+                    <div class="p-t-15">
+                        <ng-flash-message></ng-flash-message>
+                    </div>
                 </form>
             </div>
         </div>

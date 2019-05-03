@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Router} from '@angular/router';
+import { catchError, map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,8 @@ import {Router} from '@angular/router';
 export class UserService {
     uri = 'http://localhost:4000';
     private token: any;
-    private user: any;
+    username: String;
+    password: String;
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -41,15 +43,22 @@ export class UserService {
 
       return this.token;
   }
+  
+  authenticateUser(username, password){
+      const user = {
+          username,
+          password
+      };
+      return this.http.post(`${this.uri}/user/login`, user, { responseType: 'json' }).pipe(map(res => {
+          message:res
+      }));
+
+  }
 
    logout() {
       this.token = '';
       window.localStorage.removeItem('user-token');
       this.router.navigateByUrl('/home');
   }
-
-
-
-
 
 }
