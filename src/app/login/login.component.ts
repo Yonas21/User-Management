@@ -12,6 +12,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class LoginComponent implements OnInit {
 
   loginForm : FormGroup;
+  private message: String;
 
     constructor(
       private userService: UserService, 
@@ -27,8 +28,35 @@ export class LoginComponent implements OnInit {
 
       onLoginSubmit(username, password) {
         this.userService.authenticateUser(username, password).subscribe(data => {
-          console.log(data);
-          this.router.navigate(['/home']);
+          
+          if(!data) {
+            this.flashMessage.showFlashMessage({
+              messages: ["unable to find data"],
+              dismissible: true,
+               timeout: false,
+               type: 'danger'
+            })
+          } else {
+            let arr = [];
+            for (const message in data) {
+              if (data.hasOwnProperty(message)) {
+                arr.push(data[message]);
+
+                this.userService.saveToken(arr[1]);
+
+
+                this.flashMessage.showFlashMessage({
+                  messages: ['Logged in Successfully.'],
+                  dismissible: true,
+                  timeout: 5000,
+                  type: 'success'
+                });
+              }
+            }
+            
+            
+            // this.router.navigate(['/home']);
+          }
         })
 
       }

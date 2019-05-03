@@ -31,28 +31,12 @@ export class UserService {
       return this.http.post(`${this.uri}/user/signup`, user,{responseType:'json'});
   }
 
-  saveToken(token) {
-      localStorage.setItem('user-token', token);
-      this.token = token;
-  }
-
-  getToken() {
-      if (!this.token) {
-          this.token = localStorage.getItem('user-token');
-      }
-
-      return this.token;
-  }
-  
   authenticateUser(username, password){
       const user = {
           username,
           password
       };
-      return this.http.post(`${this.uri}/user/login`, user, { responseType: 'json' }).pipe(map(res => {
-          message:res
-      }));
-
+      return this.http.post(`${this.uri}/user/login`, user, { responseType: 'json' });
   }
 
    logout() {
@@ -60,5 +44,19 @@ export class UserService {
       window.localStorage.removeItem('user-token');
       this.router.navigateByUrl('/home');
   }
+
+    saveToken(token) {
+        localStorage.setItem('user-token', token);
+        this.token = token;
+    }
+
+    getToken() {
+        if (!this.token) {
+            this.token = localStorage.getItem('user-token');
+        }
+
+        return this.token;
+    }
+    
 
 }
