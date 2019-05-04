@@ -1,5 +1,7 @@
+const mongoose = require("mongoose");
+
 let Order = require("../models/order.model");
-let Product  = require('../models/product.model');
+let Product = require("../models/product.model");
 
 exports.orders_get_all = (req, res, next) => {
     Order.find()
@@ -33,6 +35,7 @@ exports.orders_get_all = (req, res, next) => {
 exports.orders_create_order = (req, res, next) => {
     //check if the product we want to order is exist.
     let id = req.body.productId;
+    console.log(id);
     Product.findById(id)
         .then(product => {
             if (!product) {
