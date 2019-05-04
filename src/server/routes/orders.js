@@ -3,14 +3,15 @@ const mongoose = require("mongoose");
 
 let Order = require("../models/order.model");
 let Product = require("../models/product.model");
+let checkAuth = require("../middleware/check-auth");
 
 const router = express.Router();
 
 //find out all the orders that were before
-router.get("/", (req, res, next) => {
+router.get("/", checkAuth, (req, res, next) => {
     Order.find()
         .select("quantity _id product")
-        .populate('product','name')
+        .populate("product", "name")
         .exec()
         .then(results => {
             res.status(200).json({
@@ -35,6 +36,8 @@ router.get("/", (req, res, next) => {
 router.post("/", (req, res, next) => {
     //check if the product we want to order is exist.
     let id = req.body.productId;
+    let quantity = req.body.quantity;
+    console.log(quantity);
     Product.findById(id)
         .then(product => {
             if (!product) {
@@ -72,7 +75,7 @@ router.post("/", (req, res, next) => {
 });
 
 //find out individual orders//details
-router.get("/:orderId", (req, res, next) => {
+router.get("/:orderId", checkAuth, (req, res, next) => {
     Order.findById(req.params.orderId)
         .exec()
         .then(order => {
@@ -94,7 +97,7 @@ router.get("/:orderId", (req, res, next) => {
 });
 
 // delete the orders
-router.delete("/:orderId", (req, res, next) => {
+router.delete("/:orderId", checkAuth, (req, res, next) => {
     Order.deleteOne({ _id: req.params.orderId })
         .exec()
         .then(result => {

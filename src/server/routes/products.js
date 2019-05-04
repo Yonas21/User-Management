@@ -1,6 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const multer = require("multer");
+const checkAuth = require("../middleware/check-auth");
+let router = express.Router();
 
 //filter the kinds of images to be stored.
 const imageFilter = (req, file, cb) => {
@@ -25,7 +27,6 @@ let upload = multer({
     limits: 1024 * 1024 * 10,
     fileFilter: imageFilter
 });
-let router = express.Router();
 let Product = require("../models/product.model");
 
 //get all the products
@@ -60,7 +61,7 @@ router.get("/", (req, res, next) => {
 });
 
 //add a product
-router.post("/", upload.single("productImage"), (req, res, next) => {
+router.post("/", checkAuth , upload.single("productImage"), (req, res, next) => {
     //set up the inputs for the database
     let product = new Product({
         _id: mongoose.Types.ObjectId(),
@@ -122,7 +123,7 @@ router.get("/:productId", (req, res, next) => {
 });
 
 //update the individual products
-router.patch("/:productId", (req, res, next) => {
+router.patch("/:productId", checkAuth, (req, res, next) => {
     let id = req.params.productId;
     Product.findOneAndUpdate(id, {
         $set: { name: req.body.newName, price: req.body.newPrice }
@@ -147,7 +148,7 @@ router.patch("/:productId", (req, res, next) => {
 });
 
 //update the individual products
-router.delete("/:productId", (req, res, next) => {
+router.delete("/:productId",checkAuth,  (req, res, next) => {
     let id = req.params.productId;
     Product.findByIdAndRemove(id)
         .exec()
