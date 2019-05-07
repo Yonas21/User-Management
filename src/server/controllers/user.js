@@ -63,7 +63,7 @@ exports.authenticate = (req, res) => {
                         const token = jwt.sign({
                             email: user[0].email,
                             userId: user[0]._id
-                        }, "website",
+                        }, process.env.JWT_SECRET ,
                             {
                                 expiresIn: "1h"
                             });

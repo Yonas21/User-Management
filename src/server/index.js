@@ -5,6 +5,7 @@ const PORT = 4000;
 const cors = require("cors");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
+require("dotenv").config();
 
 const config = require("./DB");
 
@@ -13,7 +14,7 @@ let productRouter = require("./routes/products");
 let orderRouter = require("./routes/orders");
 
 mongoose.Promise = global.Promise;
-mongoose.connect(config.DB, { useNewUrlParser: true }).then(
+mongoose.connect(process.env.DB, { useNewUrlParser: true }).then(
     () => {
         console.log("Database is connected");
     },
