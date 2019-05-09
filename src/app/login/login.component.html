@@ -1,71 +1,81 @@
-<div class="limiter">
-    <div class="container-login100">
-        <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
-            <form class="login100-form validate-form" [formGroup]="loginForm" style="margin-top:40px">
-                <div class="card-header">
-                    <h2>Login</h2>
+<!--================Home Banner Area =================-->
+<section class="banner_area">
+    <div class="banner_inner d-flex align-items-center">
+        <div class="container">
+            <div class="banner_content text-center">
+                <h2>Login/Register</h2>
+                <div class="page_link">
+                    <a href="/home">Home</a>
+                    <a href="/login">Login</a>
                 </div>
-                <div class="wrap-input100 validate-input m-b-23" data-validate = "Username is required">
-
-                    <span class="label-input100">Username</span>
-                    <input class="input100" type="email" name="username" placeholder="Type your username" #username>
-                    <span class="focus-input100" data-symbol="&#xf206;"></span>
-                </div>
-
-                <div class="wrap-input100 validate-input" data-validate="Password is required">
-                    <span class="label-input100">Password</span>
-                    <input class="input100" type="password" name="password" placeholder="Type your password" autocomplete="off" #password>
-                    <span class="focus-input100" data-symbol="&#xf190;"></span>
-                </div>
-                <div class="text-right p-t-8 p-b-31">
-                    <a href="#">
-                        Forgot password?
-                    </a>
-                </div>
-
-                <div class="container-login100-form-btn">
-                    <div class="wrap-login100-form-btn">
-                        <div class="login100-form-bgbtn"></div>
-                        <button class="login100-form-btn" (click) = "onLoginSubmit(username.value, password.value)">
-                            Login
-                        </button>
-                    </div>
-                </div>
-                <!-- this is the information box -->
-                <div class="card">
-                    <ng-flash-message></ng-flash-message>
-                </div>
-
-                <div class="txt1 text-center p-t-54 p-b-20">
-						<span>
-							Or Sign Up Using
-						</span>
-                </div>
-
-                <div class="flex-c-m">
-                    <a href="#" class="login100-social-item bg1">
-                        <i class="fa fa-facebook"></i>
-                    </a>
-
-                    <a href="#" class="login100-social-item bg2">
-                        <i class="fa fa-twitter"></i>
-                    </a>
-
-                    <a href="#" class="login100-social-item bg3">
-                        <i class="fa fa-google"></i>
-                    </a>
-                </div>
-
-                <div class="flex-col-c p-t-155">
-						<span class="txt1 p-b-17">
-							Or Sign Up Using
-						</span>
-
-                    <a routerLink="/signup" class="txt2">
-                        Sign Up
-                    </a>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
-</div>
+</section>
+<!--================End Home Banner Area =================-->
+
+<!--================Login Box Area =================-->
+<section class="login_box_area p_120">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="login_box_img">
+                    <img class="img-fluid" src="../../assets/homepage/img/login.jpg" alt="">
+                    <div class="hover">
+                        <h4>New to our website?</h4>
+                        <p>There are advances being made in science and technology everyday, and a good example of this
+                            is the</p>
+                        <a class="main_btn" href="/signup">Create an Account</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="login_form_inner">
+                    <h3>Log in to enter</h3>
+                    <form class="row login_form" method="post" id="contactForm"
+                        novalidate="novalidate" [formGroup]="loginForm">
+                        <div class="col-md-12 form-group">
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Username" #username>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <input type="password" class="form-control" id="psw" name="password" placeholder="Password" #password>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <div class="creat_account">
+                                <input type="checkbox" id="f-option2" name="selector">
+                                <label for="f-option2">Keep me logged in</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <button type="submit" (click)="onLoginSubmit(username.value,password.value)" class="btn submit_btn">Log In</button>
+                            <a href="#">Forgot Password?</a>
+                        </div>
+
+                        <div class="card">
+                            <ng-flash-message></ng-flash-message>
+                        </div>
+                        <div class="txt1 text-center p-t-54 p-b-20">
+                            <span>
+                                Or Sign Up Using
+                            </span>
+                        </div>
+
+                        <div class="flex-c-m">
+                            <a href="#" class="login100-social-item bg1">
+                                <i class="fa fa-facebook"></i>
+                            </a>
+
+                            <a href="#" class="login100-social-item bg2">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+
+                            <a href="#" class="login100-social-item bg3">
+                                <i class="fa fa-google"></i>
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

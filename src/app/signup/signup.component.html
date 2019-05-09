@@ -1,86 +1,83 @@
-<div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
-    <div class="wrapper wrapper--w680">
-        <div class="card card-4">
-            <div class="card-body">
-                <h2 class="title">Registration Form</h2>
-                <form [formGroup]="createForm" class="create-form" method="post">
-                    <div class="row row-space">
-                        <div class="col-6">
-                            <div class="input-group">
-                                <label class="label">first name</label>
-                                <input class="input--style-4" type="text" name="first_name" #firstName>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="input-group">
-                                <label class="label">last name</label>
-                                <input class="input--style-4" type="text" name="last_name" #lastName>
-                            </div>
-                        </div>
-
-                        <div class="col-6">
-                            <div class="input-group">
-                                <label class="label">Password</label>
-                                <input class="input--style-4" type="password" name="password" #password autocomplete="false">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row row-space">
-                        <div class="col-6">
-                            <div class="input-group">
-                                <label class="label">Birthday</label>
-                                <div class="input-group-icon">
-                                    <input class="input--style-4 js-datepicker" type="text" name="birthday" #birthday>
-                                    <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="input-group">
-                                <label class="label">Gender</label>
-                                <div class="p-t-10">
-                                    <label class="radio-container m-r-45">Male
-                                        <input type="radio" checked="checked" name="gender" #gender>
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <label class="radio-container">Female
-                                        <input type="radio" name="gender">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row row-space">
-                        <div class="col-6">
-                            <div class="input-group">
-                                <label class="label">Email</label>
-                                <input class="input--style-4" type="email" name="email" #email>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="input-group">
-                                <label class="label">Phone Number</label>
-                                <input class="input--style-4" type="text" name="phoneNo" #phoneNo>
-                            </div>
-                        </div>
-
-                        <div class="col-6">
-                            <div class="input-group">
-                                <label class="label">Address</label>
-                                <input class="input--style-4" type="text" name="address" #address>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-t-15">
-                        <button type="submit" (click)="addUser(firstName.value, lastName.value,password.value,birthday.value,gender.value,email.value,phoneNo.value,address.value)" class="btn btn--radius-2 btn--blue">Submit</button>
-                    </div>
-                    
-                    <div class="card">
-                        <ng-flash-message></ng-flash-message>
-                    </div>
-                </form>
+<!--================Home Banner Area =================-->
+<section class="banner_area">
+    <div class="banner_inner d-flex align-items-center">
+        <div class="container">
+            <div class="banner_content text-center">
+                <h2>Login/Register</h2>
+                <div class="page_link">
+                    <a href="/home">Home</a>
+                    <a href="/signup">Register</a>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</section>
+<!--================End Home Banner Area =================-->
+
+<!--================Login Box Area =================-->
+<section class="login_box_area p_120">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="login_box_img">
+                    <img class="img-fluid"  src="../../assets/homepage/img/login.jpg" alt="">
+                    <div class="hover">
+                        <h4>New to our website?</h4>
+                        <p>There are advances being made in science and technology everyday, and a good example of this
+                            is the</p>
+                        <a class="main_btn" href="#">Create an Account</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="login_form_inner reg_form">
+                    <h3>Create an Account</h3>
+                    <form class="row login_form"  method="post" id="contactForm"
+                        novalidate="novalidate" [formGroup]="createForm" >
+                        <div class="col-md-12 form-group">
+                            <input type="text" class="form-control" id="fname" name="fname" placeholder="first name" #firstName>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <input type="text" class="form-control" id="lname" name="lname" placeholder="last name" #lastName>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <input type="email" class="form-control" id="email" name="email"
+                                placeholder="Email Address" #email>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone No."#phoneNo>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <input type="date" class="form-control" id="birth_date" name="birth_date" placeholder="Birth Date" #birth>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <input type="text" class="form-control" id="adress" name="Address" placeholder="Address" #address>
+                        </div>
+                        <div class="col-md-12 form-group form-inline" >
+                            <input type="checkbox" class="form-control" value="Male" #gender>Male
+                            <input type="checkbox" class="form-control" value="Male" #gender>FeMale
+                        </div>
+
+                        <div class="col-md-12 form-group" #password>
+                            <input type="password" class="form-control" id="password" name="password"
+                                placeholder="Password" autocomplete="off" #password>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <div class="creat_account">
+                                <input type="checkbox" id="f-option2" name="selector">
+                                <label for="f-option2">Keep me logged in</label>
+                            </div>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <button type="submit"
+                            class="btn submit_btn"
+                            (click)="addUser(firstName.value, lastName.value, password.value, birth.value, gender.value, email.value, phoneNo.value, address.value)"
+                            >Register</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Login Box Area =================-->
