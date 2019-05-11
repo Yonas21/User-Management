@@ -1,8 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
 
-let Product = require('../models/product.model');
-let Order = require('../models/order.model');
 let checkAuth = require("../middleware/check-auth");
 let orderController = require("../controllers/orders");
 

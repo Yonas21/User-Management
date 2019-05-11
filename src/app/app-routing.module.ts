@@ -8,16 +8,34 @@ import { LoginComponent } from './login/login.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
-import { ContactComponent } from "./contact/contact.component";
-import { ProductCategoryComponent } from "./product-category/product-category.component";
-import { ProductDetailComponent } from "./product-detail/product-detail.component";
-import { WishlistComponent } from "./wishlist/wishlist.component";
+import { ContactComponent } from './contact/contact.component';
+import { ProductCategoryComponent } from './product-category/product-category.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { WishlistComponent } from './wishlist/wishlist.component';
+import { PageNotFoundComponent } from './homepage/page-not-found/page-not-found.component';
+import { AdminComponent } from './admin/admin.component';
+import { ProductComponent } from './admin/product/product.component';
+import { MallComponent } from './admin/mall/mall.component';
 
 const routes: Routes = [
     {
         path: '',
         redirectTo: 'home',
         pathMatch: 'full'
+    },
+    {
+        path: 'admin',
+        component: AdminComponent,
+        children: [
+            {
+                path: 'mall',
+                component: MallComponent
+            },
+            {
+                path: 'product',
+                component: ProductComponent
+            }
+        ]
     },
     {
         path: 'home',
@@ -32,7 +50,7 @@ const routes: Routes = [
         component: LoginComponent
     },
     {
-      path:'cart',
+      path: 'cart',
       component: CartComponent
     },
     {
@@ -44,16 +62,20 @@ const routes: Routes = [
       component: ContactComponent
     },
     {
-      path: 'product-category',
+      path: 'product_category',
       component: ProductCategoryComponent
     },
     {
-      path: 'product-detail',
-      component:ProductDetailComponent
+      path: 'product_detail',
+      component: ProductDetailComponent
     },
     {
-      path:'wishlist',
+      path: 'wishlist',
       component:  WishlistComponent
+    },
+    {
+        path: '**',
+        component: PageNotFoundComponent
     }
 ];
 

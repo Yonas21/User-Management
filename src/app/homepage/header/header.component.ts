@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../../services/user.service';
+import { NgFlashMessageService } from 'ng-flash-messages';
 
 @Component({
   selector: 'app-header',
@@ -7,7 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private userService: UserService, private flashMessage: NgFlashMessageService) { }
+
+    onLogoutClick() {
+        this.userService.logout();
+        this.flashMessage.showFlashMessage({
+            messages: ['You Logged out Successfully.'],
+            dismissible: true,
+            timeout: 5000,
+            type: 'info'
+        });
+    }
 
   ngOnInit() {
   }

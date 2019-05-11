@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Router} from '@angular/router';
-import { catchError, map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +8,8 @@ import { catchError, map, tap } from 'rxjs/operators';
 export class UserService {
     uri = 'http://localhost:4000';
     private token: any;
-    username: String;
-    password: String;
+    username: string;
+    password: string;
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -54,9 +53,8 @@ export class UserService {
         if (!this.token) {
             this.token = localStorage.getItem('user-token');
         }
-
         return this.token;
     }
-    
+
 
 }

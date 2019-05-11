@@ -1,29 +1,36 @@
-import { Component, OnInit } from "@angular/core";
-import { UserService } from "../user.service";
-import { Router } from "@angular/router";
-import { NgFlashMessageService } from "ng-flash-messages";
+import { Component, OnInit } from '@angular/core';
+import { UserService } from '../services/user.service';
+import { Router } from '@angular/router';
+import { NgFlashMessageService } from 'ng-flash-messages';
+import {ProductService} from '../services/product.service';
 
 @Component({
-    selector: "app-homepage",
-    templateUrl: "./homepage.component.html",
-    styleUrls: ["./homepage.component.css"]
+    selector: 'app-homepage',
+    templateUrl: './homepage.component.html',
+    styleUrls: ['./homepage.component.css']
 })
 export class HomepageComponent implements OnInit {
     constructor(
         private userService: UserService,
         private router: Router,
-        private flashMessage: NgFlashMessageService
+        private flashMessage: NgFlashMessageService,
+        private productService: ProductService
     ) {}
 
     ngOnInit() {}
 
-    onLogoutClick() {
-        this.userService.logout();
-        this.flashMessage.showFlashMessage({
-          messages: ['You Logged out Successfully.'],
-          dismissible: true,
-          timeout: 5000,
-          type: 'info'
-        })
+
+
+    getAllProducts() {
+        const arr = [];
+        this.productService.getProducts().subscribe(data => {
+           for (const message in data) {
+               if (data.hasOwnProperty(message)) {
+                   arr.push(data[message]);
+                   console.log(arr[1]);
+               }
+           }
+        });
     }
+
 }

@@ -38,7 +38,7 @@
                             <input type="text" class="form-control" id="username" name="username" placeholder="Username" #username>
                         </div>
                         <div class="col-md-12 form-group">
-                            <input type="password" class="form-control" id="psw" name="password" placeholder="Password" #password>
+                            <input type="password" class="form-control" id="psw" name="password" placeholder="Password" autocomplete="off" #password>
                         </div>
                         <div class="col-md-12 form-group">
                             <div class="creat_account">
@@ -62,15 +62,15 @@
 
                         <div class="flex-c-m">
                             <a href="#" class="login100-social-item bg1">
-                                <i class="fa fa-facebook"></i>
+                                <i class="fa fa-facebook" (click)="signInWithFacebook()"></i>
                             </a>
 
                             <a href="#" class="login100-social-item bg2">
-                                <i class="fa fa-twitter"></i>
+                                <i class="fa fa-linkedin-square" (click)="signInWithLinkedIn()"></i>
                             </a>
 
                             <a href="#" class="login100-social-item bg3">
-                                <i class="fa fa-google"></i>
+                                <i class="fa fa-google" (click)="signInWithGoogle()"></i>
                             </a>
                         </div>
                     </form>

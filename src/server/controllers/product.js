@@ -7,22 +7,22 @@ exports.get_all_products = (req, res, next) => {
         .select("name price _id productImage")
         .exec()
         .then(results => {
-            const response = {
-                count: results.length,
-                products: results.map(result => {
-                    return {
-                        name: result.name,
-                        price: result.price,
-                        _id: result._id,
-                        productImage: result.productImage,
-                        request: {
-                            type: "GET",
-                            url: "http://localhost:4000/products/" + result._id
-                        }
-                    };
-                })
-            };
-            res.status(200).json(response);
+            // const response = {
+            //     count: results.length,
+            //     products: results.map(result => {
+            //         return {
+            //             name: result.name,
+            //             price: result.price,
+            //             _id: result._id,
+            //             productImage: result.productImage,
+            //             request: {
+            //                 type: "GET",
+            //                 url: "http://localhost:4000/products/" + result._id
+            //             }
+            //         };
+            //     })
+            // };
+             res.status(200).json(results);
         })
         .catch(err => {
             res.status(404).json({
