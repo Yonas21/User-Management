@@ -7,8 +7,6 @@ const mongoose = require("mongoose");
 const morgan = require("morgan");
 require("dotenv").config();
 
-const config = require("./DB");
-
 let userRouter = require("./routes/user.route");
 let productRouter = require("./routes/products");
 let orderRouter = require("./routes/orders");
@@ -39,7 +37,7 @@ app.use(function (req, res, next) {
     // to the API (e.g. in case you use sessions)
     res.setHeader('Access-Control-Allow-Credentials', true);
 
-    // Pass to next layer of middleware   
+    // Pass to next layer of middleware
     next();
 });
 app.use(morgan("dev"));

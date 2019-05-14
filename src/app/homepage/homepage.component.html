@@ -23,7 +23,7 @@
         <div class="row">
             <div class="col-lg-6">
                 <div class="hot_deal_box">
-                    <img class="img-fluid" src="assets/homepage/img/product/hot_deals/deal1.jpg" alt="">
+                    <img class="img-fluid" src="../../assets/homepage/img/product/hot_deals/deal1.jpg" alt="">
                     <div class="content">
                         <h2>Hot Deals of this Month</h2>
                         <p>shop now</p>
@@ -34,7 +34,7 @@
 
             <div class="col-lg-6">
                 <div class="hot_deal_box">
-                    <img class="img-fluid" src="assets/homepage/img/product/hot_deals/deal1.jpg" alt="">
+                    <img class="img-fluid" src="../../assets/homepage/img/product/hot_deals/deal1.jpg" alt="">
                     <div class="content">
                         <h2>Hot Deals of this Month</h2>
                         <p>shop now</p>
@@ -142,7 +142,7 @@
                 <div class="col col4">
                     <div class="f_p_item">
                         <div class="f_p_img">
-                            <img class="img-fluid" src="assets/homepage/img/product/feature-product/f-p-4.jpg" alt="">
+                            <img class="img-fluid" [src]="image" alt="">
                             <div class="p_icon">
                                 <a href="#">
                                     <i class="fa fa-heart-o"></i>
@@ -334,7 +334,7 @@
                         <!-- <div style="position: absolute; left: -5000px;">
                             <input type="text" name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="">
                         </div> -->
-                        <button type="submit" class="newsl-btn">Get Started</button>
+                        <button type="submit" class="newsl-btn" (click)="getAllProducts()">Get Started</button>
                         <div class="info"></div>
                     </form>
                 </div>

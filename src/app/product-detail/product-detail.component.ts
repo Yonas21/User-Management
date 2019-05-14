@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../services/product.service';
-import { ProductModel } from '../product.model';
+import { ProductModel } from '../models/product.model';
 
 @Component({
   selector: 'app-product-detail',
@@ -11,6 +11,7 @@ export class ProductDetailComponent implements OnInit {
 
     products: ProductModel[];
     image: string;
+    url = 'http://localhost:4000';
   constructor(private productService: ProductService) { }
 
   ngOnInit() {
@@ -21,8 +22,12 @@ export class ProductDetailComponent implements OnInit {
          this.products = data;
          console.log('data requested');
          for (let i = 0; i < this.products.length ; i++) {
-              this.image = this.products[i].productImage;
+              this.image = `http://localhost:4000/${this.products[16].productImage}`;
+              console.log(this.image);
+              console.log(this.products.length);
           }
+
+         console.log(this.products);
       });
   }
 }

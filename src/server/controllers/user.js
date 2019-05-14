@@ -105,3 +105,17 @@ exports.logout = (req, res) => {
             })
         })
 };
+
+
+exports.getAllUsers = (req, res) => {
+    User.find().exec()
+        .then((results) => {
+            res.status(200).json(results)
+        })
+        .catch((err) => {
+            res.status(404).json({
+                message: 'no user found',
+                error: err
+            })
+        });
+};

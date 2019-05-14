@@ -3,6 +3,7 @@ import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 import { NgFlashMessageService } from 'ng-flash-messages';
 import {ProductService} from '../services/product.service';
+import {ProductModel} from '../models/product.model';
 
 @Component({
     selector: 'app-homepage',
@@ -10,6 +11,10 @@ import {ProductService} from '../services/product.service';
     styleUrls: ['./homepage.component.css']
 })
 export class HomepageComponent implements OnInit {
+    products: ProductModel[];
+    image: string;
+    url = 'http://localhost:4000';
+
     constructor(
         private userService: UserService,
         private router: Router,
@@ -17,19 +22,29 @@ export class HomepageComponent implements OnInit {
         private productService: ProductService
     ) {}
 
-    ngOnInit() {}
+    ngOnInit() {
+        this.productService.getProducts().subscribe((data: ProductModel[]) => {
+            this.products = data;
+            console.log('data requested');
+            for (let i = 0; i < this.products.length ; i++) {
+                this.image = `${this.url}/${this.products[i].productImage}`;
+            }
+
+            console.log(this.image);
+        });
+    }
 
 
 
     getAllProducts() {
-        const arr = [];
-        this.productService.getProducts().subscribe(data => {
-           for (const message in data) {
-               if (data.hasOwnProperty(message)) {
-                   arr.push(data[message]);
-                   console.log(arr[1]);
-               }
-           }
+        this.productService.getProducts().subscribe((data: ProductModel[]) => {
+            this.products = data;
+            console.log('data requested');
+            for (let i = 0; i < this.products.length ; i++) {
+                this.image = `${this.url}/${this.products[i].productImage}`;
+            }
+
+            console.log(this.image);
         });
     }
 

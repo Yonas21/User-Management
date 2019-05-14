@@ -33,6 +33,12 @@ let userSchema = new Schema({
     address: {
         type: String,
         required: true
+    },
+    role: {
+        type: String,
+        required: true,
+        enum: ['user','admin'],
+        default: 'user'
     }
 },
     {

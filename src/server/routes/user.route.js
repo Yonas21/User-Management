@@ -12,4 +12,7 @@ userRoutes.post('/login', userController.authenticate);
 //delete the user route handler
 userRoutes.delete('/:userId', userController.logout);
 
+//find all users
+userRoutes.get('/all_users', userController.getAllUsers);
+
 module.exports = userRoutes;

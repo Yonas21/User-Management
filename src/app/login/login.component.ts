@@ -6,6 +6,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService} from 'angularx-social-login';
 import { GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider} from 'angularx-social-login';
 import { SocialUser } from 'angularx-social-login';
+import { UserModel } from '../models/user.model';
+import {forEach} from '@angular/router/src/utils/collection';
 
 
 // @ts-ignore
@@ -16,10 +18,11 @@ import { SocialUser } from 'angularx-social-login';
 })
 export class LoginComponent implements OnInit {
 
-  loginForm: FormGroup;
-  private message: string;
-  private user: SocialUser;
-  private loggedIn: boolean;
+      loginForm: FormGroup;
+      private user: SocialUser;
+      private loggedIn: boolean;
+      users: UserModel[];
+      role: string;
 
     constructor(
       private userService: UserService,
@@ -68,6 +71,21 @@ export class LoginComponent implements OnInit {
         });
 
       }
+
+    getAllUsers() {
+        this.userService.getUsers().subscribe((data: UserModel[]) => {
+            this.users = data;
+            console.log(`requested users`);
+            for (let i = 0; i < this.users.length; i++) {
+                this.role = this.users[i].role;
+            }
+            if (this.role === 'role') {
+                this.router.navigate(['home']);
+            } else {
+                this.router.navigate(['admin']);
+            }
+        });
+    }
       signInWithFacebook() {
         this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
       }
@@ -86,4 +104,6 @@ export class LoginComponent implements OnInit {
     }
 
 
+
 }
+

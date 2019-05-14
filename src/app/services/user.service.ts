@@ -56,5 +56,12 @@ export class UserService {
         return this.token;
     }
 
+    isLoggedIn() {
+      return this.getToken() !== null;
+    }
+    getUsers() {
+      return this.http.get(`${this.uri}/user/all_users`, {responseType: 'json'});
+    }
+
 
 }
