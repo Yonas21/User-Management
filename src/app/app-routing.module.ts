@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes} from '@angular/router';
+import { AuthGuard } from './auth.guard';
 
 // angular components
 import { SignupComponent } from './signup/signup.component';
@@ -16,6 +17,7 @@ import { PageNotFoundComponent } from './homepage/page-not-found/page-not-found.
 import { AdminComponent } from './admin/admin.component';
 import { ProductComponent } from './admin/product/product.component';
 import { MallComponent } from './admin/mall/mall.component';
+
 
 const routes: Routes = [
     {
@@ -71,7 +73,8 @@ const routes: Routes = [
     },
     {
       path: 'wishlist',
-      component:  WishlistComponent
+      component:  WishlistComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: '**',
@@ -83,10 +86,7 @@ const routes: Routes = [
   declarations: [],
   imports: [
     CommonModule,
-      RouterModule.forRoot(routes),
-      {
-          enableTracing: true
-      }
+      RouterModule.forRoot(routes)
   ],
     exports: [RouterModule]
 })

@@ -7,7 +7,7 @@ const wishlistSchema = mongoose.Schema({
         ref: "Products",
         required: true
     },
-    ownedby: {
+    owner: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "users",
         required: true

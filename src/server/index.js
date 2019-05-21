@@ -7,9 +7,12 @@ const mongoose = require("mongoose");
 const morgan = require("morgan");
 require("dotenv").config();
 
-let userRouter = require("./routes/user.route");
-let productRouter = require("./routes/products");
-let orderRouter = require("./routes/orders");
+let userRouter = require("./routes/user.router");
+let productRouter = require("./routes/products.router");
+let orderRouter = require("./routes/orders.router");
+let wish_listRouter = require("./routes/wishlist.router");
+let cartRouter = require('./routes/cart.router');
+const reviewRouter = require('./routes/review.router');
 
 mongoose.Promise = global.Promise;
 mongoose.connect(process.env.DB, { useNewUrlParser: true }).then(
@@ -49,6 +52,9 @@ app.use('/uploads',express.static('uploads'));
 app.use("/user", userRouter);
 app.use("/products", productRouter);
 app.use("/orders", orderRouter);
+app.use("/wish_lists", wish_listRouter);
+app.use("/carts", cartRouter);
+app.use('/review', reviewRouter);
 
 app.listen(PORT, function() {
     console.log("Server is running on Port:", PORT);

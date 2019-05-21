@@ -31,6 +31,8 @@ import { PageNotFoundComponent } from './homepage/page-not-found/page-not-found.
 import { AdminComponent } from './admin/admin.component';
 import { ProductComponent } from './admin/product/product.component';
 import { MallComponent } from './admin/mall/mall.component';
+import { AuthGuard } from './auth.guard';
+import {ProductService} from './services/product.service';
 
 const config = new AuthServiceConfig([
     {
@@ -81,7 +83,13 @@ export function provideConfig() {
       NgFlashMessagesModule.forRoot(),
       SocialLoginModule
   ],
-  providers: [UserService, {provide: AuthServiceConfig, useFactory: provideConfig}],
+  providers: [
+      UserService,
+      {provide: AuthServiceConfig, useFactory: provideConfig},
+      AuthGuard,
+      UserService,
+      ProductService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

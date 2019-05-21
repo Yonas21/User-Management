@@ -13,6 +13,15 @@ const mallSchema = mongoose.Schema({
     contactNo: {
         type: String,
         required: true
+    },
+    shop: {
+        type: mongoose.Schema.Types.ObjectId,
+        refs: 'Shop',
+        required: true
+    },
+    closing_hour: {
+        type: String,
+        default: '3 Pm'
     }
 },
 {

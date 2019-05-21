@@ -13,10 +13,16 @@ const reviewSchema = mongoose.Schema({
         required: true
     },
     reviewDate: {
-        type: Date
+        type: Date,
+        default: new Date().toLocaleDateString()
     },
     rate: {
         type: Number,
+        required: true,
+        enum: ['poor','good', 'very good', 'excellent','outstanding']
+    },
+    comment: {
+        type: String,
         required: true
     }
 },

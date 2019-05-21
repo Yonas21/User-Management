@@ -10,6 +10,7 @@ export class UserService {
     private token: any;
     username: string;
     password: string;
+    count = 0;
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -30,7 +31,7 @@ export class UserService {
       return this.http.post(`${this.uri}/user/signup`, user,{responseType:'json'});
   }
 
-  authenticateUser(username, password){
+  authenticateUser(username, password) {
       const user = {
           username,
           password
@@ -59,9 +60,15 @@ export class UserService {
     isLoggedIn() {
       return this.getToken() !== null;
     }
+
+    logToken() {
+      this.token = localStorage.getItem('user-token');
+      console.log(this.token);
+    }
     getUsers() {
       return this.http.get(`${this.uri}/user/all_users`, {responseType: 'json'});
     }
+
 
 
 }

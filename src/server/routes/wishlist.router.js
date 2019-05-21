@@ -7,15 +7,15 @@ let wishlistController = require('../controllers/wishlist');
 const router = express.Router();
 
 //find all wishes
-router.get('/', checkAuth, wishlistController.get_all_wishes);
+router.get('/', wishlistController.get_all_wishes);
 
 //find individual wishes
-router.get('/:wishId', checkAuth, wishlistController.get_one_wish);
+router.get('/:wishId', wishlistController.get_one_wish);
 
 //create new wishlist
-router.post('/', checkAuth, wishlistController.create_wishlist);
+router.post('/', wishlistController.create_wishlist);
 
 //delete wishlist
-router.delete('/:wishId', checkAuth, wishlistController.delete_wishlist);
+router.delete('/:wishId', wishlistController.delete_wishlist);
 
 module.exports = router;

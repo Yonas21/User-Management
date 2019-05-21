@@ -22,7 +22,7 @@
                         </a>
                     </li>
                     <li>
-                        <a (click)="onLogoutClick()" href="/home">
+                        <a (click)="onLogoutClick()" href="/home" *ngIf="userService.isLoggedIn()">
                             Logout
                         </a>
                     </li>
@@ -203,7 +203,7 @@
                                         <i
                                             class="fa fa-heart-o"
                                             aria-hidden="true"
-                                        ></i>
+                                        >1</i>
                                     </a>
                                 </li>
 

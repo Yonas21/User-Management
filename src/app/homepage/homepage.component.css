@@ -1,0 +1,18 @@
+.text-heading {
+    text-align: center;
+}
+.single_product {
+    margin: 25px;
+    float: left;
+}
+.subscription-area {
+    display:block;
+    margin-top: 50px;
+}
+.clear {
+
+    clear : both ;
+
+}
+
+

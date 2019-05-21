@@ -11,9 +11,10 @@ import {ProductModel} from '../models/product.model';
     styleUrls: ['./homepage.component.css']
 })
 export class HomepageComponent implements OnInit {
-    products: ProductModel[];
-    image: string;
+    products: Array<ProductModel> = [];
     url = 'http://localhost:4000';
+    count = 0;
+    product: ProductModel;
 
     constructor(
         private userService: UserService,
@@ -24,27 +25,34 @@ export class HomepageComponent implements OnInit {
 
     ngOnInit() {
         this.productService.getProducts().subscribe((data: ProductModel[]) => {
-            this.products = data;
-            console.log('data requested');
-            for (let i = 0; i < this.products.length ; i++) {
-                this.image = `${this.url}/${this.products[i].productImage}`;
+            for (const oneData of data) {
+                const image = `${this.url}/${oneData.productImage}`;
+                this.product  = new ProductModel(oneData.name, oneData.price, image);
+                this.products.push(this.product);
             }
+            console.log(this.products);
 
-            console.log(this.image);
         });
     }
 
-
-
-    getAllProducts() {
-        this.productService.getProducts().subscribe((data: ProductModel[]) => {
-            this.products = data;
-            console.log('data requested');
-            for (let i = 0; i < this.products.length ; i++) {
-                this.image = `${this.url}/${this.products[i].productImage}`;
+    addWishlist() {
+        this.productService.addWishlist(this.product.name, this.product.price, this.product.productImage).subscribe(data => {
+            if (!data) {
+                this.flashMessage.showFlashMessage({
+                    messages: ['unable to add to the wishlist.'],
+                    dismissible: true,
+                    timeout: 5000,
+                    type: 'danger'
+                });
+            } else {
+                this.count = this.count + 1;
+                this.flashMessage.showFlashMessage({
+                    messages: ['product added to wishlist'],
+                    dismissible: true,
+                    timeout: 5000,
+                    type: 'success'
+                });
             }
-
-            console.log(this.image);
         });
     }
 

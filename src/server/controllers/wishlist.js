@@ -46,11 +46,12 @@ exports.create_wishlist = (req, res, next) => {
                     message: `Product not found`
                 });
             }
-
+            console.log(product);
+            console.log(req.body.userId);
             let wish = new Wish({
                 _id: mongoose.Types.ObjectId(),
                 item: req.body.productId,
-                ownedby: req.body.customer
+                owner: req.body.userId
             });
 
             return wish
