@@ -1,41 +1,43 @@
-const mongoose = require("mongoose");
-const Wish = require("../models/wishlist.model");
-const Product = require('../models/product.model');
-const User = require('../models/user.model');
+const mongoose = require('mongoose');
+let Product = require('../models/product.model');
+let Shop = require('../models/shop.model');
 
-exports.get_all_wishes = (req, res, next) => {
-    Wish.find()
-        .populate('item owner')
+exports.get_all_shops = (req, res, next) => {
+    Shop.find()
+        .populate('item')
         .exec()
-        .then(result => {
-            res.status(200).json(result);
-        })
-        .catch(err => {
-            res.status(404).json({
-                message: "unable to find data",
-                error: err
-            });
-        });
-};
-
-exports.get_one_wish = (req, res, next) => {
-    let id = req.params.id;
-    Wish.findById(id)
-        .exec.then(result => {
+        .then(results => {
             res.status(200).json({
-                message: "founded Result",
-                result: result
-            });
+                message: 'founded shops',
+                result: results
+            })
         })
         .catch(err => {
             res.status(404).json({
-                message: `unable to find data with id ${id}`,
+                message: 'unable to find any shop',
                 error: err
-            });
+            })
+        })
+};
+
+exports.get_a_shop = (req, res, next) => {
+    let id = req.params.shopId;
+    Shop.findById(id).exec()
+        .then(result => {
+            res.status(200).json({
+                message: 'a shop found',
+                result: result
+            })
+        })
+        .catch(err => {
+            res.status(404).json({
+                message: `product with id ${id} not found`,
+                error: err
+            })
         });
 };
 
-exports.create_wishlist = (req, res, next) => {
+exports.create_a_shop = (req, res, next) => {
     //check if the product we want to order is exist.
     let id = req.body.productId;
     Product.findById(id)
@@ -47,13 +49,14 @@ exports.create_wishlist = (req, res, next) => {
             }
             console.log(product);
             console.log(req.body.userId);
-            let wish = new Wish({
+            let shop = new Shop({
                 _id: mongoose.Types.ObjectId(),
-                item: id,
-                owner: req.body.owner
+                item: req.body.productId,
+                contactNo: req.body.contactNo
             });
 
-            return wish
+            console.log(req.body.ProductId);
+            return shop
                 .save()
                 .then(result => {
                     res.status(201).json(result);
@@ -74,21 +77,19 @@ exports.create_wishlist = (req, res, next) => {
         });
 };
 
-
-exports.delete_wishlist = (req, res, next) => {
-    let id = req.params.id;
-    Wish.findByIdAndRemove(id).exec()
+exports.delete_a_shop = (req,res, next) => {
+    let id = req.params.shopId;
+    Shop.findByIdAndRemove(id).exec()
         .then(result => {
             res.status(200).json({
-                message: `wishlist with id of ${id} is successfully deleted.`,
-                request: {
-                    type: 'Get',
-                    message: 'the remaining wishes',
-                    url: 'http://localhost:4000/wishes'
-                }
+                message: 'shop deleted successfully',
+                result: result
             })
         })
-        .catch();
+        .catch(err => {
+            res.status(404).json({
+                message: 'unable to delete a shop',
+                errorLabelContainer: err
+            })
+        })
 };
-
-

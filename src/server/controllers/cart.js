@@ -4,6 +4,7 @@ const Product = require('../models/product.model');
 
 exports.get_all_products_in_cart = (req, res, next) => {
     Cart.find()
+        .populate('item')
         .exec()
         .then(results => {
             res.status(200).json({
