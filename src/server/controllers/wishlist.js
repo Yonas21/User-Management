@@ -4,12 +4,10 @@ const Product = require('../models/product.model');
 
 exports.get_all_wishes = (req, res, next) => {
     Wish.find()
+        .populate('item owner')
         .exec()
         .then(result => {
-            res.status(200).json({
-                message: "wishlists",
-                result: result
-            });
+            res.status(200).json(result);
         })
         .catch(err => {
             res.status(404).json({

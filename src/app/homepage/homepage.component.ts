@@ -29,8 +29,8 @@ export class HomepageComponent implements OnInit {
                 const image = `${this.url}/${oneData.productImage}`;
                 this.product  = new ProductModel(oneData.name, oneData.price, image);
                 this.products.push(this.product);
+                console.log(image);
             }
-            console.log(this.products);
 
         });
     }
@@ -45,7 +45,7 @@ export class HomepageComponent implements OnInit {
                     type: 'danger'
                 });
             } else {
-                this.count = this.count + 1;
+                this.productService.count = this.productService.count + 1;
                 this.flashMessage.showFlashMessage({
                     messages: ['product added to wishlist'],
                     dismissible: true,

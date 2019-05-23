@@ -69,20 +69,21 @@ exports.get_one_product = (req, res, next) => {
     const id = req.params.productId;
 
     Product.findById(id)
-        .select("name price _id")
+        .select("name price _id productImage")
         .exec()
         .then(result => {
-            res.status(200).json({
-                message: `Product with Id ${id}`,
-                response: {
-                    result: result,
-                    request: {
-                        type: "GET",
-                        description: "Get all Products",
-                        url: "http://localhost:4000/products/"
-                    }
-                }
-            });
+            // res.status(200).json({
+            //     message: `Product with Id ${id}`,
+            //     response: {
+            //         result: result,
+            //         request: {
+            //             type: "GET",
+            //             description: "Get all Products",
+            //             url: "http://localhost:4000/products/"
+            //         }
+            //     }
+            // });
+            res.status(200).json(result);
         })
         .catch(err => {
             res.status(404).json({

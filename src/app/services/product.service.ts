@@ -8,6 +8,8 @@ import { NgFlashMessageService} from 'ng-flash-messages';
 })
 export class ProductService {
   url = 'http://localhost:4000';
+  productId = [];
+  count = 0;
   constructor(
     private http: HttpClient,
     private router: Router,
