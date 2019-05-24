@@ -76,10 +76,10 @@ export class LoginComponent implements OnInit {
         this.userService.getUsers().subscribe((data: UserModel[]) => {
             this.users = data;
             console.log(`requested users`);
-            for (let i = 0; i < this.users.length; i++) {
-                this.role = this.users[i].role;
+            for (const result of this.users) {
+                this.role = result.role;
             }
-            if (this.role === 'role') {
+            if (this.role === 'user') {
                 this.router.navigate(['home']);
             } else {
                 this.router.navigate(['admin']);

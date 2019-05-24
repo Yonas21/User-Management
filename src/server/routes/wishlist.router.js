@@ -13,7 +13,7 @@ router.get('/', wishlistController.get_all_wishes);
 router.get('/:wishId', wishlistController.get_one_wish);
 
 //create new wishlist
-router.post('/', wishlistController.create_wishlist);
+router.post('/:productId', wishlistController.create_wishlist);
 
 //delete wishlist
 router.delete('/:wishId', wishlistController.delete_wishlist);

@@ -8,7 +8,7 @@ let router = express.Router();
 
 router.get('/', checkAuth, cartRouter.get_all_products_in_cart);
 
-router.post('/', checkAuth, cartRouter.add_item_to_cart);
+router.post('/:productId', checkAuth, cartRouter.add_item_to_cart);
 
 router.get('/:cartId', checkAuth, cartRouter.get_one_cart_product);
 

@@ -19,9 +19,9 @@ exports.get_all_wishes = (req, res, next) => {
 };
 
 exports.get_one_wish = (req, res, next) => {
-    let id = req.params.id;
+    let id = req.params.wishId;
     Wish.findById(id)
-        .exec.then(result => {
+        .exec().then(result => {
             res.status(200).json({
                 message: "founded Result",
                 result: result
@@ -37,7 +37,7 @@ exports.get_one_wish = (req, res, next) => {
 
 exports.create_wishlist = (req, res, next) => {
     //check if the product we want to order is exist.
-    let id = req.body.productId;
+    let id = req.params.productId;
     Product.findById(id)
         .then(product => {
             if (!product) {
@@ -49,8 +49,7 @@ exports.create_wishlist = (req, res, next) => {
             console.log(req.body.userId);
             let wish = new Wish({
                 _id: mongoose.Types.ObjectId(),
-                item: id,
-                owner: req.body.owner
+                item: id
             });
 
             return wish

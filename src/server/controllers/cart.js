@@ -50,7 +50,7 @@ exports.add_item_to_cart = (req, res, next)=>{
 
             let cart = new Cart({
                 _id: mongoose.Types.ObjectId(),
-                item: req.body.productId
+                item: req.params.productId
             });
 
             cart.save().then(result => {

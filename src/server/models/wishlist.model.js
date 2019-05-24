@@ -6,11 +6,6 @@ const wishlistSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Products",
         required: true
-    },
-    owner: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "users",
-        required: true
     }
 },
 {
