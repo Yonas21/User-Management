@@ -7,7 +7,6 @@ import { AuthService} from 'angularx-social-login';
 import { GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider} from 'angularx-social-login';
 import { SocialUser } from 'angularx-social-login';
 import { UserModel } from '../models/user.model';
-import {forEach} from '@angular/router/src/utils/collection';
 
 
 // @ts-ignore
@@ -79,10 +78,10 @@ export class LoginComponent implements OnInit {
             for (const result of this.users) {
                 this.role = result.role;
             }
-            if (this.role === 'user') {
-                this.router.navigate(['home']);
-            } else {
+            if (this.role === 'admin') {
                 this.router.navigate(['admin']);
+            } else {
+                this.router.navigate(['home']);
             }
         });
     }

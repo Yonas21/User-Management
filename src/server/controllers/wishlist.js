@@ -87,7 +87,12 @@ exports.delete_wishlist = (req, res, next) => {
                 }
             })
         })
-        .catch();
+        .catch(err => {
+            res.status(404).json({
+                message: 'unable to find wish with id',
+                error: err
+            })
+        });
 };
 
 

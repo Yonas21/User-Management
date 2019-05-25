@@ -15,8 +15,11 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { WishlistComponent } from './wishlist/wishlist.component';
 import { PageNotFoundComponent } from './homepage/page-not-found/page-not-found.component';
 import { AdminComponent } from './admin/admin.component';
-import { ProductComponent } from './admin/product/product.component';
+import { ProductComponent} from './admin/product/product.component';
+import { AddProductComponent } from './admin/product/add-product/add-product.component';
+import { UpdateProductComponent } from './admin/product/update-product/update-product.component';
 import { MallComponent } from './admin/mall/mall.component';
+import { ShopComponent } from './admin/shop/shop.component';
 
 
 const routes: Routes = [
@@ -28,14 +31,33 @@ const routes: Routes = [
     {
         path: 'admin',
         component: AdminComponent,
+        canActivate: [AuthGuard],
         children: [
             {
-                path: 'mall',
-                component: MallComponent
-            },
-            {
-                path: 'product',
-                component: ProductComponent
+                path: '',
+                canActivateChild: [AuthGuard],
+                children: [
+                    {
+                        path: 'products',
+                        component: ProductComponent
+                    },
+                    {
+                        path: 'add-product',
+                        component: AddProductComponent
+                    },
+                    {
+                        path: 'update-product',
+                        component: UpdateProductComponent
+                    },
+                    {
+                        path: 'malls',
+                        component: MallComponent
+                    },
+                    {
+                        path: 'shops',
+                        component: ShopComponent
+                    }
+                ]
             }
         ]
     },

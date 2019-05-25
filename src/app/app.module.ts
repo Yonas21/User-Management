@@ -12,6 +12,7 @@ import {
     FacebookLoginProvider,
     LinkedInLoginProvider
 } from 'angularx-social-login';
+import { NgZorroAntdModule, NZ_I18N, en_US } from 'ng-zorro-antd';
 
 import { AppComponent } from './app.component';
 import { SignupComponent } from './signup/signup.component';
@@ -28,11 +29,14 @@ import { CartComponent } from './cart/cart.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { LoginComponent } from './login/login.component';
 import { PageNotFoundComponent } from './homepage/page-not-found/page-not-found.component';
-import { AdminComponent } from './admin/admin.component';
-import { ProductComponent } from './admin/product/product.component';
 import { MallComponent } from './admin/mall/mall.component';
 import { AuthGuard } from './auth.guard';
 import {ProductService} from './services/product.service';
+import { AddProductComponent } from './admin/product/add-product/add-product.component';
+import { UpdateProductComponent } from './admin/product/update-product/update-product.component';
+import {AdminComponent} from './admin/admin.component';
+import {ProductComponent} from './admin/product/product.component';
+import {ShopComponent} from './admin/shop/shop.component';
 
 const config = new AuthServiceConfig([
     {
@@ -68,9 +72,12 @@ export function provideConfig() {
     CartComponent,
     CheckoutComponent,
       PageNotFoundComponent,
+      MallComponent,
+      AddProductComponent,
+      UpdateProductComponent,
       AdminComponent,
       ProductComponent,
-      MallComponent,
+      ShopComponent
   ],
   imports: [
     BrowserModule,
@@ -81,7 +88,8 @@ export function provideConfig() {
       HttpClientModule,
       BrowserAnimationsModule,
       NgFlashMessagesModule.forRoot(),
-      SocialLoginModule
+      SocialLoginModule,
+      NgZorroAntdModule
   ],
   providers: [
       UserService,
