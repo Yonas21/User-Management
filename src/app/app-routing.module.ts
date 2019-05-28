@@ -33,10 +33,6 @@ const routes: Routes = [
         component: AdminComponent,
         canActivate: [AuthGuard],
         children: [
-            {
-                path: '',
-                canActivateChild: [AuthGuard],
-                children: [
                     {
                         path: 'products',
                         component: ProductComponent
@@ -57,8 +53,6 @@ const routes: Routes = [
                         path: 'shops',
                         component: ShopComponent
                     }
-                ]
-            }
         ]
     },
     {

@@ -1,3 +1,12 @@
-.sidebar-brand {
-    display: flex;
+.admin_sidebar {
+    width: 20%;
+    min-height: available;
+    float: left;
+}
+
+.admin_sidebar ul li {
+    padding: 40px;
+}
+.sub-menu ul li {
+    padding-bottom: 10px;
 }

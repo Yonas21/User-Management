@@ -11,10 +11,11 @@ export class AppComponent {
   path: string;
 
   constructor(private userService: UserService , private router: Router) {
-      if (window.location.pathname === '/admin'){
+      if (window.location.pathname.startsWith('/admin')) {
           this.path = '/admin';
       } else {
           this.path = 'other';
       }
+      console.log();
   }
 }

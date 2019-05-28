@@ -5,6 +5,7 @@ import {UserService} from './services/user.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FileSelectDirective } from 'ng2-file-upload';
 import {
     SocialLoginModule,
     AuthServiceConfig,
@@ -12,7 +13,6 @@ import {
     FacebookLoginProvider,
     LinkedInLoginProvider
 } from 'angularx-social-login';
-import { NgZorroAntdModule, NZ_I18N, en_US } from 'ng-zorro-antd';
 
 import { AppComponent } from './app.component';
 import { SignupComponent } from './signup/signup.component';
@@ -37,6 +37,20 @@ import { UpdateProductComponent } from './admin/product/update-product/update-pr
 import {AdminComponent} from './admin/admin.component';
 import {ProductComponent} from './admin/product/product.component';
 import {ShopComponent} from './admin/shop/shop.component';
+import { NgZorroAntdModule, NZ_ICONS } from 'ng-zorro-antd';
+import { IconDefinition } from '@ant-design/icons-angular';
+import * as AllIcons from '@ant-design/icons-angular/icons';
+
+
+import { NZ_I18N, en_US } from 'ng-zorro-antd';
+import { registerLocaleData } from '@angular/common';
+import en from '@angular/common/locales/en';
+registerLocaleData(en);
+
+const antDesignIcons = AllIcons as {
+    [key: string]: IconDefinition;
+};
+const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesignIcons[key])
 
 const config = new AuthServiceConfig([
     {
@@ -77,7 +91,8 @@ export function provideConfig() {
       UpdateProductComponent,
       AdminComponent,
       ProductComponent,
-      ShopComponent
+      ShopComponent,
+      FileSelectDirective
   ],
   imports: [
     BrowserModule,
@@ -94,6 +109,7 @@ export function provideConfig() {
   providers: [
       UserService,
       {provide: AuthServiceConfig, useFactory: provideConfig},
+      { provide: NZ_I18N, useValue: en_US }, { provide: NZ_ICONS, useValue: icons },
       AuthGuard,
       UserService,
       ProductService

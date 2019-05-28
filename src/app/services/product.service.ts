@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
+import { FileSelectDirective, FileUploader} from 'ng2-file-upload/ng2-file-upload';
 import { Router } from '@angular/router';
 import { NgFlashMessageService} from 'ng-flash-messages';
-import {ProductModel} from '../models/product.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +13,19 @@ export class ProductService {
   count = 0;
   id: string;
   constructor(
-    private http: HttpClient,
-    private router: Router,
-    private flashMessage: NgFlashMessageService
+    private http: HttpClient
     ) { }
 
+    addProduct(name, price, path) {
+      const product = {
+          name,
+          price,
+          path
+      };
+      return this.http.post(`${this.url}/products`, product, { responseType: 'json' });
+      // console.log(product);
+
+    }
     getProducts() {
       return this.http.get(`${this.url}/products`, { responseType: 'json' });
     }
@@ -38,5 +46,8 @@ export class ProductService {
     }
     getWishlists() {
       return this.http.get(`${this.url}/wish_lists`, {responseType: 'json'});
+    }
+    deleteProduct(item) {
+      return this.http.delete(`${this.url}/products/${item}`, { responseType: 'json' });
     }
 }

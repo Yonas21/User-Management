@@ -1,48 +1,21 @@
-<div class="container">
-    <!--<form action="">-->
-        <!--<h3 class="text-heading">Insert Product</h3>-->
-        <!--<div class="form-group">-->
-            <!--<label for="name"><i class="fa fa-user-friends"></i></label>-->
-            <!--<input  type="text" class="form-control" id="name" name="name" #name/>-->
-        <!--</div>-->
-        <!--<div class="form-group">-->
-            <!--<label for="price"><i class="fa fa fa-dollar-sign"></i></label>-->
-            <!--<input  type="text" class="form-control" id="price" name="name" #price/>-->
-        <!--</div>-->
+<form action="" class="add-product">
+    <h3 class="page header">Add Product</h3>
+    <div class="form-group">
+        <label for="name" class="col-form-label-sm">Enter a name</label>
+        <input type="text" class="form-control" id="name" placeholder="Enter a name" #name />
+    </div>
+    <div class="form-group">
+        <label for="price" class="col-form-label-sm">Enter a Price</label>
+        <input type="text" class="form-control" id="price" placeholder="Enter a price" #price />
+    </div>
 
-        <!--<div class="form-group file_input">-->
-            <!--<label for="file"><i class="fa fa fa-file-image"></i></label>-->
-            <!--<input  type="file" class="form-control" id="file" name="file"  #ProductImage/>-->
-        <!--</div>-->
+    <div class="form-group">
+        <label for="photo" class="col-form-label-sm">Enter an image</label>
+        <input type="file" id="photo" name="photo" ng2FileSelect [uploader]="uploader" />
+    </div>
 
-        <!--<div class="form-group">-->
-            <!--<button class="btn btn-secondary" type = "submit">Submit</button>-->
-        <!--</div>-->
-    <!--</form>-->
-    <form action="" nz-form [formGroup]="productForm" >
-        <nz-form-item>
-            <nz-form-control>
-                <nz-input-group [nzPrefix]="prefixUser">
-                    <input type="text" nz-input formControlName="userName" id="username" placeholder="username" />
-                </nz-input-group>
-            </nz-form-control>
-            <nz-form-item>
-                <nz-form-control>
-                    <nz-input-group [nzPrefix]="prefixLock">
-                        <input type="password" nz-input formControlName="password" id="pass" placeholder="password" />
-                    </nz-input-group>
-                </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-                <nz-form-control>
-                    <nz-input-group >
-                        <button nz-button type = "submit" >Submit</button>
-                    </nz-input-group>
-                </nz-form-control>
-            </nz-form-item>
-
-        </nz-form-item>
-    </form>
-    <ng-template #prefixUser><i class="fa fa-user"></i></ng-template>
-    <ng-template #prefixLock><i class="fa fa-user-lock"></i></ng-template>
-</div>
+    <div class="form-group">
+        <button class="btn btn-success" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems()">Upload</button>
+    </div>
+    <button class="btn btn-primary">Submit</button>
+</form>

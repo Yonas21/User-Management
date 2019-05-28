@@ -36,7 +36,6 @@ router.get("/", productController.get_all_products);
 //add a product
 router.post(
     "/",
-    checkAuth,
     upload.single("productImage"),
     productController.create_product
 );
@@ -44,9 +43,9 @@ router.post(
 router.get("/:productId", productController.get_one_product);
 
 //update the individual products
-router.patch("/:productId", checkAuth, productController.update_product);
+router.patch("/:productId", productController.update_product);
 
 //update the individual products
-router.delete("/:productId", checkAuth, productController.delete_product);
+router.delete("/:productId", productController.delete_product);
 
 module.exports = router;
