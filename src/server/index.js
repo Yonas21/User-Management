@@ -6,6 +6,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
 require("dotenv").config();
+const multer = require('multer');
 
 let userRouter = require("./routes/user.router");
 let productRouter = require("./routes/products.router");
@@ -17,6 +18,7 @@ let mallRouter = require('./routes/mall.router');
 let shopRouter = require('./routes/shop.router');
 
 mongoose.Promise = global.Promise;
+mongoose.set('useCreateIndex', true);
 mongoose.connect(process.env.DB, { useNewUrlParser: true }).then(
     () => {
         console.log("Database is connected");
@@ -25,6 +27,18 @@ mongoose.connect(process.env.DB, { useNewUrlParser: true }).then(
         console.log("Can not connect to the database" + err);
     }
 );
+
+const DIR = './uploads';
+let storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, DIR);
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.originalname);
+    }
+});
+
+let upload = multer({storage: storage});
 
 // ALLOW ACCESS HEADERS
 app.use(function (req, res, next) {
@@ -59,6 +73,20 @@ app.use("/carts", cartRouter);
 app.use('/review', reviewRouter);
 app.use('/shop', shopRouter);
 app.use('/mall', mallRouter);
+
+app.post('/api/upload', upload.single('photo') ,(req, res, next) => {
+    if (!req.file) {
+        console.log('file not received');
+        return res.send({
+            success: false
+        })
+    } else {
+        console.log('file received');
+        res.send({
+            success: true
+        })
+    }
+});
 
 app.listen(PORT, function() {
     console.log("Server is running on Port:", PORT);

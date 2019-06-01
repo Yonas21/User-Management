@@ -1,40 +1,59 @@
 import { Component, OnInit } from '@angular/core';
-import {FormsModule, FormBuilder, FormGroup, Validators, Form} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
 import { ProductService } from '../../../services/product.service';
-import {FileUploader, FileSelectDirective} from 'ng2-file-upload/ng2-file-upload';
+import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
+import { HttpClient } from '@angular/common/http';
 
+const URL = 'http://localhost:4000/products';
 @Component({
   selector: 'app-add-product',
   templateUrl: './add-product.component.html',
   styleUrls: ['./add-product.component.css']
 })
 export class AddProductComponent implements OnInit {
-    productForm: FormGroup;
-    imageUrl: 'http://localhost:4000/uploads';
+    productForm = new FormGroup({
+        name: new FormControl(''),
+        price: new FormControl('')
+    });
+
     // @ts-ignore
     public uploader: FileUploader = new FileUploader({url: URL, itemAlias: 'photo'});
+    files = null;
   constructor(
+      private http: HttpClient,
       private formBuilder: FormBuilder,
       private productService: ProductService
   ) {
       this.productForm = this.formBuilder.group({
-          userName: ['', Validators.required],
-          password: ['', Validators.required]
+          name: ['', Validators.required],
+          price: ['', Validators.required],
+          productImage: ['', Validators.required]
       });
   }
     ngOnInit() {
-      this.uploader.onAfterAddingFile = (file) => { file.withCredentials = false; };
-      this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
-          console.log('File Uploaded: uploaded', item, status, response);
-          alert('File upload succcessfully');
-      };
+      this.productForm = this.formBuilder.group({
+          name: [''],
+          price: [''],
+          productImage: ['']
+      });
+    }
+    onChange(event) {
+        if (event.target.files.length > 0) {
+            const file = event.target.files[0];
+            this.productForm.get('productImage').setValue(file);
+        }
     }
 
-  addProduct(name, price, path) {
-      this.productService.addProduct(name, price, path).subscribe(result => {
+  onSubmit() {
+      const formData = new FormData();
+      formData.append('name', this.productForm.get('name').value);
+      formData.append('price', this.productForm.get('price').value)
+      formData.append('productImage', this.productForm.get('productImage').value);
+      this.http.post<any>(URL, formData).subscribe(result => {
           console.log(result);
       });
-      // this.productService.addProduct(name, price, path);
   }
+
+
 
 }

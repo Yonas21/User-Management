@@ -6,6 +6,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FileSelectDirective } from 'ng2-file-upload';
+import { NgxUploaderModule } from 'ngx-uploader';
 import {
     SocialLoginModule,
     AuthServiceConfig,
@@ -104,7 +105,8 @@ export function provideConfig() {
       BrowserAnimationsModule,
       NgFlashMessagesModule.forRoot(),
       SocialLoginModule,
-      NgZorroAntdModule
+      NgZorroAntdModule,
+      NgxUploaderModule
   ],
   providers: [
       UserService,

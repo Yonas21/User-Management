@@ -75,7 +75,7 @@ exports.create_wishlist = (req, res, next) => {
 
 
 exports.delete_wishlist = (req, res, next) => {
-    let id = req.params.id;
+    let id = req.params.wishId;
     Wish.findByIdAndRemove(id).exec()
         .then(result => {
             res.status(200).json({

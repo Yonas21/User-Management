@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
-import { FileSelectDirective, FileUploader} from 'ng2-file-upload/ng2-file-upload';
-import { Router } from '@angular/router';
-import { NgFlashMessageService} from 'ng-flash-messages';
 
 @Injectable({
   providedIn: 'root'

@@ -7,21 +7,6 @@ exports.get_all_products = (req, res, next) => {
         .select("name price _id productImage")
         .exec()
         .then(results => {
-            // const response = {
-            //     count: results.length,
-            //     products: results.map(result => {
-            //         return {
-            //             name: result.name,
-            //             price: result.price,
-            //             _id: result._id,
-            //             productImage: result.productImage,
-            //             request: {
-            //                 type: "GET",
-            //                 url: "http://localhost:4000/products/" + result._id
-            //             }
-            //         };
-            //     })
-            // };
              res.status(200).json(results);
         })
         .catch(err => {
@@ -131,4 +116,18 @@ exports.delete_product = (req, res, next) => {
                 message: `unable to delete.`
             });
         });
+};
+
+exports.uploadImage = (req, res, next ) => {
+    if (!req.file) {
+        console.log("No file received");
+        return res.send({
+            success: false
+        });
+    } else {
+        console.log('file received');
+        return res.send({
+            success: true
+        })
+    }
 };

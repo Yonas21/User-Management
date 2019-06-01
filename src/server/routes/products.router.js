@@ -27,9 +27,10 @@ const storage = multer.diskStorage({
 
 let upload = multer({
     storage: storage,
-    limits: 1024 * 1024 * 10,
+    limits: 1024 * 1024 * 20,
     fileFilter: imageFilter
 });
+
 
 //get all the products
 router.get("/", productController.get_all_products);
@@ -47,5 +48,6 @@ router.patch("/:productId", productController.update_product);
 
 //update the individual products
 router.delete("/:productId", productController.delete_product);
+
 
 module.exports = router;
