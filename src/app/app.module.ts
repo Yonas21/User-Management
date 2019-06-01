@@ -46,6 +46,10 @@ import * as AllIcons from '@ant-design/icons-angular/icons';
 import { NZ_I18N, en_US } from 'ng-zorro-antd';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
+import { AddMallComponent } from './admin/mall/add-mall/add-mall.component';
+import { UpdateMallComponent } from './admin/mall/update-mall/update-mall.component';
+import { AddShopComponent } from './admin/shop/add-shop/add-shop.component';
+import { UpdateShopComponent } from './admin/shop/update-shop/update-shop.component';
 registerLocaleData(en);
 
 const antDesignIcons = AllIcons as {
@@ -93,7 +97,11 @@ export function provideConfig() {
       AdminComponent,
       ProductComponent,
       ShopComponent,
-      FileSelectDirective
+      FileSelectDirective,
+      AddMallComponent,
+      UpdateMallComponent,
+      AddShopComponent,
+      UpdateShopComponent
   ],
   imports: [
     BrowserModule,

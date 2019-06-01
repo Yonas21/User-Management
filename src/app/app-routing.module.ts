@@ -20,6 +20,13 @@ import { AddProductComponent } from './admin/product/add-product/add-product.com
 import { UpdateProductComponent } from './admin/product/update-product/update-product.component';
 import { MallComponent } from './admin/mall/mall.component';
 import { ShopComponent } from './admin/shop/shop.component';
+import { AddMallComponent } from './admin/mall/add-mall/add-mall.component';
+// @ts-ignore
+import { UpdateMallComponent } from './admin/mall/update-mall/update-mall.component';
+import { AddShopComponent } from './admin/shop/add-shop/add-shop.component';
+// @ts-ignore
+import { UpdateMallComponent } from './admin/mall/update-mall/update-mall.component';
+import {UpdateShopComponent} from './admin/shop/update-shop/update-shop.component';
 
 
 const routes: Routes = [
@@ -52,6 +59,22 @@ const routes: Routes = [
                     {
                         path: 'shops',
                         component: ShopComponent
+                    },
+                    {
+                        path: 'add-mall',
+                        component: AddMallComponent
+                    },
+                    {
+                        path: 'update-mall',
+                        component: UpdateMallComponent
+                    },
+                    {
+                        path: 'add-shop',
+                        component: AddShopComponent
+                    },
+                    {
+                        path: 'update-shop',
+                        component: UpdateShopComponent
                     }
         ]
     },

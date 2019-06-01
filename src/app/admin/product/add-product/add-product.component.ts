@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
-import { ProductService } from '../../../services/product.service';
-import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
 const URL = 'http://localhost:4000/products';
@@ -15,14 +13,10 @@ export class AddProductComponent implements OnInit {
         name: new FormControl(''),
         price: new FormControl('')
     });
-
-    // @ts-ignore
-    public uploader: FileUploader = new FileUploader({url: URL, itemAlias: 'photo'});
     files = null;
   constructor(
       private http: HttpClient,
-      private formBuilder: FormBuilder,
-      private productService: ProductService
+      private formBuilder: FormBuilder
   ) {
       this.productForm = this.formBuilder.group({
           name: ['', Validators.required],

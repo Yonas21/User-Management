@@ -29,8 +29,8 @@
                 <a routerLink="admin/add-product"><img src="../../assets/homepage/img/_African_Teenager-512.png" width="40px" height="40px" alt=""></a>
             </li>
             <li class="list-group-item-primary">
-                <h6 (click)="hideAndShow('products')"><a>Products</a></h6>
-                <div  *ngIf="menus.products"  class="sub-menu">
+                <h6 (click)="hideAndShowProducts('products')"><a>Products</a></h6>
+                <div  *ngIf="productMenu.products"  class="sub-menu">
                     <ul>
                         <li routerLink= "/admin/add-product">Add</li>
                         <li routerLink="/admin/update-product">Edit</li>
@@ -39,10 +39,24 @@
                 </div>
             </li>
             <li class="list-group-item-primary">
-                <a routerLink="" >Malls</a>
+                <h6 (click)="hideAndShowMalls('malls')"><a>Malls</a></h6>
+                <div  *ngIf="mallMenu.malls"  class="sub-menu">
+                    <ul>
+                        <li routerLink= "/admin/add-mall">Add</li>
+                        <li routerLink="/admin/update-mall">Edit</li>
+                        <li routerLink="/admin/malls">Malls</li>
+                    </ul>
+                </div>
             </li>
             <li class="list-group-item-primary">
-                <a href="">Shops</a>
+                <h6 (click)="hideAndShowShops('shops')"><a>Shops</a></h6>
+                <div  *ngIf="shopMenu.shops"  class="sub-menu">
+                    <ul>
+                        <li routerLink= "/admin/add-shop">Add</li>
+                        <li routerLink="/admin/update-shop">Edit</li>
+                        <li routerLink="/admin/shops">Shops</li>
+                    </ul>
+                </div>
             </li>
             <li class="list-group-item-primary">
                 <a href="">users</a>

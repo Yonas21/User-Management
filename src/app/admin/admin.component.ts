@@ -9,8 +9,14 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 export class AdminComponent implements OnInit {
 
     validateForm: FormGroup;
-    menus = {
+    productMenu = {
         products : false,
+    };
+    mallMenu = {
+        malls: false,
+    };
+    shopMenu = {
+        shops: false
     }
     submitForm(): void {
         // @ts-ignore
@@ -30,9 +36,15 @@ export class AdminComponent implements OnInit {
         });
     }
 
-    hideAndShow(section) {
-        console.log('being called');
-        this.menus[section] = !this.menus[section];
+    hideAndShowProducts(section) {
+        this.productMenu[section] = !this.productMenu[section];
+    }
+    hideAndShowMalls(section) {
+        this.mallMenu[section] = !this.mallMenu[section];
+    }
+
+    hideAndShowShops(section) {
+        this.shopMenu[section] = !this.shopMenu[section];
     }
 
 }
