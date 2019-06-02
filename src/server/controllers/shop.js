@@ -51,6 +51,7 @@ exports.create_a_shop = (req, res, next) => {
             console.log(req.body.userId);
             let shop = new Shop({
                 _id: mongoose.Types.ObjectId(),
+                name: req.body.name,
                 item: req.body.productId,
                 contactNo: req.body.contactNo
             });

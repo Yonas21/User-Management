@@ -14,6 +14,7 @@ const productUrl = 'http://localhost:4000/products';
 })
 export class AddShopComponent implements OnInit {
     shopForm = new FormGroup({
+        name: new FormControl(''),
         product: new FormControl(''),
         contact: new FormControl('')
     });

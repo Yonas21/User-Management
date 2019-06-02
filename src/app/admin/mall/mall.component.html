@@ -1,3 +1,25 @@
-<p>
-  mall works!
-</p>
+<div>
+    <table class="table table-striped" style="width: 80%">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">name</th>
+            <th scope="col">Address</th>
+            <th scope="col">Contact No.</th>
+            <th scope="col">Closing Hour</th>
+            <th scope="col">Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let mall of malls">
+            <th scope="row">1</th>
+            <td>{{mall.name}}</td>
+            <td>{{mall.address}}</td>
+            <td>{{mall.contactNo}}</td>
+            <td>{{mall.closing_hour}}</td>
+            <td><button class="btn btn-danger" (click)="deleteMalls()">Delete</button></td>
+        </tr>
+        </tbody>
+    </table>
+    <ng-flash-message></ng-flash-message>
+</div>

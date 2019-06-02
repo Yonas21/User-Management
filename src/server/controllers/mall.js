@@ -5,10 +5,7 @@ let Shop = require('../models/shop.model');
 exports.getMalls = (req, res, next) => {
     Mall.find().exec()
         .then(results => {
-            res.status(200).json({
-                message: 'mall found',
-                result: results
-            })
+            res.status(200).json(results)
         })
         .catch(err => {
             res.status(404).json({

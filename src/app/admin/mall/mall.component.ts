@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MallService } from '../../services/mall.service';
+import { MallModel } from '../../models/mall.model';
+import { DeleteModel } from '../../models/delete.model';
+import { NgFlashMessageService} from 'ng-flash-messages';
 
 @Component({
   selector: 'app-mall',
@@ -6,10 +10,34 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./mall.component.css']
 })
 export class MallComponent implements OnInit {
+    mall: MallModel;
+    malls: Array<MallModel> = [];
+  constructor(
+      private mallService: MallService,
+      private flashMessage: NgFlashMessageService
+  ) {
+      this.mallService.getMalls().subscribe((result: MallModel[]) => {
+          for (const data of result) {
+              this.mall = new MallModel(data.closing_hour, data._id, data.name, data.address, data.contactNo);
+              this.malls.push(this.mall);
+              this.mallService.id = this.mall._id;
+          }
+      });
 
-  constructor() { }
+  }
 
   ngOnInit() {
   }
-
+  deleteMalls() {
+      this.mallService.DeleteMalls(this.mall._id).subscribe((result: DeleteModel) => {
+          if (result.message){
+              this.flashMessage.showFlashMessage({
+                  messages: [result.message],
+                  dismissible: true,
+                  timeout: 4000,
+                  type: 'info'
+              });
+          }
+      });
+  }
 }

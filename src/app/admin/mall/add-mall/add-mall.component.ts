@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {FormGroup, FormBuilder, Form, FormControl} from '@angular/forms';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-add-mall',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddMallComponent implements OnInit {
 
-  constructor() { }
+    mallForm = new FormGroup({
+        name: new FormControl(''),
+        price: new FormControl('')
+    });
+  constructor(
+      private formBuilder: FormBuilder,
+      private http: HttpClient) { }
 
   ngOnInit() {
   }
+
+  onSubmit() {
+
+  }
+
 
 }
