@@ -65,7 +65,7 @@ const routes: Routes = [
                         component: AddMallComponent
                     },
                     {
-                        path: 'update-mall',
+                        path: 'update-mall/:id',
                         component: UpdateMallComponent
                     },
                     {
@@ -73,7 +73,7 @@ const routes: Routes = [
                         component: AddShopComponent
                     },
                     {
-                        path: 'update-shop',
+                        path: 'update-shop/:id',
                         component: UpdateShopComponent
                     }
         ]

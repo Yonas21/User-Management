@@ -33,7 +33,7 @@
                 <div  *ngIf="productMenu.products"  class="sub-menu">
                     <ul>
                         <li routerLink= "/admin/add-product">Add</li>
-                        <li routerLink="/admin/update-product">Edit</li>
+                        <li routerLink="/admin/update-product/:id">Edit</li>
                         <li routerLink="/admin/products">Products</li>
                     </ul>
                 </div>
@@ -43,7 +43,7 @@
                 <div  *ngIf="mallMenu.malls"  class="sub-menu">
                     <ul>
                         <li routerLink= "/admin/add-mall">Add</li>
-                        <li routerLink="/admin/update-mall">Edit</li>
+                        <li routerLink="/admin/update-mall:/id">Edit</li>
                         <li routerLink="/admin/malls">Malls</li>
                     </ul>
                 </div>
@@ -53,7 +53,7 @@
                 <div  *ngIf="shopMenu.shops"  class="sub-menu">
                     <ul>
                         <li routerLink= "/admin/add-shop">Add</li>
-                        <li routerLink="/admin/update-shop">Edit</li>
+                        <li routerLink="/admin/update-shop/:id">Edit</li>
                         <li routerLink="/admin/shops">Shops</li>
                     </ul>
                 </div>

@@ -3,7 +3,7 @@ import { MallService } from '../../services/mall.service';
 import { MallModel } from '../../models/mall.model';
 import { DeleteModel } from '../../models/delete.model';
 import { NgFlashMessageService} from 'ng-flash-messages';
-
+import {Router} from '@angular/router';
 @Component({
   selector: 'app-mall',
   templateUrl: './mall.component.html',
@@ -14,7 +14,8 @@ export class MallComponent implements OnInit {
     malls: Array<MallModel> = [];
   constructor(
       private mallService: MallService,
-      private flashMessage: NgFlashMessageService
+      private flashMessage: NgFlashMessageService,
+      private router: Router
   ) {
       this.mallService.getMalls().subscribe((result: MallModel[]) => {
           for (const data of result) {
@@ -40,4 +41,8 @@ export class MallComponent implements OnInit {
           }
       });
   }
+
+    updateMall(id) {
+        this.router.navigate([`/admin/update-mall/${id}`]);
+    }
 }

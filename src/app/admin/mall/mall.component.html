@@ -8,6 +8,7 @@
             <th scope="col">Shop</th>
             <th scope="col">Contact No.</th>
             <th scope="col">Closing Hour</th>
+            <th scope="col">Update</th>
             <th scope="col">Delete</th>
         </tr>
         </thead>
@@ -19,6 +20,7 @@
             <td>{{mall.shop}}</td>
             <td>{{mall.contactNo}}</td>
             <td>{{mall.closing_hour}}</td>
+            <td><button class="btn btn-primary" (click)="updateMall(mall._id)">Update</button></td>
             <td><button class="btn btn-danger" (click)="deleteMalls()">Delete</button></td>
         </tr>
         </tbody>

@@ -1,3 +1,41 @@
-<p>
-  update-mall works!
-</p>
+<form action="">
+    <div class="form-group">
+        <h6 class="text-heading">Update Mall</h6>
+    </div>
+
+    <div class="form-group">
+        <label for="name" class="col-form-label">name</label>
+        <input type="text" class="form-control" id="name" #name>
+    </div>
+
+    <div class="form-group">
+        <label for="address" class="col-form-label">Address</label>
+        <input type="text" class="form-control"  id="address" #address>
+    </div>
+
+    <div class="form-group">
+        <label for="contact" class="col-form-label">Contact No.</label>
+        <input type="text" class="form-control" id="contact" #contact>
+    </div>
+
+    <div class="form-group">
+        <label for="shop" class="col-form-label">Shop</label>
+        <select id="shop" class="form-control"  name="item" #item>
+            <option selected>Choose...</option>
+            <option *ngFor="let shop of shops" [value]="shop.value">{{shop.name}}</option>
+        </select>    </div>
+
+    <div class="form-group">
+        <label for="closing" class="col-form-label">Closing Hour</label>
+        <input type="text" class="form-control" id="closing" #closing>
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-primary" type = "submit"
+                (click)="updateMall(name.value, address.value, contact.value, item.value, closing.value)">Submit</button>
+    </div>
+
+    <div class="form-group">
+        <ng-flash-message></ng-flash-message>
+    </div>
+</form>

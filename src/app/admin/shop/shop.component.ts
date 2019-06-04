@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ShopService } from '../../services/shop.service';
 import { ShopModel} from '../../models/shop.model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-shop',
@@ -11,7 +12,8 @@ export class ShopComponent implements OnInit {
     shops: Array<ShopModel> = [];
     shop: ShopModel;
   constructor(
-      private shopService: ShopService
+      private shopService: ShopService,
+      private router: Router
   ) {
       this.shopService.getShops().subscribe((result: ShopModel[]) => {
           for (const data of result) {
@@ -25,9 +27,12 @@ export class ShopComponent implements OnInit {
   ngOnInit() {
   }
 
-    deleteShop() {
-        this.shopService.deleteShop(this.shop._id).subscribe(result => {
-            console.log(result);
-        });
+  updateShop(id) {
+      this.router.navigate([`/admin/update-shop/${id}`]);
+  }
+  deleteShop() {
+    this.shopService.deleteShop(this.shop._id).subscribe(result => {
+        console.log(result);
+    });
     }
 }
