@@ -3,6 +3,7 @@ import { ProductService } from '../../services/product.service';
 import { ProductModel } from '../../models/product.model';
 import { NgFlashMessageService } from 'ng-flash-messages';
 import { DeleteModel } from '../../models/delete.model';
+import { Router} from '@angular/router';
 
 @Component({
   selector: 'app-product',
@@ -15,7 +16,8 @@ export class ProductComponent implements OnInit {
     message: string;
     constructor(
         private productService: ProductService,
-        private flashMessage: NgFlashMessageService
+        private flashMessage: NgFlashMessageService,
+        private router: Router
         ) {
       this.productService.getProducts().subscribe((result: ProductModel[]) => {
          for (const data of result) {
@@ -29,6 +31,9 @@ export class ProductComponent implements OnInit {
   ngOnInit() {
   }
 
+  updateProduct(id) {
+        this.router.navigate([`/admin/update-product/${id}`]);
+  }
   deleteProducts() {
         this.productService.deleteProduct(this.product._id).subscribe((result: DeleteModel) => {
             if (result.message) {

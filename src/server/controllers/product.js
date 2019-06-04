@@ -80,11 +80,11 @@ exports.get_one_product = (req, res, next) => {
 
 exports.update_product = (req, res, next) => {
     let id = req.params.productId;
+    console.log(req.body.newPrice);
     Product.findOneAndUpdate(id, {
         $set: {
             name: req.body.newName,
-            price: req.body.newPrice,
-            productImage: req.file.newImage
+            price: req.body.newPrice
         }
     })
         .exec()
@@ -122,16 +122,3 @@ exports.delete_product = (req, res, next) => {
         });
 };
 
-exports.uploadImage = (req, res, next ) => {
-    if (!req.file) {
-        console.log("No file received");
-        return res.send({
-            success: false
-        });
-    } else {
-        console.log('file received');
-        return res.send({
-            success: true
-        })
-    }
-};
