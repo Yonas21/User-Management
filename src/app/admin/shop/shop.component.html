@@ -1,3 +1,23 @@
-<p>
-  shop works!
-</p>
+<div>
+    <table class="table table-striped" style="width: 80%">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">name</th>
+            <th scope="col">Item</th>
+            <th scope="col">Contact No.</th>
+            <th scope="col">Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let shop of shops">
+            <th scope="row">1</th>
+            <td>{{shop.name}}</td>
+            <td>{{shop.item}}</td>
+            <td>{{shop.contactNo}}</td>
+            <td><button class="btn btn-danger" (click)="deleteShop()">Delete</button></td>
+        </tr>
+        </tbody>
+    </table>
+    <ng-flash-message></ng-flash-message>
+</div>

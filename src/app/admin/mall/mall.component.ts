@@ -18,7 +18,7 @@ export class MallComponent implements OnInit {
   ) {
       this.mallService.getMalls().subscribe((result: MallModel[]) => {
           for (const data of result) {
-              this.mall = new MallModel(data.closing_hour, data._id, data.name, data.address, data.contactNo);
+              this.mall = new MallModel(data.closing_hour, data._id, data.name, data.shop, data.address, data.contactNo);
               this.malls.push(this.mall);
               this.mallService.id = this.mall._id;
           }
@@ -30,7 +30,7 @@ export class MallComponent implements OnInit {
   }
   deleteMalls() {
       this.mallService.DeleteMalls(this.mall._id).subscribe((result: DeleteModel) => {
-          if (result.message){
+          if (result.message) {
               this.flashMessage.showFlashMessage({
                   messages: [result.message],
                   dismissible: true,

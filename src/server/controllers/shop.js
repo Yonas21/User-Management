@@ -7,10 +7,7 @@ exports.get_all_shops = (req, res, next) => {
         .populate('item')
         .exec()
         .then(results => {
-            res.status(200).json({
-                message: 'founded shops',
-                result: results
-            })
+            res.status(200).json(results);
         })
         .catch(err => {
             res.status(404).json({
@@ -24,10 +21,7 @@ exports.get_a_shop = (req, res, next) => {
     let id = req.params.shopId;
     Shop.findById(id).exec()
         .then(result => {
-            res.status(200).json({
-                message: 'a shop found',
-                result: result
-            })
+            res.status(200).json(result);
         })
         .catch(err => {
             res.status(404).json({
@@ -39,7 +33,7 @@ exports.get_a_shop = (req, res, next) => {
 
 exports.create_a_shop = (req, res, next) => {
     //check if the product we want to order is exist.
-    let id = req.body.productId;
+    let id = req.body.item;
     Product.findById(id)
         .then(product => {
             if (!product) {
@@ -47,16 +41,15 @@ exports.create_a_shop = (req, res, next) => {
                     message: `Product not found`
                 });
             }
-            console.log(product);
-            console.log(req.body.userId);
+
             let shop = new Shop({
                 _id: mongoose.Types.ObjectId(),
                 name: req.body.name,
-                item: req.body.productId,
+                item: req.body.item,
                 contactNo: req.body.contactNo
             });
 
-            console.log(req.body.ProductId);
+            console.log(req.body.name);
             return shop
                 .save()
                 .then(result => {
@@ -73,6 +66,33 @@ exports.create_a_shop = (req, res, next) => {
         .catch(err => {
             res.status(404).json({
                 message: `unable to find the product with id ${id}`,
+                error: err
+            });
+        });
+};
+//update a shop
+exports.update_shop = (req, res, next) => {
+    let id = req.params.shopId;
+    Shop.findOneAndUpdate(id, {
+        $set: {
+            name: req.body.newName,
+            item: req.body.newItem,
+            contactNo: req.body.newContactNo
+        }
+    }).exec()
+        .then(result => {
+            res.status(201).json({
+                message: `Shop with id ${id} successfully updated.`,
+                result: result,
+                request: {
+                    type: "GET",
+                    url: "http://localhost:4000/shop/" + id
+                }
+            });
+        })
+        .catch(err => {
+            res.status(500).json({
+                message: `unable to update data`,
                 error: err
             });
         });

@@ -44,7 +44,7 @@ router.post(
 router.get("/:productId", productController.get_one_product);
 
 //update the individual products
-router.patch("/:productId", productController.update_product);
+router.patch("/:productId",upload.single('newImage'), productController.update_product);
 
 //update the individual products
 router.delete("/:productId", productController.delete_product);

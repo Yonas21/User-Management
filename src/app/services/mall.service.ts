@@ -18,4 +18,14 @@ export class MallService {
   DeleteMalls(item) {
       return this.http.delete(`${this.url}/mall/${item}`, { responseType: 'json'});
   }
+    addMall(name: string, address: string, contact: string, item: string, closing: string) {
+      const mall = {
+          name,
+          address,
+          contact,
+          item,
+          closing
+      };
+      return this.http.post(`${this.url}/mall`, mall, { responseType: 'json'});
+  }
 }

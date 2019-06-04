@@ -15,6 +15,9 @@ router.get('/:shopId', shopController.get_a_shop);
 //create new shop
 router.post('/', shopController.create_a_shop);
 
+//update a shop
+router.patch('/:shopId', shopController.update_shop);
+
 //delete shop
 router.delete('/:shopId', shopController.delete_a_shop);
 

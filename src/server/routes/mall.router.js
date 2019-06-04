@@ -14,7 +14,8 @@ router.get('/:mallId', mallController.get_a_mall);
 
 //create new mall
 router.post('/', mallController.create_a_mall);
-
+//update a mall
+router.patch('/:mallId', mallController.update_mall);
 //delete mall
 router.delete('/:mallId', mallController.delete_a_mall);
 

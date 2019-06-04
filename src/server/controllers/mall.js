@@ -33,7 +33,8 @@ exports.get_a_mall = (req, res, next) => {
 
 exports.create_a_mall = (req, res, next) => {
     //check if the product we want to order is exist.
-    let id = req.body.shopId;
+    let id = req.body.item;
+    console.log(id);
     Shop.findById(id)
         .then(shop => {
             if (!shop) {
@@ -53,8 +54,8 @@ exports.create_a_mall = (req, res, next) => {
                 _id: mongoose.Types.ObjectId(),
                 name: req.body.name,
                 address: req.body.address,
-                contactNo: req.body.contactNo,
-                shop: req.body.shopId,
+                contactNo: req.body.contact,
+                shop: req.body.item,
                 closing_hour: req.body.closing
             });
 
@@ -79,7 +80,35 @@ exports.create_a_mall = (req, res, next) => {
         });
 };
 
-
+exports.update_mall = (req, res, next) => {
+    let id = req.params.mallId;
+    console.log(id);
+    Mall.findOneAndUpdate(id, {
+        $set: {
+            name: req.body.newName,
+            address: req.body.newAddress,
+            contactNo: req.body.newContact,
+            shop: req.body.newItem,
+            closing_hour: req.body.newClosing
+        }
+    }).exec()
+        .then(result => {
+            res.status(201).json({
+                message: `mall with id ${id} successfully updated.`,
+                result: result,
+                request: {
+                    type: "GET",
+                    url: "http://localhost:4000/mall/" + id
+                }
+            });
+        })
+        .catch(err => {
+            res.status(500).json({
+                message: `unable to update data`,
+                error: err
+            });
+        });
+};
 exports.delete_a_mall = (req, res, next) => {
     let id = req.params.mallId;
     Mall.findByIdAndRemove(id).exec()
