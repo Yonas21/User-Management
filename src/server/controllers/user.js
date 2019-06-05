@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 let User = require('../models/user.model');
+const jwt_decoded = require('jwt-decode');
 
 exports.register = (req, res) => {
     //check if the email is present
@@ -26,7 +27,8 @@ exports.register = (req, res) => {
                         gender: req.body.gender,
                         email: req.body.email,
                         phoneNo: req.body.phoneNo,
-                        address: req.body.address
+                        address: req.body.address,
+                        role: req.body.role
                     });
 
                     //save to the database
@@ -57,20 +59,25 @@ exports.authenticate = (req, res) => {
                         return res.status(401).json({
                             message: 'Authorization Failed'
                         });
-                        console.log(`${req.body.email} + ${req.body.password}`)
+                        console.log(`${req.body.email} + ${req.body.password}`);
                     }
                     if (result) {
-                        const token = jwt.sign({
+                        const payload = {
                             email: user[0].email,
-                            userId: user[0]._id
-                        }, process.env.JWT_SECRET ,
+                            userId: user[0]._id,
+                            role: user[0].role,
+                            name: user[0].firstName
+                        };
+                        const token = jwt.sign(payload, process.env.JWT_SECRET ,
                             {
-                                expiresIn: "1h"
+                                expiresIn: "12h"
                             });
-
+                        //let decoded  = jwt_decoded(token);
                         return res.status(200).json({
                             message: 'Authorized',
-                            token: token
+                            token: token,
+                            role: payload.role,
+                            username: payload.name
                         });
                     }
 

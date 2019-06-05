@@ -32,9 +32,7 @@ export class HomepageComponent implements OnInit {
                 const image = `${this.url}/${oneData.productImage}`;
                 this.product  = new ProductModel(oneData._id, oneData.name, oneData.price, image);
                 this.products.push(this.product);
-                console.log(image);
                 this.productService.id = this.product._id;
-                console.log(this.product._id);
             }
         });
         this.userService.getUsers().subscribe((result: UserModel[]) => {

@@ -7,6 +7,8 @@ import { AuthService} from 'angularx-social-login';
 import { GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider} from 'angularx-social-login';
 import { SocialUser } from 'angularx-social-login';
 import { UserModel } from '../models/user.model';
+import {LoginPayloadModel} from '../models/LoginPayload.model';
+import {decode} from 'punycode';
 
 
 // @ts-ignore
@@ -37,9 +39,8 @@ export class LoginComponent implements OnInit {
       }
 
       onLoginSubmit(username, password) {
-        this.userService.authenticateUser(username, password).subscribe(data => {
-
-          if (!data) {
+        this.userService.authenticateUser(username, password).subscribe((data: LoginPayloadModel) => {
+          if (!(data.message === 'Authorized')) {
             this.flashMessage.showFlashMessage({
               messages: ['unable to find data'],
               dismissible: true,
@@ -47,25 +48,18 @@ export class LoginComponent implements OnInit {
                type: 'danger'
             });
           } else {
-            const arr = [];
-            for (const message in data) {
-              if (data.hasOwnProperty(message)) {
-                arr.push(data[message]);
-
-                this.userService.saveToken(arr[1]);
-
-
-                this.flashMessage.showFlashMessage({
-                  messages: ['Logged in Successfully.'],
-                  dismissible: true,
-                  timeout: 5000,
-                  type: 'success'
-                });
+              if (data.role === 'admin') {
+                  this.router.navigate(['/home']);
+            } else {
+                  this.router.navigate(['/home']);
               }
-            }
-
-
-            this.router.navigate(['/home']);
+              this.flashMessage.showFlashMessage({
+                  messages: [data.message],
+                  dismissible: true,
+                  timeout: 4000,
+                  type: 'success'
+              });
+              this.userService.saveToken(data.token);
           }
         });
 
@@ -101,8 +95,6 @@ export class LoginComponent implements OnInit {
             this.loggedIn = (user != null);
         });
     }
-
-
 
 }
 

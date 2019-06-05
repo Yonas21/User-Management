@@ -12,8 +12,8 @@ import { NgFlashMessageService } from 'ng-flash-messages';
 export class SignupComponent implements OnInit {
 
     createForm: FormGroup;
-
-
+    gender: string;
+    role: string;
   constructor(
       private userService: UserService,
       private router: Router,
@@ -30,10 +30,15 @@ export class SignupComponent implements OnInit {
           address: ['']
       });
   }
-
-
+    getValue(event) {
+      this.gender = event.target.value;
+      console.log(this.gender);
+    }
+    selectedRole(event) {
+        this.role = event.target.value;
+    }
     addUser(firstName, lastName, password, birthday, gender, email, phoneNo, address) {
-      this.userService.addUser(firstName, lastName, password, birthday, gender, email, phoneNo, address).subscribe(() => {
+      this.userService.addUser(firstName, lastName, password, birthday, this.gender, email, phoneNo, address, this.role).subscribe(() => {
           this.flashMessage.showFlashMessage({
             messages: ['user Successfully Registered.'],
             dismissible: true,
