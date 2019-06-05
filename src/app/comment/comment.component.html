@@ -4,22 +4,25 @@
           novalidate="novalidate">
         <div class="col-md-12">
             <div class="form-group">
-                <input type="email" class="form-control" id="email" name="email" placeholder="Email Address">
+                <input type="email" class="form-control" id="email" name="email" placeholder="Email Address" #email>
             </div>
         </div>
         <div class="col-md-12">
             <div class="form-group">
-                <input type="text" class="form-control" id="number" name="number" placeholder="Phone Number">
+                <input type="text" class="form-control" id="number" name="number" placeholder="Phone Number" #phone>
             </div>
         </div>
         <div class="col-md-12">
             <div class="form-group">
                       <textarea class="form-control" name="message" id="message" rows="1"
-                                placeholder="Message"></textarea>
+                                placeholder="Message" #message></textarea>
             </div>
         </div>
         <div class="col-md-12 text-right">
-            <button type="submit" value="submit" class="btn submit_btn">Submit Now</button>
+            <button type="submit" value="submit"
+                    class="btn submit_btn"
+            (click)="addComment(email.value, phone.value, message.value)"
+            >Submit Now</button>
         </div>
     </form>
 </div>

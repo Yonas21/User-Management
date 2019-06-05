@@ -7,15 +7,15 @@ let reivewController = require("../controllers/review");
 const router = express.Router();
 
 //find all orders created
-router.get("/", reivewController.get_all_comments);
+router.get("/", reivewController.get_all_reviews);
 
 //create new order
-router.post("/", reivewController.create_a_comment);
+router.post("/", reivewController.create_a_review);
 
 //find out individual orders//details
-router.get("/:commentId", reivewController.get_a_comment);
+router.get("/:reviewId", reivewController.get_a_review);
 
 // delete the orders
-router.delete("/:commentId", reivewController.delete_a_comment);
+router.delete("/:reviewId", reivewController.delete_a_review);
 
 module.exports = router;

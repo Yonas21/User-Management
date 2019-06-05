@@ -12,4 +12,7 @@ export class CommentComponent implements OnInit {
   ngOnInit() {
   }
 
+    addComment(name: string, phone: string, message: string) {
+
+    }
 }

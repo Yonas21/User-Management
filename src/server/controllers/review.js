@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 //find all reviews and comments
-exports.get_all_comments = (req, res, next) => {
+exports.get_all_reviews = (req, res, next) => {
     Review.find()
         .exec()
         .then(results => {
@@ -22,8 +22,8 @@ exports.get_all_comments = (req, res, next) => {
         });
 };
 
-exports.get_a_comment = (req, res, next) => {
-    const id = req.params.commentId;
+exports.get_a_review = (req, res, next) => {
+    const id = req.params.reviewId;
 
     Review.findById(id)
         .exec()
@@ -42,7 +42,7 @@ exports.get_a_comment = (req, res, next) => {
 
 };
 
-exports.create_a_comment = (req, res, next) => {
+exports.create_a_review = (req, res, next) => {
       const id = req.body.token;
       let decoded = jwt.verify(id, process.env.JWT_SECRET);
       console.log(decoded);
@@ -78,8 +78,8 @@ exports.create_a_comment = (req, res, next) => {
 
 };
 
-exports.delete_a_comment = (req, res, next) => {
-    const id = req.body.commentId;
+exports.delete_a_review = (req, res, next) => {
+    const id = req.params.reviewId;
     Review.findByIdAndRemove(id)
         .exec()
         .then(result => {
