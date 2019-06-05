@@ -50,6 +50,8 @@ import { AddMallComponent } from './admin/mall/add-mall/add-mall.component';
 import { UpdateMallComponent } from './admin/mall/update-mall/update-mall.component';
 import { AddShopComponent } from './admin/shop/add-shop/add-shop.component';
 import { UpdateShopComponent } from './admin/shop/update-shop/update-shop.component';
+import { CommentComponent } from './comment/comment.component';
+import { ReviewComponent } from './review/review.component';
 registerLocaleData(en);
 
 const antDesignIcons = AllIcons as {
@@ -101,7 +103,9 @@ export function provideConfig() {
       AddMallComponent,
       UpdateMallComponent,
       AddShopComponent,
-      UpdateShopComponent
+      UpdateShopComponent,
+      CommentComponent,
+      ReviewComponent
   ],
   imports: [
     BrowserModule,

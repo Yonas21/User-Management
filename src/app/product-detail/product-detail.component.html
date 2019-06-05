@@ -6,9 +6,9 @@
         <div class="banner_content text-center">
           <h2>Single Product Page</h2>
           <div class="page_link">
-            <a href="/home">Home</a>
-            <a href="/product_category">Category</a>
-            <a href="/product_detail">Product Details</a>
+            <a routerLink = '/home'>Home</a>
+            <a routerLink = '/product_category'>Category</a>
+            <a routerLink = '/product_detail'>Product Details</a>
           </div>
         </div>
       </div>
@@ -81,10 +81,10 @@
             <div class="card_area">
               <a class="main_btn" href="#">Add to Cart</a>
               <a class="icon_btn" href="#">
-                <i class="fa fa-diamond"></i>
+                <i class="fa fa-dice"></i>
               </a>
               <a class="icon_btn" href="#">
-                <i class="fa fa-heart-o"></i>
+                <i class="fa fa-heart"></i>
               </a>
             </div>
           </div>
@@ -271,36 +271,7 @@
               </div>
             </div>
             <div class="col-lg-6">
-              <div class="review_box">
-                <h4>Post a comment</h4>
-                <form class="row contact_form" action="#" method="post" id="contactForm"
-                  novalidate="novalidate">
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <input type="text" class="form-control" id="name" name="name" placeholder="Your Full name">
-                    </div>
-                  </div>
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <input type="email" class="form-control" id="email" name="email" placeholder="Email Address">
-                    </div>
-                  </div>
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <input type="text" class="form-control" id="number" name="number" placeholder="Phone Number">
-                    </div>
-                  </div>
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <textarea class="form-control" name="message" id="message" rows="1"
-                        placeholder="Message"></textarea>
-                    </div>
-                  </div>
-                  <div class="col-md-12 text-right">
-                    <button type="submit" value="submit" class="btn submit_btn">Submit Now</button>
-                  </div>
-                </form>
-              </div>
+                <app-comment></app-comment>
             </div>
           </div>
         </div>
@@ -414,65 +385,7 @@
               </div>
             </div>
             <div class="col-lg-6">
-              <div class="review_box">
-                <h4>Add a Review</h4>
-                <p>Your Rating:</p>
-                <ul class="list">
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-star"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-star"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-star"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-star"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-star"></i>
-                    </a>
-                  </li>
-                </ul>
-                <p>Outstanding</p>
-                <form class="row contact_form" action="#" method="post" id="contactForm"
-                  novalidate="novalidate">
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <input type="text" class="form-control" id="name" name="name" placeholder="Your Full name">
-                    </div>
-                  </div>
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <input type="email" class="form-control" id="email" name="email" placeholder="Email Address">
-                    </div>
-                  </div>
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <input type="text" class="form-control" id="number" name="number" placeholder="Phone Number">
-                    </div>
-                  </div>
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <textarea class="form-control" name="message" id="message" rows="1"
-                        placeholder="Review"></textarea>
-                    </div>
-                  </div>
-                  <div class="col-md-12 text-right">
-                    <button type="submit" value="submit" class="btn submit_btn">Submit Now</button>
-                  </div>
-                </form>
-              </div>
+                <app-review></app-review>
             </div>
           </div>
         </div>

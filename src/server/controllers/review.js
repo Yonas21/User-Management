@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 const Review = require('../models/review.model');
 const User = require('../models/user.model');
-
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 //find all reviews and comments
 exports.get_all_comments = (req, res, next) => {
@@ -42,42 +43,39 @@ exports.get_a_comment = (req, res, next) => {
 };
 
 exports.create_a_comment = (req, res, next) => {
-      const id = req.body.userId;
-      User.findById(id)
-          .exec()
-          .then(user => {
-              if (!user){
-                  res.status(404).json({
-                      message: 'unable to find any user'
+      const id = req.body.token;
+      let decoded = jwt.verify(id, process.env.JWT_SECRET);
+      console.log(decoded);
+      if (id.length > 0){
+          let review = new Review({
+              _id: mongoose.Types.ObjectId(),
+              email: req.body.email,
+              phone: req.body.phone,
+              message: req.body.message,
+              rate: req.body.rate,
+              token: req.body.token
+          });
+          review.save()
+              .then(result => {
+                  res.status(201).json({
+                      message: 'comment added successfully',
+                      result: result,
+                      username: decoded.name,
+                      role: decoded.role
                   })
-              }
-              let review = new Review({
-                  _id: mongoose.Schema.ObjectId(),
-                  reviewedBy: req.body.userId,
-                  product: req.body.productId,
-                  rate: req.body.rate,
-                  comment: req.body.comment
-              });
-              review.save()
-                  .then(result => {
-                      res.status(201).json({
-                          message: 'comment added successfully',
-                          result: result
-                      })
-                  })
-                  .catch(err => {
-                      res.status(500).json({
-                          message: 'unable to add a comment',
-                          error: err
-                      })
-                  })
-          })
-          .catch(err => {
-              res.status(404).json({
-                  message: 'no user found',
-                  error: err
               })
+              .catch(err => {
+                  res.status(500).json({
+                      message: 'unable to add a comment',
+                      error: err
+                  })
+              })
+      } else {
+          res.status(500).json({
+              message: 'You cannot give Comment, You Should Login First.'
           })
+      }
+
 };
 
 exports.delete_a_comment = (req, res, next) => {

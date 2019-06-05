@@ -2,29 +2,32 @@ const mongoose = require('mongoose');
 
 const reviewSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
-    reviewedBy: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "users",
+    email: {
+      type: String,
+      required: true
+    },
+    phone: {
+        type: String,
         required: true
     },
-    product: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Products",
-        required: true
+    message: {
+        type: String,
+        required: true,
+        minlength: 20,
+        maxlength: 1000
     },
     reviewDate: {
         type: Date,
         default: new Date().toLocaleDateString()
     },
-    rate: {
-        type: Number,
-        required: true,
-        enum: ['poor','good', 'very good', 'excellent','outstanding']
+    token: {
+        type: String
     },
-    comment: {
+    rate: {
         type: String,
-        required: true
-    }
+        default: 1,
+    },
+
 },
 {
     collection: 'review'
