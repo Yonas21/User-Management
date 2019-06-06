@@ -79,7 +79,7 @@
               </button>
             </div>
             <div class="card_area">
-              <a class="main_btn" href="#">Add to Cart</a>
+              <a class="main_btn" (click)="addToCart()">Add to Cart</a>
               <a class="icon_btn" href="#">
                 <i class="fa fa-dice"></i>
               </a>
@@ -279,8 +279,8 @@
                 <div class="col-6">
                   <div class="box_total">
                     <h5>Overall</h5>
-                    <h4>4.0</h4>
-                    <h6>(03 Reviews)</h6>
+                    <h4>{{overall.toFixed(2)}}</h4>
+                    <h6>({{count}} Reviews)</h6>
                   </div>
                 </div>
                 <div class="col-6">
@@ -322,13 +322,13 @@
                 </div>
               </div>
               <div class="review_list">
-                <div class="review_item">
+                <div class="review_item" *ngFor="let review of reviews">
                   <div class="media">
                     <div class="d-flex">
                       <img src="../../assets/homepage/img/product/single-product/review-1.png" alt="">
                     </div>
                     <div class="media-body">
-                      <h4>Blake Ruiz</h4>
+                      <h4>{{username[1]}}</h4>
                       <i class="fa fa-star"></i>
                       <i class="fa fa-star"></i>
                       <i class="fa fa-star"></i>
@@ -336,48 +336,7 @@
                       <i class="fa fa-star"></i>
                     </div>
                   </div>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                    labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                    commodo</p>
-                </div>
-                <div class="review_item">
-                  <div class="media">
-                    <div class="d-flex">
-                      <img src="../../assets/homepage/img/product/single-product/review-2.png" alt="">
-                    </div>
-                    <div class="media-body">
-                      <h4>Blake Ruiz</h4>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                    </div>
-                  </div>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                    labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                    commodo</p>
-                </div>
-                <div class="review_item">
-                  <div class="media">
-                    <div class="d-flex">
-                      <img src="../../assets/homepage/img/product/single-product/review-3.png" alt="">
-                    </div>
-                    <div class="media-body">
-                      <h4>Blake Ruiz</h4>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                    </div>
-                  </div>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                    labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                    commodo</p>
+                  <p>{{review.message}}</p>
                 </div>
               </div>
             </div>

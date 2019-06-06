@@ -5,6 +5,7 @@ import { CommentService } from '../services/comment.service';
 import {CommentModel} from '../models/comment.model';
 import * as jwt_decode from 'jwt-decode';
 import {ReviewModel} from '../models/review.model';
+import {ReviewResponseModel} from '../models/reviewResponse.model';
 
 @Component({
   selector: 'app-product-detail',
@@ -12,18 +13,54 @@ import {ReviewModel} from '../models/review.model';
   styleUrls: ['./product-detail.component.css']
 })
 export class ProductDetailComponent implements OnInit {
-
     products: ProductModel[];
     image: string;
+    count = 0;
+    sum = 0;
+    overall = 0;
     url = 'http://localhost:4000';
     comments: Array<CommentModel> = [];
+    reviews: Array<ReviewModel> = [];
+    rates = [];
+    token = [];
+    decodedToken: Array<ReviewResponseModel> = [];
+    username = [];
   constructor(
       private productService: ProductService,
       private commentService: CommentService
       ) {
+      this.productService.getProducts().subscribe((result: ProductModel[]) => {
+         for (const data of result) {
+             console.log(data);
+         }
+      });
       this.commentService.getComments().subscribe((result: CommentModel[]) => {
           for (const data of result) {
               this.comments.push(data);
+          }
+      });
+      this.commentService.getReviews().subscribe((result: ReviewModel[]) => {
+          this.count = result.length;
+          for (const data of result) {
+              this.reviews.push(data);
+              this.rates.push(+data.rate);
+              this.token.push(data.token);
+          }
+          for (const rate of this.rates) {
+              this.sum = this.sum + rate;
+          }
+          this.overall = this.sum / this.count;
+          for (const token of this.token) {
+              try {
+                  const decoded = jwt_decode(token);
+                  this.decodedToken.push(decoded);
+              } catch (e) {
+                  console.error(e);
+              }
+          }
+
+          for (const individualDecode of this.decodedToken) {
+              this.username.push(individualDecode.name);
           }
       });
   }
@@ -44,17 +81,7 @@ export class ProductDetailComponent implements OnInit {
          console.log(this.products);
       });
   }
-  getAllComments() {
-      this.commentService.getReviews().subscribe((result: ReviewModel[]) => {
-          for (const data of result) {
-              const token = data.token;
-              try {
-                  const decoded = jwt_decode(token);
-                  console.log(decoded);
-              } catch (e) {
-                  console.error(e);
-              }
-          }
-      });
+  addToCart() {
+      console.log(`add to cart`);
   }
 }
