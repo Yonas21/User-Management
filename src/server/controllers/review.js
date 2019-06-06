@@ -9,10 +9,7 @@ exports.get_all_reviews = (req, res, next) => {
     Review.find()
         .exec()
         .then(results => {
-            res.status(200).json({
-                message: 'result found',
-                result: results
-            })
+            res.status(200).json(results)
         })
         .catch(err => {
             res.status(404).json({

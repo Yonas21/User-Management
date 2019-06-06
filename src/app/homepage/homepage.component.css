@@ -12,7 +12,8 @@
 .clear {
 
     clear : both ;
-
 }
-
+.feature_products {
+    overflow: hidden;
+}
 

@@ -1,14 +1,13 @@
+const mongoose = require('mongoose');
 const Comment = require('../models/comment.model');
+const moment = require('moment');
 
 //get all comments found
 exports.get_all_comments = (req, res, next) => {
     Comment.find()
         .exec()
         .then(comments => {
-            res.status(200).json({
-                message: 'Comments found',
-                result: comments
-            })
+            res.status(200).json(comments)
         })
         .catch(err => {
             res.status(404).json({
@@ -39,7 +38,9 @@ exports.get_a_comment = (req, res, next) => {
 
 //add a comment
 exports.create_a_comment = (req, res, next) => {
+    console.log(req.body.email);
     let comment = new Comment({
+        _id: mongoose.Types.ObjectId(),
         email: req.body.email,
         phone: req.body.phone,
         message: req.body.message

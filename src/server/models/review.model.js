@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const moment = require('moment');
 const reviewSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     email: {
@@ -17,8 +17,8 @@ const reviewSchema = mongoose.Schema({
         maxlength: 1000
     },
     reviewDate: {
-        type: Date,
-        default: new Date().toLocaleDateString()
+        type: String,
+        default: moment(new Date()).format('Do MMMM, YYYY [at] h:mm a')
     },
     token: {
         type: String

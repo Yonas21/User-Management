@@ -220,21 +220,18 @@
           <div class="row">
             <div class="col-lg-6">
               <div class="comment_list">
-                <div class="review_item">
+                <div class="review_item" *ngFor="let comment of comments">
                   <div class="media">
                     <div class="d-flex">
                       <img src="../../assets/homepage/img/product/single-product/review-1.png" alt="Review the first Image.">
                     </div>
                     <div class="media-body">
                       <h4>Blake Ruiz</h4>
-                      <h5>12th Feb, 2017 at 05:56 pm</h5>
+                      <h5>{{comment.commentDate}}</h5>
                       <a class="reply_btn" href="#">Reply</a>
                     </div>
                   </div>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                    labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                    commodo</p>
+                  <p>{{comment.message}}</p>
                 </div>
                 <div class="review_item reply">
                   <div class="media">
@@ -416,7 +413,7 @@
               <!-- <div style="position: absolute; left: -5000px;">
 									<input type="text" name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="">
 								</div> -->
-              <button type="submit" class="newsl-btn">Get Started</button>
+              <button type="submit" (click)="getAllComments()" class="newsl-btn">Get Started</button>
               <div class="info"></div>
             </form>
           </div>
