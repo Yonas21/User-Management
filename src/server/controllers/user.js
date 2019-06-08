@@ -27,8 +27,7 @@ exports.register = (req, res) => {
                         gender: req.body.gender,
                         email: req.body.email,
                         phoneNo: req.body.phoneNo,
-                        address: req.body.address,
-                        role: req.body.role
+                        address: req.body.address
                     });
 
                     //save to the database

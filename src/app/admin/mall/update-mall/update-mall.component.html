@@ -1,38 +1,62 @@
-<form action="">
+<form action="" [formGroup]="updateMallForm">
     <div class="form-group">
         <h6 class="text-heading">Update Mall</h6>
     </div>
 
     <div class="form-group">
         <label for="name" class="col-form-label">name</label>
-        <input type="text" class="form-control" id="name" #name>
+        <input type="text" class="form-control" formControlName="newName" id="name" #newName>
+    </div>
+
+    <div *ngIf="updateMallForm.controls['newName'].invalid && (updateMallForm.controls['newName'].dirty || updateMallForm.controls['newName'].touched)" class="alert alert-danger">
+        <div *ngIf="updateMallForm.controls['newName'].hasError('required')">
+            Name is required.
+        </div>
     </div>
 
     <div class="form-group">
         <label for="address" class="col-form-label">Address</label>
-        <input type="text" class="form-control"  id="address" #address>
+        <input type="text" class="form-control" formControlName="newAddress" id="address" #newAddress>
+    </div>
+
+    <div *ngIf="updateMallForm.controls['newAddress'].invalid && (updateMallForm.controls['newAddress'].dirty || updateMallForm.controls['newAddress'].touched)" class="alert alert-danger">
+        <div *ngIf="updateMallForm.controls['newAddress'].hasError('required')">
+            Address is required.
+        </div>
     </div>
 
     <div class="form-group">
         <label for="contact" class="col-form-label">Contact No.</label>
-        <input type="text" class="form-control" id="contact" #contact>
+        <input type="text" class="form-control" formControlName="newContact" id="contact" #newContact>
+    </div>
+
+    <div *ngIf="updateMallForm.controls['newContact'].invalid && (updateMallForm.controls['newContact'].dirty || updateMallForm.controls['newContact'].touched)" class="alert alert-danger">
+        <div *ngIf="updateMallForm.controls['newContact'].hasError('required')">
+            Contact Number is required.
+        </div>
     </div>
 
     <div class="form-group">
         <label for="shop" class="col-form-label">Shop</label>
-        <select id="shop" class="form-control"  name="item" #item>
+        <select id="shop" class="form-control"  name="item" #newItem>
             <option selected>Choose...</option>
             <option *ngFor="let shop of shops" [value]="shop.value">{{shop.name}}</option>
         </select>    </div>
 
     <div class="form-group">
         <label for="closing" class="col-form-label">Closing Hour</label>
-        <input type="text" class="form-control" id="closing" #closing>
+        <input type="text" class="form-control" formControlName="newClosing" id="closing" #newClosing>
+    </div>
+
+    <div *ngIf="updateMallForm.controls['newClosing'].invalid && (updateMallForm.controls['newClosing'].dirty || updateMallForm.controls['newClosing'].touched)" class="alert alert-danger">
+        <div *ngIf="updateMallForm.controls['newClosing'].hasError('required')">
+            Closing Hour is required.
+        </div>
     </div>
 
     <div class="form-group">
-        <button class="btn btn-primary" type = "submit"
-                (click)="updateMall(name.value, address.value, contact.value, item.value, closing.value)">Submit</button>
+        <button class="btn btn-primary" type = "submit" [disabled]="updateMallForm.pristine || updateMallForm.invalid"
+                (click)="updateMall(newName.value, newAddress.value, newContact.value, newItem.value, newClosing.value)">Submit</button>
     </div>
 
     <div class="form-group">

@@ -1,14 +1,21 @@
-<form action="" [formGroup]="shopForm" (ngSubmit)="onSubmit()">
+<form action="" [formGroup]="shopForm" >
     <div class="form-group">
         <h6 class="text-heading">update Shop</h6>
     </div>
     <div class="form-group">
         <label for="name" class="col-form-label">name</label>
-        <input type="text" class="form-control" id="name" name="name" formControlName="name" #name>
+        <input type="text" class="form-control" id="name"  name="newName" #newName>
     </div>
+
+    <div *ngIf="shopForm.controls['newName'].invalid && (shopForm.controls['newName'].dirty || shopForm.controls['newName'].touched)" class="alert alert-danger">
+        <div *ngIf="shopForm.controls['newName'].errors.required">
+            Name is Required.
+        </div>
+    </div>
+
     <div class="form-group">
         <label for="item" class="col-form-label">Product</label>
-        <select id="item" class="form-control" (change)="selectedOptions($event)" name="item" formControlName="item" #item>
+        <select id="item" class="form-control" (change)="selectedOptions($event)" name="newItem" #newItem>
             <option selected>Choose...</option>
             <option *ngFor="let product of productNames" [value]="product.value">{{product.name}}</option>
         </select>
@@ -16,11 +23,17 @@
 
     <div class="form-group">
         <label for="contact_no" class="col-form-label">Contact No.</label>
-        <input type="text" class="form-control" id="contact_no" name="contactNo" formControlName="contactNo" #contactNo>
+        <input type="text" class="form-control" id="contact_no" name="newContactNo" #newContactNo>
+    </div>
+
+    <div *ngIf="shopForm.controls['newContactNo'].invalid && (shopForm.controls['newContactNo'].dirty || shopForm.controls['newContactNo'].touched)" class="alert alert-danger">
+        <div *ngIf="shopForm.controls['newContactNo'].errors.required">
+            Contact Number is Required.
+        </div>
     </div>
 
     <div class="form-group">
-        <button class="btn btn-primary" type = "submit">Submit</button>
+        <button class="btn btn-primary" type = "submit" (click)="onSubmit(newName.value, newItem.value, newContactNo.value)">Submit</button>
     </div>
 
     <div class="form-group">

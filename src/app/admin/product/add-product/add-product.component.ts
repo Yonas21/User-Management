@@ -18,18 +18,13 @@ export class AddProductComponent implements OnInit {
       private http: HttpClient,
       private formBuilder: FormBuilder
   ) {
-      this.productForm = this.formBuilder.group({
-          name: ['', Validators.required],
-          price: ['', Validators.required],
-          productImage: ['', Validators.required]
-      });
   }
     ngOnInit() {
-      this.productForm = this.formBuilder.group({
-          name: [''],
-          price: [''],
-          productImage: ['']
-      });
+        this.productForm = this.formBuilder.group({
+            name: new FormControl('', Validators.required),
+            price: new FormControl('', Validators.required),
+            productImage: ['']
+        });
     }
     onChange(event) {
         if (event.target.files.length > 0) {
@@ -47,7 +42,6 @@ export class AddProductComponent implements OnInit {
           console.log(result);
       });
   }
-
 
 
 }

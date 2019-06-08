@@ -80,7 +80,6 @@ exports.get_one_product = (req, res, next) => {
 
 exports.update_product = (req, res, next) => {
     let id = req.params.productId;
-    console.log(req.body.newPrice);
     Product.findOneAndUpdate(id, {
         $set: {
             name: req.body.newName,

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { ShopService } from '../../../services/shop.service';
 import { ProductService } from '../../../services/product.service';
 import { ProductModel } from '../../../models/product.model';
@@ -15,9 +15,9 @@ const URL = 'http://localhost:4000/shop';
 })
 export class UpdateShopComponent implements OnInit {
     shopForm = new FormGroup({
-        name: new FormControl(''),
-        item: new FormControl(''),
-        contactNo: new FormControl('')
+        newName: new FormControl(''),
+        newItem: new FormControl(''),
+        newContactNo: new FormControl('')
     });
     productNames = [];
   constructor(
@@ -36,26 +36,28 @@ export class UpdateShopComponent implements OnInit {
 
     ngOnInit() {
         this.shopForm = this.formBuilder.group({
-            name: [''],
-            item: [''],
-            contactNo: ['']
+            newName: ['' , Validators.required],
+            newItem: ['', Validators.required],
+            newContactNo: ['', Validators.required]
         });
     }
 
     selectedOptions(event) {
         if (event.target.value.length > 0) {
             const selected  = event.target.value;
-            this.shopForm.get('item').setValue(selected);
+            this.shopForm.get('newItem').setValue(selected);
         }
     }
 
-    onSubmit() {
+    onSubmit(newName, newItem, newContactNo) {
         const id = window.location.pathname.substr(19, 24);
-        const formData = new FormData();
-        formData.append('name', this.shopForm.get('name').value);
-        formData.append('item', this.shopForm.get('item').value);
-        formData.append('contactNo', this.shopForm.get('contactNo').value);
-        this.http.patch(`${URL}/:${id}`, formData, { responseType: 'json'}).subscribe((result: DeleteModel) => {
+        const shops = {
+            newName,
+            newItem,
+            newContactNo
+        };
+        console.log(shops.newName);
+        this.http.patch(`${URL}/${id}`, shops, { responseType: 'json'}).subscribe((result: DeleteModel) => {
             this.flashMessage.showFlashMessage({
                 messages: [result.message],
                 dismissible: true,
@@ -64,4 +66,5 @@ export class UpdateShopComponent implements OnInit {
             });
         });
     }
+
 }

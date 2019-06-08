@@ -30,18 +30,13 @@ export class AddShopComponent implements OnInit {
               this.productNames.push({name: data.name, value: data._id});
           }
       });
-      this.shopForm = this.formBuilder.group({
-          name: ['', Validators.required],
-          item: ['', Validators.required],
-          contactNo: ['', Validators.required]
-      });
   }
 
   ngOnInit() {
       this.shopForm = this.formBuilder.group({
-          name: [''],
-          item: [''],
-          contactNo: ['']
+          name: ['', Validators.required],
+          item: ['', Validators.required],
+          contactNo: ['', Validators.required]
       });
   }
 

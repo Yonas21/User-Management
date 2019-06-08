@@ -1,37 +1,62 @@
-<form action="">
+<form action="" [formGroup]="mallForm" novalidate>
     <div class="form-group">
         <h6 class="text-heading">Add Mall</h6>
     </div>
 
     <div class="form-group">
         <label for="name" class="col-form-label">name</label>
-        <input type="text" class="form-control" id="name" #name>
+        <input type="text" class="form-control" id="name" formControlName="name" minlength="4" [autocomplete]="false"  #name>
+    </div>
+
+    <div *ngIf="mallForm.controls['name'].invalid && (mallForm.controls['name'].dirty || mallForm.controls['name'].touched)" class="alert alert-danger">
+        <div *ngIf="mallForm.controls['name'].hasError('required')">
+            Name is required.
+        </div>
     </div>
 
     <div class="form-group">
         <label for="address" class="col-form-label">Address</label>
-        <input type="text" class="form-control"  id="address" #address>
+        <input type="text" class="form-control"  id="address" formControlName= "address"  #address>
+    </div>
+
+    <div *ngIf="mallForm.controls['address'].invalid && (mallForm.controls['address'].dirty || mallForm.controls['address'].touched)" class="alert alert-danger">
+        <div *ngIf="mallForm.controls['address'].errors.required">
+            Address is required.
+        </div>
     </div>
 
     <div class="form-group">
         <label for="contact" class="col-form-label">Contact No.</label>
-        <input type="text" class="form-control" id="contact" #contact>
+        <input type="text" class="form-control" id="contact" formControlName="contact" #contact>
+    </div>
+
+    <div *ngIf="mallForm.controls['contact'].invalid && (mallForm.controls['contact'].dirty || mallForm.controls['contact'].touched)" class="alert alert-danger">
+        <div *ngIf="mallForm.controls['contact'].errors.required">
+            Contact number is required.
+        </div>
     </div>
 
     <div class="form-group">
         <label for="shop" class="col-form-label">Shop</label>
-        <select id="shop" class="form-control"  name="item" #item>
+        <select id="shop" class="form-control"  name="item"  #item>
             <option selected>Choose...</option>
             <option *ngFor="let shop of shops" [value]="shop.value">{{shop.name}}</option>
-        </select>    </div>
-
-    <div class="form-group">
-        <label for="closing" class="col-form-label">Closing Hour</label>
-        <input type="text" class="form-control" id="closing" #closing>
+        </select>
     </div>
 
     <div class="form-group">
-        <button class="btn btn-primary" type = "submit"
-                (click)="addMall(name.value, address.value, contact.value, item.value, closing.value)">Submit</button>
+        <label for="closing" class="col-form-label">Closing Hour</label>
+        <input type="text" class="form-control" id="closing" formControlName="closing"  #closing>
+    </div>
+
+    <div *ngIf="mallForm.controls['closing'].invalid && (mallForm.controls['closing'].dirty || mallForm.controls['closing'].touched)" class="alert alert-danger">
+        <div *ngIf="mallForm.controls['closing'].errors.required">
+            Closing Hour is Required.
+        </div>
+    </div>
+
+    <div class="form-group">
+        <button (click)="addMall(name.value, address.value, contact.value, item.value, closing.value)" class="btn btn-primary"
+                type="submit" [disabled]="mallForm.pristine || mallForm.invalid">Submit</button>
     </div>
 </form>

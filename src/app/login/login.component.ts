@@ -2,13 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 import { NgFlashMessageService } from 'ng-flash-messages';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import {FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
 import { AuthService} from 'angularx-social-login';
 import { GoogleLoginProvider, FacebookLoginProvider, LinkedInLoginProvider} from 'angularx-social-login';
 import { SocialUser } from 'angularx-social-login';
 import { UserModel } from '../models/user.model';
 import {LoginPayloadModel} from '../models/LoginPayload.model';
-import {decode} from 'punycode';
 
 
 // @ts-ignore
@@ -32,10 +31,7 @@ export class LoginComponent implements OnInit {
       private fb: FormBuilder,
       private authService: AuthService
       ) {
-        this.loginForm = this.fb.group({
-          username: ['', Validators.required],
-          password: ['', Validators.required]
-        });
+        this.VaidateLogin();
       }
 
       onLoginSubmit(username, password) {
@@ -96,5 +92,11 @@ export class LoginComponent implements OnInit {
         });
     }
 
+    VaidateLogin() {
+        this.loginForm = this.fb.group({
+            username: new FormControl('', Validators.required),
+            password: new FormControl('', Validators.required)
+        });
+    }
 }
 

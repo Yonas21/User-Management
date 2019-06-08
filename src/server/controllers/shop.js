@@ -73,6 +73,8 @@ exports.create_a_shop = (req, res, next) => {
 //update a shop
 exports.update_shop = (req, res, next) => {
     let id = req.params.shopId;
+    console.log(id);
+    console.log(req.body.newName);
     Shop.findOneAndUpdate(id, {
         $set: {
             name: req.body.newName,

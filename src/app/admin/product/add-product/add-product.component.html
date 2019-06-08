@@ -7,9 +7,21 @@
         <input type="text" class="form-control" id="name" formControlName="name">
     </div>
 
+    <div *ngIf="productForm.controls['name'].invalid && (productForm.controls['name'].dirty || productForm.controls['name'].touched)" class="alert alert-danger">
+        <div *ngIf="productForm.controls['name'].hasError('required')">
+           Name is Required.
+        </div>
+    </div>
+
     <div class="form-group">
         <label for="price" class="col-form-label">Price</label>
-        <input type="text" class="form-control" id="price" name="price"   formControlName="price">
+        <input type="text" class="form-control" id="price" name="price" formControlName="price">
+    </div>
+
+    <div *ngIf="productForm.controls['price'].invalid && (productForm.controls['price'].dirty || productForm.controls['price'].touched)" class="alert alert-danger">
+        <div *ngIf="productForm.controls['price'].errors.required">
+            Price is Required.
+        </div>
     </div>
 
     <div class="form-group">
@@ -18,6 +30,6 @@
     </div>
 
     <div class="form-group">
-        <button class="btn btn-primary" type = "submit">Submit</button>
+        <button class="btn btn-primary" [disabled]="productForm.pristine || productForm.invalid" type = "submit">Submit</button>
     </div>
 </form>

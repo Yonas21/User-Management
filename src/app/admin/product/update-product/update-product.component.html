@@ -4,12 +4,24 @@
     </div>
     <div class="form-group">
         <label for="name" class="col-form-label">name</label>
-        <input type="text" class="form-control" id="name" formControlName="name">
+        <input type="text" class="form-control" id="name" formControlName="newName">
+    </div>
+
+    <div *ngIf="productForm.controls['newName'].invalid && (productForm.controls['newName'].dirty || productForm.controls['newName'].touched)" class="alert alert-danger">
+        <div *ngIf="productForm.controls['newName'].errors.required">
+            Name is Required.
+        </div>
     </div>
 
     <div class="form-group">
         <label for="price" class="col-form-label">Price</label>
-        <input type="text" class="form-control" id="price" name="price"   formControlName="price">
+        <input type="text" class="form-control" id="price" name="price"   formControlName="newPrice">
+    </div>
+
+    <div *ngIf="productForm.controls['newPrice'].invalid && (productForm.controls['newPrice'].dirty || productForm.controls['newPrice'].touched)" class="alert alert-danger">
+        <div *ngIf="productForm.controls['newPrice'].errors.required">
+            Price is Required.
+        </div>
     </div>
 
     <div class="form-group">
@@ -18,7 +30,7 @@
     </div>
 
     <div class="form-group">
-        <button class="btn btn-primary" type = "submit">Submit</button>
+        <button class="btn btn-primary" type = "submit" [disabled]="productForm.pristine || productForm.invalid">Submit</button>
     </div>
     <div class="form-group">
         <ng-flash-message></ng-flash-message>

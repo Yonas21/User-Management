@@ -5,8 +5,8 @@
             <div class="banner_content text-center">
                 <h2>Login/Register</h2>
                 <div class="page_link">
-                    <a href="/home">Home</a>
-                    <a href="/signup">Register</a>
+                    <a routerLink="/home">Home</a>
+                    <a routerLink="/signup">Register</a>
                 </div>
             </div>
         </div>
@@ -35,15 +35,29 @@
                     <form class="row login_form"  method="post" id="contactForm"
                         novalidate="novalidate" [formGroup]="createForm" >
                         <div class="col-md-12 form-group">
-                            <input type="text" class="form-control" id="fname" name="fname" placeholder="first name" #firstName>
+                            <input type="text" class="form-control" id="fname" formControlName="firstName" placeholder="first name" #firstName>
                         </div>
+
+                        <div *ngIf="createForm.controls['firstName'].invalid && (createForm.controls['firstName'].dirty || createForm.controls['firstName'].touched)" class="alert alert-danger">
+                            <div *ngIf="createForm.controls['firstName'].errors.required">
+                                First Name is Required.
+                            </div>
+                        </div>
+
                         <div class="col-md-12 form-group">
                             <input type="text" class="form-control" id="lname" name="lname" placeholder="last name" #lastName>
                         </div>
                         <div class="col-md-12 form-group">
-                            <input type="email" class="form-control" id="email" name="email"
+                            <input type="email" class="form-control" id="email" formControlName="email"
                                 placeholder="Email Address" #email>
                         </div>
+
+                        <div *ngIf="createForm.controls['email'].invalid && (createForm.controls['email'].dirty || createForm.controls['email'].touched)" class="alert alert-danger">
+                            <div *ngIf="createForm.controls['email'].errors.required">
+                                Email is Required.
+                            </div>
+                        </div>
+
                         <div class="col-md-12 form-group">
                             <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone No."#phoneNo>
                         </div>
@@ -59,16 +73,16 @@
                         </div>
 
                         <div class="col-md-12 form-group" #password>
-                            <input type="password" class="form-control" id="password" name="password"
+                            <input type="password" class="form-control" id="password" formControlName="password"
                                 placeholder="Password" autocomplete="off" #password>
                         </div>
-                        <div class="form-group">
-                            <select class="form-control" id="role" #role (change)="selectedRole($event)" style="padding-left: 30px">
-                                    <option selected>Role...</option>
-                                    <option value="user">User</option>
-                                    <option value="admin">Admin</option>
-                            </select>
+
+                        <div *ngIf="createForm.controls['password'].invalid && (createForm.controls['password'].dirty || createForm.controls['password'].touched)" class="alert alert-danger">
+                            <div *ngIf="createForm.controls['password'].errors.required">
+                                Password is Required.
+                            </div>
                         </div>
+
                         <div class="col-md-12 form-group">
                             <div class="creat_account">
                                 <input type="checkbox" id="f-option2" name="selector">

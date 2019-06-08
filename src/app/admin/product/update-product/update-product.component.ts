@@ -13,8 +13,8 @@ const URL = 'http://localhost:4000/products';
 export class UpdateProductComponent implements OnInit {
 
     productForm = new FormGroup({
-        name: new FormControl(''),
-        price: new FormControl('')
+        newName: new FormControl(''),
+        newPrice: new FormControl('')
     });
     files = null;
     constructor(
@@ -22,16 +22,12 @@ export class UpdateProductComponent implements OnInit {
         private formBuilder: FormBuilder,
         private flashMessage: NgFlashMessageService
     ) {
-        this.productForm = this.formBuilder.group({
-            name: ['', Validators.required],
-            price: ['', Validators.required],
-            productImage: ['', Validators.required]
-        });
+
     }
     ngOnInit() {
         this.productForm = this.formBuilder.group({
-            name: [''],
-            price: [''],
+            newName: ['', Validators.required],
+            newPrice: ['', Validators.required],
             productImage: ['']
         });
     }
@@ -45,10 +41,10 @@ export class UpdateProductComponent implements OnInit {
     onSubmit() {
         const id = window.location.pathname.substr(22, 24);
         const formData = new FormData();
-        formData.append('name', this.productForm.get('name').value);
-        formData.append('price', this.productForm.get('price').value)
+        formData.append('newName', this.productForm.get('newName').value);
+        formData.append('newPrice', this.productForm.get('newPrice').value)
         formData.append('productImage', this.productForm.get('productImage').value);
-        this.http.patch(`${URL}/:${id}`, formData, { responseType: 'json'}).subscribe((result: DeleteModel) => {
+        this.http.patch(`${URL}/${id}`, formData, { responseType: 'json'}).subscribe((result: DeleteModel) => {
             this.flashMessage.showFlashMessage({
                 messages: [result.message],
                 dismissible: true,
