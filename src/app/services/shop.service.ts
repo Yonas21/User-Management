@@ -19,11 +19,14 @@ export class ShopService {
           name,
           item,
           contactNo
-      }
+      };
       return this.http.post(this.url, shop, {responseType: 'json'});
   }
 
   deleteShop(shop) {
       return this.http.delete(`${this.url}/${shop}`, {responseType: 'json'});
+  }
+  getAShop(id) {
+      return this.http.get(`${this.url}/${id}`, {responseType: 'json'});
   }
 }

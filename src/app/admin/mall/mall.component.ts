@@ -4,6 +4,8 @@ import { MallModel } from '../../models/mall.model';
 import { DeleteModel } from '../../models/delete.model';
 import { NgFlashMessageService} from 'ng-flash-messages';
 import {Router} from '@angular/router';
+import {ShopService} from '../../services/shop.service';
+import {ShopModel} from '../../models/shop.model';
 @Component({
   selector: 'app-mall',
   templateUrl: './mall.component.html',
@@ -11,17 +13,27 @@ import {Router} from '@angular/router';
 })
 export class MallComponent implements OnInit {
     mall: MallModel;
-    malls: Array<MallModel> = [];
+    malls = [];
   constructor(
       private mallService: MallService,
       private flashMessage: NgFlashMessageService,
-      private router: Router
+      private router: Router,
+      private shopService: ShopService
   ) {
       this.mallService.getMalls().subscribe((result: MallModel[]) => {
           for (const data of result) {
               this.mall = new MallModel(data.closing_hour, data._id, data.name, data.shop, data.address, data.contactNo);
-              this.malls.push(this.mall);
               this.mallService.id = this.mall._id;
+              this.shopService.getAShop(data.shop).subscribe((shops: ShopModel) => {
+                  this.malls.push(
+                      {
+                          closing_hour: data.closing_hour,
+                          name: data.name,
+                          shop: shops.name,
+                          address: data.address,
+                          contactNo: data.contactNo
+                      });
+              });
           }
       });
 

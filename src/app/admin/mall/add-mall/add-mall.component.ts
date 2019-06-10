@@ -14,6 +14,7 @@ export class AddMallComponent implements OnInit {
     shops = [];
     data: any = {};
     mallForm: FormGroup;
+    shopName = [];
   constructor(
       private formBuilder: FormBuilder,
       private http: HttpClient,
@@ -23,7 +24,9 @@ export class AddMallComponent implements OnInit {
       this.shopService.getShops().subscribe((result: ShopModel[] ) => {
           for (const data of result) {
               this.shops.push({name: data.name, value: data._id});
+              this.shopName.push(data.name);
           }
+          console.log(this.shopName);
       });
       this.createForm();
   }

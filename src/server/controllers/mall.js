@@ -3,7 +3,8 @@ const Mall = require('../models/mall.model');
 let Shop = require('../models/shop.model');
 
 exports.getMalls = (req, res, next) => {
-    Mall.find().exec()
+    Mall.find()
+        .exec()
         .then(results => {
             res.status(200).json(results)
         })
@@ -34,7 +35,6 @@ exports.get_a_mall = (req, res, next) => {
 exports.create_a_mall = (req, res, next) => {
     //check if the product we want to order is exist.
     let id = req.body.item;
-    console.log(id);
     Shop.findById(id)
         .then(shop => {
             if (!shop) {

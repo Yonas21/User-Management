@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ShopService } from '../../services/shop.service';
 import { ShopModel} from '../../models/shop.model';
 import {Router} from '@angular/router';
+import { ProductService } from '../../services/product.service';
+import {ProductModel} from '../../models/product.model';
 
 @Component({
   selector: 'app-shop',
@@ -9,17 +11,20 @@ import {Router} from '@angular/router';
   styleUrls: ['./shop.component.css']
 })
 export class ShopComponent implements OnInit {
-    shops: Array<ShopModel> = [];
+    shops = [];
     shop: ShopModel;
   constructor(
       private shopService: ShopService,
-      private router: Router
+      private router: Router,
+      private productService: ProductService
   ) {
       this.shopService.getShops().subscribe((result: ShopModel[]) => {
           for (const data of result) {
-              this.shop = new ShopModel(data._id, data.name, data.item, data.contactNo);
-              this.shops.push(data);
               this.shopService.id = data._id;
+              this.productService.getOneProduct(data.item).subscribe((products: ProductModel) => {
+                  this.shops.push({name: data.name, item: products.name, contactNo: data.contactNo});
+              });
+
           }
       });
   }

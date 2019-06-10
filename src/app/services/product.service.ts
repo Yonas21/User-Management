@@ -47,4 +47,7 @@ export class ProductService {
     deleteProduct(item) {
       return this.http.delete(`${this.url}/products/${item}`, { responseType: 'json' });
     }
+    getOneProduct(item) {
+      return this.http.get(`${this.url}/products/${item}`, {responseType: 'json'});
+    }
 }

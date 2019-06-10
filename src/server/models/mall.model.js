@@ -16,7 +16,7 @@ const mallSchema = mongoose.Schema({
     },
     shop: {
         type: mongoose.Schema.Types.ObjectId,
-        refs: 'Shop',
+        ref: 'Shop',
         required: true
     },
     closing_hour: {

@@ -7,15 +7,15 @@ let orderController = require("../controllers/orders");
 const router = express.Router();
 
 //find all orders created
-router.get("/", checkAuth, orderController.orders_get_all);
+router.get("/", orderController.orders_get_all);
 
 //create new order
-router.post("/", checkAuth, orderController.orders_create_order);
+router.post("/", orderController.orders_create_order);
 
 //find out individual orders//details
-router.get("/:orderId", checkAuth, orderController.orders_get_one);
+router.get("/:orderId", orderController.orders_get_one);
 
 // delete the orders
-router.delete("/:orderId", checkAuth, orderController.delete_order);
+router.delete("/:orderId", orderController.delete_order);
 
 module.exports = router;

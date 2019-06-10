@@ -4,7 +4,6 @@ let Shop = require('../models/shop.model');
 
 exports.get_all_shops = (req, res, next) => {
     Shop.find()
-        .populate('item')
         .exec()
         .then(results => {
             res.status(200).json(results);
@@ -41,15 +40,13 @@ exports.create_a_shop = (req, res, next) => {
                     message: `Product not found`
                 });
             }
-
+            console.log(req.body.item);
             let shop = new Shop({
                 _id: mongoose.Types.ObjectId(),
                 name: req.body.name,
                 item: req.body.item,
                 contactNo: req.body.contactNo
             });
-
-            console.log(req.body.name);
             return shop
                 .save()
                 .then(result => {

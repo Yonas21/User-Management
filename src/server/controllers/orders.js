@@ -6,7 +6,7 @@ let Product = require("../models/product.model");
 exports.orders_get_all = (req, res, next) => {
     Order.find()
         .select("quantity _id product")
-        .populate("product", "name")
+        .populate('product')
         .exec()
         .then(results => {
             res.status(200).json({
@@ -25,7 +25,7 @@ exports.orders_get_all = (req, res, next) => {
             });
         })
         .catch(err => {
-            res.status.json({
+            res.status(404).json({
                 message: "unable to find orders",
                 error: err
             });
