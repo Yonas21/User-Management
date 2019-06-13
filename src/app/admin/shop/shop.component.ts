@@ -22,7 +22,7 @@ export class ShopComponent implements OnInit {
           for (const data of result) {
               this.shopService.id = data._id;
               this.productService.getOneProduct(data.item).subscribe((products: ProductModel) => {
-                  this.shops.push({name: data.name, item: products.name, contactNo: data.contactNo});
+                  this.shops.push({name: data.name, item: products.name, contactNo: data.contactNo, _id: data._id});
               });
 
           }
@@ -33,6 +33,7 @@ export class ShopComponent implements OnInit {
   }
 
   updateShop(id) {
+      console.log(id);
       this.router.navigate([`/admin/update-shop/${id}`]);
   }
   deleteShop() {

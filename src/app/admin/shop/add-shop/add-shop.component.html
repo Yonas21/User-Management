@@ -13,12 +13,19 @@
         </div>
     </div>
 
-    <div class="form-group">
-        <label for="item" class="col-form-label">Product</label>
-        <select id="item" class="form-control" (change)="selectedOptions($event)" name="item" formControlName="item" #item>
-            <option selected>Choose...</option>
-            <option *ngFor="let product of productNames" [value]="product.value">{{product.name}}</option>
-        </select>
+    <div class="form-group" *ngIf="dropDownList.length > 0">
+        <ng-multiselect-dropdown
+            [placeholder]="'select items'"
+            formControlName="items"
+            [data]="dropDownList"
+            [(ngModel)]="selectedItems"
+            [settings]="dropdownSetting"
+            (onSelect)="onItemSelect($event)"
+            (onSelectAll)="onSelectAll($event)"
+            (onDeSelect)="onItemUnSelect($event)"
+            (onDeSelectAll)="onUnselectAll($event)"
+        >
+        </ng-multiselect-dropdown>
     </div>
 
     <div class="form-group">
@@ -31,8 +38,7 @@
             Contact Number is Required.
         </div>
     </div>
-
     <div class="form-group">
-        <button class="btn btn-primary" type = "submit" (click)="AddShop(name.value, item.value, contactNo.value)">Submit</button>
+        <button class="btn btn-primary" type = "submit" (click)="AddShop(name.value, items, contactNo.value)">Submit</button>
     </div>
 </form>

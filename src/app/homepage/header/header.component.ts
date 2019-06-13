@@ -5,6 +5,7 @@ import { MallService } from '../../services/mall.service';
 import {MallModel} from '../../models/mall.model';
 import { ShopService } from '../../services/shop.service';
 import {ShopModel} from '../../models/shop.model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -12,22 +13,27 @@ import {ShopModel} from '../../models/shop.model';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-    shops: Array<string> = [];
+    shops: Array<MallModel> = [];
   constructor(
       private userService: UserService,
       private flashMessage: NgFlashMessageService,
       private mallService: MallService,
-      private shopService: ShopService
+      private shopService: ShopService,
+      private router: Router
       ) {
       this.mallService.getMalls().subscribe((results: MallModel[]) => {
           for (const data of results) {
-              this.shops.push(data.name);
-              // this.shopService.getAShop(data.shop).subscribe((shop: ShopModel) => {
-              //     this.shops.push(shop.name);
-              // });
+              this.shops.push(data);
           }
       });
   }
+
+    findMalls(item) {
+        this.router.navigate([`/mall/${item}`]);
+        this.mallService.getAMall(item).subscribe(result => {
+            console.log(result);
+        });
+    }
 
     onLogoutClick() {
         this.userService.logout();

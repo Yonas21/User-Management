@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { ProductService } from '../../../services/product.service';
 import { ProductModel } from '../../../models/product.model';
 import { ShopService } from '../../../services/shop.service';
+import {DeleteModel} from '../../../models/delete.model';
+import { NgFlashMessageService } from 'ng-flash-messages';
 
 const URL = 'http://localhost:4000/shop/';
 @Component({
@@ -15,19 +17,25 @@ export class AddShopComponent implements OnInit {
     shopForm = new FormGroup({
         name: new FormControl(''),
         item: new FormControl(''),
-        contactNo: new FormControl('')
+        contactNo: new FormControl(''),
+        items: new FormControl('')
     });
      productNames = [];
      id = null;
+     dropDownList = [];
+     selectedItems = [];
+     dropdownSetting = {};
   constructor(
       private http: HttpClient,
       private formBuilder: FormBuilder,
       private productService: ProductService,
-      private shopService: ShopService
+      private shopService: ShopService,
+      private flashMessage: NgFlashMessageService
   ) {
       this.productService.getProducts().subscribe((result: ProductModel[]) => {
           for (const data of result) {
               this.productNames.push({name: data.name, value: data._id});
+              this.dropDownList.push( {value: data._id, name: data.name});
           }
       });
   }
@@ -36,19 +44,41 @@ export class AddShopComponent implements OnInit {
       this.shopForm = this.formBuilder.group({
           name: ['', Validators.required],
           item: ['', Validators.required],
-          contactNo: ['', Validators.required]
+          contactNo: ['', Validators.required],
+          items: ['', Validators.required]
       });
-  }
 
-    selectedOptions(event) {
-        if (event.target.value.length > 0) {
-            const selected  = event.target.value;
-            this.shopForm.get('item').setValue(selected);
-        }
+      this.dropdownSetting = {
+          singleSelection: false,
+          idField: 'value',
+          textField: 'name',
+          selectAllText: 'Select All',
+          unSelectAllText: 'UnSelect All',
+          itemsShowLimit: 10,
+          allowSearchFilter: true
+      };
+  }
+    onItemSelect(item: any) {
+      this.selectedItems.push(item);
     }
+    onSelectAll(items: any) {
+        this.selectedItems.push(items);
+    }
+    onItemUnSelect(item: any) {
+        this.selectedItems.reduce(item);
+    }
+    onUnselectAll(items: any) {
+        this.selectedItems.reduce(items);
+    }
+
     AddShop(name: string, item: string, contactNo: string) {
-       this.shopService.addShops(name, item, contactNo).subscribe(result => {
-           console.log(result);
+       this.shopService.addShops(name, this.selectedItems.map(e => e.value), contactNo).subscribe((result: DeleteModel) => {
+           this.flashMessage.showFlashMessage({
+               messages: [result.message],
+               dismissible: true,
+               timeout: 4000,
+               type: 'info'
+           });
        });
     }
 }

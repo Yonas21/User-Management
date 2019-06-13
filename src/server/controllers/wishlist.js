@@ -55,7 +55,10 @@ exports.create_wishlist = (req, res, next) => {
             return wish
                 .save()
                 .then(result => {
-                    res.status(201).json(result);
+                    res.status(201).json({
+                        message: 'Added to Wishlist',
+                        result: result
+                    });
                 })
                 .catch(err => {
                     console.log("unable to save orders." + err);

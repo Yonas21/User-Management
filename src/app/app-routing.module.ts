@@ -21,6 +21,7 @@ import { UpdateProductComponent } from './admin/product/update-product/update-pr
 import { MallComponent } from './admin/mall/mall.component';
 import { ShopComponent } from './admin/shop/shop.component';
 import { AddMallComponent } from './admin/mall/add-mall/add-mall.component';
+import { MallsComponent} from './malls/malls.component';
 // @ts-ignore
 import { UpdateMallComponent } from './admin/mall/update-mall/update-mall.component';
 import { AddShopComponent } from './admin/shop/add-shop/add-shop.component';
@@ -114,6 +115,10 @@ const routes: Routes = [
       path: 'wishlist',
       component:  WishlistComponent,
         canActivate: [AuthGuard]
+    },
+    {
+        path: 'mall/:id',
+        component: MallsComponent
     },
     {
         path: '**',

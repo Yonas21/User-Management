@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FileSelectDirective } from 'ng2-file-upload';
 import { NgxUploaderModule } from 'ngx-uploader';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import {
     SocialLoginModule,
     AuthServiceConfig,
@@ -52,6 +53,7 @@ import { AddShopComponent } from './admin/shop/add-shop/add-shop.component';
 import { UpdateShopComponent } from './admin/shop/update-shop/update-shop.component';
 import { CommentComponent } from './comment/comment.component';
 import { ReviewComponent } from './review/review.component';
+import { MallsComponent } from './malls/malls.component';
 registerLocaleData(en);
 
 const antDesignIcons = AllIcons as {
@@ -105,7 +107,8 @@ export function provideConfig() {
       AddShopComponent,
       UpdateShopComponent,
       CommentComponent,
-      ReviewComponent
+      ReviewComponent,
+      MallsComponent
   ],
   imports: [
     BrowserModule,
@@ -118,7 +121,8 @@ export function provideConfig() {
       NgFlashMessagesModule.forRoot(),
       SocialLoginModule,
       NgZorroAntdModule,
-      NgxUploaderModule
+      NgxUploaderModule,
+      NgMultiSelectDropDownModule.forRoot()
   ],
   providers: [
       UserService,

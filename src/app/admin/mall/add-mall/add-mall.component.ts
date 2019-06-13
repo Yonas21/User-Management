@@ -15,6 +15,9 @@ export class AddMallComponent implements OnInit {
     data: any = {};
     mallForm: FormGroup;
     shopName = [];
+    dropDownList = [];
+    selectedItems = [];
+    dropdownSetting = {};
   constructor(
       private formBuilder: FormBuilder,
       private http: HttpClient,
@@ -25,16 +28,37 @@ export class AddMallComponent implements OnInit {
           for (const data of result) {
               this.shops.push({name: data.name, value: data._id});
               this.shopName.push(data.name);
+              this.dropDownList.push( {value: data._id, name: data.name});
           }
-          console.log(this.shopName);
       });
       this.createForm();
   }
 
   ngOnInit() {
+      this.dropdownSetting = {
+          singleSelection: false,
+          idField: 'value',
+          textField: 'name',
+          selectAllText: 'Select All',
+          unSelectAllText: 'UnSelect All',
+          itemsShowLimit: 10,
+          allowSearchFilter: true
+      };
   }
+    onItemSelect(item: any) {
+        this.selectedItems.push(item);
+    }
+    onSelectAll(items: any) {
+        this.selectedItems.push(items);
+    }
+    onItemUnSelect(item: any) {
+        this.selectedItems.reduce(item);
+    }
+    onUnselectAll(items: any) {
+        this.selectedItems.reduce(items);
+    }
   addMall(name: string, address: string, contact: string, item: string, closing: string) {
-        this.mallService.addMall(name, address, contact, item, closing).subscribe(result => {
+        this.mallService.addMall(name, address, contact, this.selectedItems.map(e => e.value), closing).subscribe(result => {
             console.log(result);
         });
     }
@@ -44,7 +68,8 @@ export class AddMallComponent implements OnInit {
           name : new FormControl('', Validators.required),
           address: new FormControl('', Validators.required),
           contact: new FormControl('', Validators.required),
-          closing: new FormControl('', Validators.required)
+          closing: new FormControl('', Validators.required),
+          items: new FormControl('', Validators.required)
       });
     }
 }

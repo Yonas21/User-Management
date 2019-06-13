@@ -33,6 +33,7 @@ exports.get_a_shop = (req, res, next) => {
 exports.create_a_shop = (req, res, next) => {
     //check if the product we want to order is exist.
     let id = req.body.item;
+    console.log(id);
     Product.findById(id)
         .then(product => {
             if (!product) {
@@ -50,10 +51,13 @@ exports.create_a_shop = (req, res, next) => {
             return shop
                 .save()
                 .then(result => {
-                    res.status(201).json(result);
+                    res.status(201).json({
+                        message: 'Shop Created Successfully',
+                        result: result
+                    });
                 })
                 .catch(err => {
-                    console.log("unable to save orders." + err);
+                    console.log("unable to save shops." + err);
                     res.status(500).json({
                         message: "unable to save to the database.",
                         error: err
@@ -113,3 +117,8 @@ exports.delete_a_shop = (req,res, next) => {
             })
         })
 };
+
+exports.addItemToShop = (req, res, next) => {
+    // req.body.id shop id
+    //
+}

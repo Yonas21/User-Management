@@ -75,7 +75,7 @@
                                         <li class="nav-item">
                                             <a
                                                 class="nav-link"
-                                                href="/product_category"
+                                                routerLink="/product_category"
                                                 >Shop Category</a
                                             >
                                         </li>
@@ -83,7 +83,7 @@
                                         <li class="nav-item">
                                             <a
                                                 class="nav-link"
-                                                href="/product_detail"
+                                                routerLink="/product_detail"
                                                 >Product Details</a
                                             >
                                         </li>
@@ -91,20 +91,20 @@
                                         <li class="nav-item">
                                             <a
                                                 class="nav-link"
-                                                href="/checkout"
+                                                routerLink="/checkout"
                                                 >Checkout</a
                                             >
                                         </li>
                                         <li class="nav-item">
                                             <a
                                                 class="nav-link"
-                                                href="/wishlist"
+                                                routerLink="/wishlist"
                                             >Wishlists</a
                                             >
                                         </li>
 
                                         <li class="nav-item">
-                                            <a class="nav-link" href="/cart"
+                                            <a class="nav-link" routerLink="/cart"
                                                 >Shopping Cart</a
                                             >
                                         </li>
@@ -130,21 +130,10 @@
                                     >
                                     <ul class="dropdown-menu">
                                         <li class="nav-item" *ngFor="let shop of shops">
-                                            <a class="nav-link" href="#"
-                                            >{{shop}}</a
+                                            <a class="nav-link"  (click)="findMalls(shop._id)"
+                                            >{{shop.name}}</a
                                             >
                                         </li>
-                                        <!--<li class="nav-item">-->
-                                            <!--<a class="nav-link" href="#"-->
-                                            <!--&gt;Electronic Shop</a-->
-                                            <!--&gt;-->
-                                        <!--</li>-->
-
-                                        <!--<li class="nav-item">-->
-                                            <!--<a class="nav-link" href="#"-->
-                                            <!--&gt;Clothing</a-->
-                                            <!--&gt;-->
-                                        <!--</li>-->
 
                                     </ul>
                                 </li>

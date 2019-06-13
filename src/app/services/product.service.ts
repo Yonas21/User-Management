@@ -39,7 +39,7 @@ export class ProductService {
       const product = {
           item
       };
-      return this.http.post(`${this.url}/wish_lists/${this.id}`, product, { responseType: 'json'});
+      return this.http.post(`${this.url}/carts/${this.id}`, product, { responseType: 'json'});
     }
     getWishlists() {
       return this.http.get(`${this.url}/wish_lists`, {responseType: 'json'});
@@ -49,5 +49,8 @@ export class ProductService {
     }
     getOneProduct(item) {
       return this.http.get(`${this.url}/products/${item}`, {responseType: 'json'});
+    }
+    getProductFromCart() {
+      return this.http.get(`${this.url}/carts`, {responseType: 'json'});
     }
 }

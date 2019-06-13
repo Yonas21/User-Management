@@ -5,6 +5,7 @@ import { NgFlashMessageService } from 'ng-flash-messages';
 import {ProductService} from '../services/product.service';
 import {ProductModel} from '../models/product.model';
 import {UserModel} from '../models/user.model';
+import {DeleteModel} from '../models/delete.model';
 
 @Component({
     selector: 'app-homepage',
@@ -44,45 +45,24 @@ export class HomepageComponent implements OnInit {
     }
 
     addWishlist() {
-        this.productService.addToWishlist(this.product._id).subscribe(data => {
-            if (!data) {
-                this.flashMessage.showFlashMessage({
-                    messages: ['unable to add to the wishlist.'],
-                    dismissible: true,
-                    timeout: 5000,
-                    type: 'danger'
-                });
-                console.log(this.productService.productId);
-            } else {
-                this.productService.count = this.productService.count + 1;
-                this.flashMessage.showFlashMessage({
-                    messages: ['product added to wishlist'],
-                    dismissible: true,
-                    timeout: 5000,
-                    type: 'success'
-                });
-            }
+        this.productService.addToWishlist(this.product._id).subscribe((data: DeleteModel) => {
+            this.flashMessage.showFlashMessage({
+                messages: [data.message],
+                dismissible: true,
+                timeout: 4000,
+                type: 'info'
+            });
         });
     }
 
     addToCart() {
-        this.productService.addToCart(this.product._id).subscribe(result => {
-            if (!result) {
-                this.flashMessage.showFlashMessage({
-                    messages: ['unable to add to cart'],
-                    dismissible: true,
-                    timeout: 4000,
-                    type: 'danger'
-                });
-            } else {
-                this.productService.count += 1;
-                this.flashMessage.showFlashMessage({
-                    messages: ['product added to cart'],
-                    dismissible: true,
-                    timeout: 5000,
-                    type: 'success'
-                });
-            }
+        this.productService.addToCart(this.product._id).subscribe((result: DeleteModel) => {
+            this.flashMessage.showFlashMessage({
+                messages: [result.message],
+                dismissible: true,
+                timeout: 4000,
+                type: 'info'
+            });
         });
     }
 

@@ -35,13 +35,20 @@
             Contact Number is required.
         </div>
     </div>
-
-    <div class="form-group">
-        <label for="shop" class="col-form-label">Shop</label>
-        <select id="shop" class="form-control"  name="item" #newItem>
-            <option selected>Choose...</option>
-            <option *ngFor="let shop of shops" [value]="shop.value">{{shop.name}}</option>
-        </select>    </div>
+    <div class="form-group" *ngIf="dropDownList.length > 0">
+        <ng-multiselect-dropdown
+            [placeholder]="'select items'"
+            formControlName="newShop"
+            [data]="dropDownList"
+            [(ngModel)]="selectedItems"
+            [settings]="dropdownSetting"
+            (onSelect)="onItemSelect($event)"
+            (onSelectAll)="onSelectAll($event)"
+            (onDeSelect)="onItemUnSelect($event)"
+            (onDeSelectAll)="onUnselectAll($event)"
+        >
+        </ng-multiselect-dropdown>
+    </div>
 
     <div class="form-group">
         <label for="closing" class="col-form-label">Closing Hour</label>
@@ -56,7 +63,7 @@
 
     <div class="form-group">
         <button class="btn btn-primary" type = "submit" [disabled]="updateMallForm.pristine || updateMallForm.invalid"
-                (click)="updateMall(newName.value, newAddress.value, newContact.value, newItem.value, newClosing.value)">Submit</button>
+                (click)="updateMall(newName.value, newAddress.value, newContact.value, newItem, newClosing.value)">Submit</button>
     </div>
 
     <div class="form-group">

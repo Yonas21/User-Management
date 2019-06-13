@@ -6,11 +6,8 @@ exports.get_all_products_in_cart = (req, res, next) => {
     Cart.find()
         .populate('item')
         .exec()
-        .then(results => {
-            res.status(200).json({
-                message:'successful',
-                result: results
-            })
+        .then(products => {
+            res.status(200).json(products)
         })
         .catch(error => {
             res.status(404).json({
@@ -39,7 +36,8 @@ exports.get_one_cart_product = (req, res, next) => {
 };
 
 exports.add_item_to_cart = (req, res, next)=>{
-    let id = req.body.productId;
+    let id = req.params.productId;
+    console.log(id);
     Product.findById(id)
         .then(product => {
             if (!product) {

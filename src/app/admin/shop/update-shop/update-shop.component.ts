@@ -17,9 +17,13 @@ export class UpdateShopComponent implements OnInit {
     shopForm = new FormGroup({
         newName: new FormControl(''),
         newItem: new FormControl(''),
-        newContactNo: new FormControl('')
+        newContactNo: new FormControl(''),
+        items: new FormControl('')
     });
     productNames = [];
+    dropDownList = [];
+    selectedItems = [];
+    dropdownSetting = {};
   constructor(
       private http: HttpClient,
       private formBuilder: FormBuilder,
@@ -30,6 +34,7 @@ export class UpdateShopComponent implements OnInit {
       this.productService.getProducts().subscribe((result: ProductModel[]) => {
           for (const data of result) {
               this.productNames.push({name: data.name, value: data._id});
+              this.dropDownList.push( {value: data._id, name: data.name});
           }
       });
   }
@@ -38,25 +43,44 @@ export class UpdateShopComponent implements OnInit {
         this.shopForm = this.formBuilder.group({
             newName: ['' , Validators.required],
             newItem: ['', Validators.required],
-            newContactNo: ['', Validators.required]
+            newContactNo: ['', Validators.required],
+            items: ['', Validators.required]
         });
+        this.dropdownSetting = {
+            singleSelection: false,
+            idField: 'value',
+            textField: 'name',
+            selectAllText: 'Select All',
+            unSelectAllText: 'UnSelect All',
+            itemsShowLimit: 10,
+            allowSearchFilter: true
+        };
     }
 
-    selectedOptions(event) {
-        if (event.target.value.length > 0) {
-            const selected  = event.target.value;
-            this.shopForm.get('newItem').setValue(selected);
-        }
+    onItemSelect(item: any) {
+        this.selectedItems.push(item);
     }
+    onSelectAll(items: any) {
+        this.selectedItems.push(items);
+    }
+    onItemUnSelect(item: any) {
+        this.selectedItems.reduce(item);
+    }
+    onUnselectAll(items: any) {
+        this.selectedItems.reduce(items);
+    }
+
 
     onSubmit(newName, newItem, newContactNo) {
         const id = window.location.pathname.substr(19, 24);
+        let Ids: any[];
+        Ids = this.selectedItems.map(e => e.value);
         const shops = {
             newName,
-            newItem,
+           Ids,
             newContactNo
         };
-        console.log(shops.newName);
+        console.log(id);
         this.http.patch(`${URL}/${id}`, shops, { responseType: 'json'}).subscribe((result: DeleteModel) => {
             this.flashMessage.showFlashMessage({
                 messages: [result.message],

@@ -8,11 +8,11 @@ const cartSchema = mongoose.Schema({
    },
     subTotal: {
        type: Number,
-        required: true
+        required: false
     },
     allTotal: {
        type: Number,
-        required: true
+        required: false
     }
 },
     {

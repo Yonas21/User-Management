@@ -15,7 +15,7 @@ const mallSchema = mongoose.Schema({
         required: true
     },
     shop: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Array,
         ref: 'Shop',
         required: true
     },

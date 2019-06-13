@@ -7,7 +7,7 @@ const shopSchema = mongoose.Schema({
         required: true
     },
     item: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Array,
         refs: 'Products',
         required: true
     },

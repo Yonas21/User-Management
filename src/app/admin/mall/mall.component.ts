@@ -31,7 +31,8 @@ export class MallComponent implements OnInit {
                           name: data.name,
                           shop: shops.name,
                           address: data.address,
-                          contactNo: data.contactNo
+                          contactNo: data.contactNo,
+                          _id: data._id
                       });
               });
           }

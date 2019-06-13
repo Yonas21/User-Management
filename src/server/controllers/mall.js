@@ -39,7 +39,7 @@ exports.create_a_mall = (req, res, next) => {
         .then(shop => {
             if (!shop) {
                 res.status(404).json({
-                    message: `Product not found`
+                    message: `shop not found`
                 });
             }
             Mall.find({name: req.body.name}).exec().then(result => {
