@@ -30,6 +30,26 @@ exports.get_a_shop = (req, res, next) => {
         });
 };
 
+exports.get_array_shops = (req, res, next) => {
+    let shopArrays = req.body;
+    let preparedShopArray = [];
+
+    shopArrays.forEach(id =>
+    Shop.findById(id).exec()
+        .then(result => {
+            res.status(200).json(result);
+            preparedShopArray.push(result);
+        })
+        .catch(err => {
+            res.status(404).json({
+                message: `product with id ${id} not found`,
+                error: err
+            })
+        })
+    );
+    res.send(preparedShopArray);
+}
+
 exports.create_a_shop = (req, res, next) => {
     //check if the product we want to order is exist.
     let id = req.body.item;

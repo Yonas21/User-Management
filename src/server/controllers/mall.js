@@ -17,12 +17,11 @@ exports.getMalls = (req, res, next) => {
 };
 exports.get_a_mall = (req, res, next) => {
     let id = req.params.mallId;
-    Mall.findById(id).exec()
-        .then(result => {
-            res.status(200).json({
-                message: 'mall found',
-                result: result
-            })
+    Mall.findById(id)
+        .exec()
+        .then(mall => {
+            console.log('mall ', mall);
+            res.status(200).json(mall)
         })
         .catch(err => {
             res.status(404).json({

@@ -1,3 +1,7 @@
+.topbar {
+    margin-bottom: 7%;
+}
 .card {
-    margin: auto !important;
+    padding-left: 30px;
+    margin: 20px;
 }

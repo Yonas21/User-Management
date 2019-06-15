@@ -54,6 +54,7 @@ import { UpdateShopComponent } from './admin/shop/update-shop/update-shop.compon
 import { CommentComponent } from './comment/comment.component';
 import { ReviewComponent } from './review/review.component';
 import { MallsComponent } from './malls/malls.component';
+import { ShopMallService } from './services/shop_mall.service';
 registerLocaleData(en);
 
 const antDesignIcons = AllIcons as {
@@ -130,7 +131,8 @@ export function provideConfig() {
       { provide: NZ_I18N, useValue: en_US }, { provide: NZ_ICONS, useValue: icons },
       AuthGuard,
       UserService,
-      ProductService
+      ProductService,
+      ShopMallService
   ],
   bootstrap: [AppComponent]
 })

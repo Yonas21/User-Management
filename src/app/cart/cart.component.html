@@ -32,7 +32,7 @@
                 <td>
                   <div class="media">
                     <div class="d-flex">
-                      <img [src]="url/product.productImage" alt="{{product.name}}">
+                      <img [src]="product.productImage" alt="{{product.name}}">
                     </div>
                     <div class="media-body">
                       <p>{{product.name}}</p>
@@ -40,12 +40,12 @@
                   </div>
                 </td>
                 <td>
-                  <h5>{{product.price}}</h5>
+                  <h5>{{product.price }}</h5>
                 </td>
                 <td>
                   <div class="product_count">
                     <input type="text" name="qty" id="qty" maxlength="12" value="1" title="Quantity:"
-                      class="input-text qty">
+                      class="input-text qty" (change)="findValue($event)">
                     <button
                       class="increase items-count" type="button">
                       <i class="fa fa-chevron-up"></i>
@@ -57,13 +57,10 @@
                   </div>
                 </td>
                 <td>
-                  <h5>{{product.price}}</h5>
+                  <h5>{{product.price * count}}</h5>
                 </td>
               </tr>
               <tr class="bottom_button">
-                <td>
-                  <a class="gray_btn" href="#">Update Cart</a>
-                </td>
                 <td>
 
                 </td>
@@ -89,7 +86,7 @@
                   <h5>Subtotal</h5>
                 </td>
                 <td>
-                  <h5>$2160.00</h5>
+                  <h5>{{sum}}</h5>
                 </td>
               </tr>
               <tr class="shipping_area">
@@ -122,17 +119,17 @@
                       <i class="fa fa-caret-down" aria-hidden="true"></i>
                     </h6>
                     <select class="shipping_select">
-                      <option value="1">Bangladesh</option>
-                      <option value="2">India</option>
-                      <option value="4">Pakistan</option>
+                      <option value="1">Ethiopia</option>
+                      <option value="2">Kenya</option>
+                      <option value="4">other</option>
                     </select>
                     <select class="shipping_select">
-                      <option value="1">Select a State</option>
-                      <option value="2">Select a State</option>
-                      <option value="4">Select a State</option>
+                      <option value="1">Addis Ababa</option>
+                      <option value="2">Jimma</option>
+                      <option value="4">Bahir Dar</option>
                     </select>
                     <input type="text" placeholder="Postcode/Zipcode">
-                    <a class="gray_btn" href="#">Update Details</a>
+                    <a class="gray_btn">Update Details</a>
                   </div>
                 </td>
               </tr>

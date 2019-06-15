@@ -58,4 +58,10 @@ export class MallComponent implements OnInit {
     updateMall(id) {
         this.router.navigate([`/admin/update-mall/${id}`]);
     }
+
+    findMalls() {
+      this.mallService.getMalls().subscribe(result => {
+          console.log(result);
+      });
+    }
 }
