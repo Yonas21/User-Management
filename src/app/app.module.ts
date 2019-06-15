@@ -55,6 +55,9 @@ import { CommentComponent } from './comment/comment.component';
 import { ReviewComponent } from './review/review.component';
 import { MallsComponent } from './malls/malls.component';
 import { ShopMallService } from './services/shop_mall.service';
+import { ProductShopMallComponent } from './product-shop-mall/product-shop-mall.component';
+import { SpecialOrderComponent } from './special-order/special-order.component';
+import { OrdersComponent } from './admin/orders/orders.component';
 registerLocaleData(en);
 
 const antDesignIcons = AllIcons as {
@@ -109,7 +112,10 @@ export function provideConfig() {
       UpdateShopComponent,
       CommentComponent,
       ReviewComponent,
-      MallsComponent
+      MallsComponent,
+      ProductShopMallComponent,
+      SpecialOrderComponent,
+      OrdersComponent
   ],
   imports: [
     BrowserModule,

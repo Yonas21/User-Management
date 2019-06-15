@@ -10,5 +10,8 @@ export class ShopMallService {
     toggle(value: any) {
         this.change.emit(value);
     }
+    findProducts(value: any) {
+        this.change.emit(value);
+    }
 
 }

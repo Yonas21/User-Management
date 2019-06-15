@@ -22,12 +22,15 @@ import { MallComponent } from './admin/mall/mall.component';
 import { ShopComponent } from './admin/shop/shop.component';
 import { AddMallComponent } from './admin/mall/add-mall/add-mall.component';
 import { MallsComponent} from './malls/malls.component';
+import { ProductShopMallComponent } from './product-shop-mall/product-shop-mall.component';
+import { SpecialOrderComponent } from './special-order/special-order.component';
 // @ts-ignore
 import { UpdateMallComponent } from './admin/mall/update-mall/update-mall.component';
 import { AddShopComponent } from './admin/shop/add-shop/add-shop.component';
 // @ts-ignore
 import { UpdateMallComponent } from './admin/mall/update-mall/update-mall.component';
 import {UpdateShopComponent} from './admin/shop/update-shop/update-shop.component';
+import {OrdersComponent} from './admin/orders/orders.component';
 
 
 const routes: Routes = [
@@ -76,6 +79,10 @@ const routes: Routes = [
                     {
                         path: 'update-shop/:id',
                         component: UpdateShopComponent
+                    },
+                    {
+                        path: 'orders',
+                        component: OrdersComponent
                     }
         ]
     },
@@ -119,6 +126,15 @@ const routes: Routes = [
     {
         path: 'mall/:id',
         component: MallsComponent
+    },
+    {
+        path: 'find-product/:id',
+        component: ProductShopMallComponent
+    },
+    {
+        path: 'special-order',
+        component: SpecialOrderComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: '**',

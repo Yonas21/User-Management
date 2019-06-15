@@ -5,24 +5,10 @@ let Product = require("../models/product.model");
 
 exports.orders_get_all = (req, res, next) => {
     Order.find()
-        .select("quantity _id product")
-        .populate('product')
+        .select("name quantity description productImage")
         .exec()
-        .then(results => {
-            res.status(200).json({
-                count: results.length,
-                orders: results.map(result => {
-                    return {
-                        _id: result._id,
-                        product: result.product,
-                        quantity: result.quantity,
-                        request: {
-                            type: "GET",
-                            url: "http://localhost:4000/orders/" + result._id
-                        }
-                    };
-                })
-            });
+        .then(orders => {
+            res.status(200).json(orders);
         })
         .catch(err => {
             res.status(404).json({
@@ -33,26 +19,21 @@ exports.orders_get_all = (req, res, next) => {
 };
 
 exports.orders_create_order = (req, res, next) => {
-    //check if the product we want to order is exist.
-    let id = req.body.productId;
-    Product.findById(id)
-        .then(product => {
-            if (!product) {
-                res.status(404).json({
-                    message: `Product not found`
-                });
-            }
-
             let order = new Order({
                 _id: mongoose.Types.ObjectId(),
                 quantity: req.body.quantity,
-                product: req.body.productId
+                name: req.body.name,
+                description: req.body.description,
+                productImage: req.file.path
             });
 
             return order
                 .save()
                 .then(result => {
-                    res.status(201).json(result);
+                    res.status(201).json({
+                        message: `order successfully delivered`,
+                        result: result
+                    });
                 })
                 .catch(err => {
                     console.log("unable to save orders." + err);
@@ -61,13 +42,6 @@ exports.orders_create_order = (req, res, next) => {
                         error: err
                     });
                 });
-        })
-        .catch(err => {
-            res.status(404).json({
-                message: `unable to find the product with id ${id}`,
-                error: err
-            });
-        });
 };
 
 exports.orders_get_one = (req, res, next) => {

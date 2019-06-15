@@ -6,6 +6,7 @@ import { ShopMallService} from '../services/shop_mall.service';
 import { ShopService } from '../services/shop.service';
 import {HeaderComponent} from '../homepage/header/header.component';
 import {ShopModel} from '../models/shop.model';
+import { ProductService } from '../services/product.service';
 
 @Component({
   selector: 'app-malls',
@@ -24,13 +25,13 @@ export class MallsComponent implements OnInit {
   constructor(private mallService: MallService,
               private router: Router,
               private shopMallService: ShopMallService,
-              private shopService: ShopService
+              private shopService: ShopService,
+              private productService: ProductService
               ) {}
 
   ngOnInit() {
 
       this.shopMallService.change.subscribe(item => {
-          this.shopIdArray = item.shop;
           for (const i of item.shop) {
               this.shopService.getAShop(i).subscribe((shopDetial: ShopModel) => {
                    this.shopArray.push(shopDetial);
@@ -41,8 +42,11 @@ export class MallsComponent implements OnInit {
 
 
     showProductsFromShop(value: string[]) {
-        for (const data of value) {
-            console.log(data);
+      for (const data of value) {
+          this.router.navigate([`/find-product/:${data}`]);
+          this.productService.getOneProduct(data).subscribe(ProductFromShop => {
+                console.log(ProductFromShop);
+            });
         }
     }
 }

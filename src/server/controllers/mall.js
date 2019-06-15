@@ -20,7 +20,6 @@ exports.get_a_mall = (req, res, next) => {
     Mall.findById(id)
         .exec()
         .then(mall => {
-            console.log('mall ', mall);
             res.status(200).json(mall)
         })
         .catch(err => {

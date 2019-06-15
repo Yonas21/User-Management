@@ -1,0 +1,23 @@
+<div>
+    <table class="table table-striped" style="width: 80%">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">name</th>
+            <th scope="col">Quantity</th>
+            <th scope="col">Description</th>
+            <th scope="col">Image</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let order of OrderArray">
+            <th scope="row">1</th>
+            <td>{{order.name}}</td>
+            <td>{{order.quantity}}</td>
+            <td>{{order.description}}</td>
+            <td>{{order.img}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
