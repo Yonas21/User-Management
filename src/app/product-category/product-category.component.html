@@ -29,8 +29,8 @@
                 <option value="4">Default sorting 02</option>
               </select>
               <select class="show">
-                <option value="1">Show 12</option>
-                <option value="2">Show 14</option>
+                <option value="1" >Show 12</option>
+                <option value="2" >Show 14</option>
                 <option value="4">Show 16</option>
               </select>
             </div>
@@ -70,12 +70,14 @@
               <section class="feature_products">
                   <h3 class="text-heading">Featured Products</h3>
                   <div class="card single_product" style="width: 25rem;" *ngFor="let pro of ProductArray">
-                      <img class="card-img-top" height="80%" [src]="pro.img" alt="Card image cap">
-                      <div class="card-body">
-                          <h5 class="card-title">{{pro.name}}</h5>
-                          <p class="card-text"><span class="text-info">Price</span> {{pro.price}}</p>
-                          <a (click)="addWishlist()" style="margin-right: 30px"> <i class="fa fa-heart"></i></a>
-                          <a (click)="addToCart()"> <i class="fa fa-shopping-cart"></i></a>
+                      <div *ngIf="pro.price > smallestRange">
+                          <img class="card-img-top" height="80%" [src]="pro.img" alt="Card image cap">
+                          <div class="card-body">
+                              <h5 class="card-title">{{pro.name}}</h5>
+                              <p class="card-text"><span class="text-info">Price</span> {{pro.price}}</p>
+                              <a (click)="addWishlist()" style="margin-right: 30px"> <i class="fa fa-heart"></i></a>
+                              <a (click)="addToCart()"> <i class="fa fa-shopping-cart"></i></a>
+                          </div>
                       </div>
                   </div>
               </section>
@@ -206,9 +208,9 @@
                 <h4>Price</h4>
                 <div class="range_item">
                   <div id="slider-range"></div>
-                  <div class="row m0">
+                  <div class="row">
                     <label for="amount">Price : </label>
-                    <input type="text" id="amount" readonly>
+                    <input type="text" id="amount" class="form-control" (change)="categorizeProduct($event)" placeholder="enter smallest price" >
                   </div>
                 </div>
               </div>

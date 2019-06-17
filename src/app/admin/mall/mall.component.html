@@ -17,7 +17,7 @@
             <th scope="row">1</th>
             <td>{{mall.name}}</td>
             <td>{{mall.address}}</td>
-            <td>{{mall.shop}}</td>
+            <td><p></p></td>
             <td>{{mall.contactNo}}</td>
             <td>{{mall.closing_hour}}</td>
             <td><button class="btn btn-primary" (click)="updateMall(mall._id)">Update</button></td>
@@ -26,5 +26,4 @@
         </tbody>
     </table>
     <ng-flash-message></ng-flash-message>
-    <td><button class="btn btn-danger" (click)="findMalls()">Malls</button></td>
 </div>

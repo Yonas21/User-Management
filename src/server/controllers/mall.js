@@ -80,14 +80,12 @@ exports.create_a_mall = (req, res, next) => {
 
 exports.update_mall = (req, res, next) => {
     let id = req.params.mallId;
-    console.log(id);
-    console.log(req.body.newName);
     Mall.findOneAndUpdate(id, {
         $set: {
             name: req.body.newName,
             address: req.body.newAddress,
             contactNo: req.body.newContact,
-            shop: req.body.newItem,
+            shop: req.body.Ids,
             closing_hour: req.body.newClosing
         }
     }).exec()

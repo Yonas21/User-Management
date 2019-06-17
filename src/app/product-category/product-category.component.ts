@@ -11,6 +11,7 @@ export class ProductCategoryComponent implements OnInit {
     ProductArray = [];
     singleProduct: ProductModel;
     url = 'http://localhost:4000';
+    smallestRange = 0;
   constructor(private productService: ProductService) {
       this.productService.getProducts().subscribe((products: ProductModel[]) => {
           for (const productDetail of products) {
@@ -22,6 +23,11 @@ export class ProductCategoryComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  categorizeProduct(event) {
+      const value = event.target.value;
+      this.smallestRange = value;
   }
 
 }

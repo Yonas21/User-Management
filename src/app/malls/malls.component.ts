@@ -39,14 +39,4 @@ export class MallsComponent implements OnInit {
           }
       });
   }
-
-
-    showProductsFromShop(value: string[]) {
-      for (const data of value) {
-          this.router.navigate([`/find-product/:${data}`]);
-          this.productService.getOneProduct(data).subscribe(ProductFromShop => {
-                console.log(ProductFromShop);
-            });
-        }
-    }
 }

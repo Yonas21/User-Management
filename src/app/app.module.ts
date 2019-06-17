@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FileSelectDirective } from 'ng2-file-upload';
 import { NgxUploaderModule } from 'ngx-uploader';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { NgxPayPalModule } from 'ngx-paypal';
 import {
     SocialLoginModule,
     AuthServiceConfig,
@@ -129,7 +130,8 @@ export function provideConfig() {
       SocialLoginModule,
       NgZorroAntdModule,
       NgxUploaderModule,
-      NgMultiSelectDropDownModule.forRoot()
+      NgMultiSelectDropDownModule.forRoot(),
+      NgxPayPalModule
   ],
   providers: [
       UserService,

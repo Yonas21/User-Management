@@ -6,6 +6,5 @@
         <h5 class="card-title">{{item.name}}</h5>
         <p class="card-text">Phone Number: {{item.contactNo}}</p>
         <p class="card-text" *ngFor="let i of item.item">Products: {{i}}</p>
-        <a class="btn btn-primary" (click)="showProductsFromShop(item.item)" >show Products</a>
     </div>
 </div>

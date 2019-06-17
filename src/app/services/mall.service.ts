@@ -32,4 +32,5 @@ export class MallService {
     getAMall(item) {
         return this.http.get(`${this.url}/mall/${item}`, { responseType: 'json'});
     }
+
 }

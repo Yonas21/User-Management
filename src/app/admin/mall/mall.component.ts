@@ -24,17 +24,18 @@ export class MallComponent implements OnInit {
           for (const data of result) {
               this.mall = new MallModel(data.closing_hour, data._id, data.name, data.shop, data.address, data.contactNo);
               this.mallService.id = this.mall._id;
-              this.shopService.getAShop(data.shop).subscribe((shops: ShopModel) => {
-                  this.malls.push(
-                      {
-                          closing_hour: data.closing_hour,
-                          name: data.name,
-                          shop: shops.name,
-                          address: data.address,
-                          contactNo: data.contactNo,
-                          _id: data._id
-                      });
-              });
+              for (const shopId of data.shop) {
+                  this.shopService.getAShop(shopId).subscribe((shopDetial: ShopModel) => {
+                     this.malls.push({
+                         shop: shopDetial.name,
+                         closing_hour: data.closing_hour,
+                         name: data.name,
+                         address: data.address,
+                         contactNo: data.contactNo,
+                         _id: data._id
+                     });
+                  });
+              }
           }
       });
 
@@ -59,9 +60,11 @@ export class MallComponent implements OnInit {
         this.router.navigate([`/admin/update-mall/${id}`]);
     }
 
-    findMalls() {
-      this.mallService.getMalls().subscribe(result => {
-          console.log(result);
-      });
-    }
+    // findMalls() {
+    //   this.mallService.getMalls().subscribe((result: MallModel[]) => {
+    //       for (const data of result) {
+    //           console.log(data.shop);
+    //       }
+    //   });
+    // }
 }
