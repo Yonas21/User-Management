@@ -7,7 +7,11 @@ import { ShopService } from '../../services/shop.service';
 import { ShopMallService} from '../../services/shop_mall.service';
 import {ShopModel} from '../../models/shop.model';
 import {Router} from '@angular/router';
+import {WishlistModel} from '../../models/wishlist.model';
+import {CartModel} from '../../models/cart.model';
+import {ProductService} from '../../services/product.service';
 
+// @ts-ignore
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -15,18 +19,27 @@ import {Router} from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
     shops: Array<MallModel> = [];
+    private wishlists: number;
+    private carts: number;
   constructor(
       private userService: UserService,
       private flashMessage: NgFlashMessageService,
       private mallService: MallService,
       private shopService: ShopService,
       private shopMallService: ShopMallService,
-      private router: Router
+      private router: Router,
+      private productService: ProductService
       ) {
       this.mallService.getMalls().subscribe((results: MallModel[]) => {
           for (const data of results) {
               this.shops.push(data);
           }
+      });
+      this.productService.getWishlists().subscribe((result: WishlistModel[]) => {
+          this.wishlists = result.length;
+      });
+      this.productService.getProductFromCart().subscribe((result: CartModel[]) => {
+          this.carts = result.length;
       });
   }
 

@@ -22,7 +22,7 @@ export class ProductComponent implements OnInit {
       this.productService.getProducts().subscribe((result: ProductModel[]) => {
          for (const data of result) {
              this.products.push(data);
-             this.product = new ProductModel(data._id, data.name, data.price, data.productImage);
+             this.product = new ProductModel(data._id, data.name, data.price, data.color, data.productImage);
              this.productService.id = this.product._id;
          }
       });

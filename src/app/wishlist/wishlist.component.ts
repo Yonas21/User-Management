@@ -37,7 +37,7 @@ export class WishlistComponent implements OnInit {
           for ( const i of this.wishProducts) {
               this.product = i;
               const image = `${this.url}/${this.product.productImage}`;
-              this.showProduct = new ProductModel(this.product._id, this.product.name, this.product.price, image );
+              this.showProduct = new ProductModel(this.product._id, this.product.name, this.product.price, this.product.color, image );
               this.think.push(this.showProduct);
               console.log(this.product.name);
           }

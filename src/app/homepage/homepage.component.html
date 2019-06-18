@@ -78,8 +78,9 @@
         <div class="card-body">
             <h5 class="card-title">{{pro.name}}</h5>
             <p class="card-text"><span class="text-info">Price</span> {{pro.price}}</p>
-            <a (click)="addWishlist()" style="margin-right: 30px"> <i class="fa fa-heart"></i></a>
-            <a (click)="addToCart()"> <i class="fa fa-shopping-cart"></i></a>
+            <a (click)="addWishlist()" style="margin-right: 30px" [title]="'add to wishlist'"> <i class="fa fa-heart"></i></a>
+            <a (click)="addToCart()"> <i class="fa fa-shopping-cart" style="margin-right: 30px" [title]="'add to cart'"></i></a>
+            <a (click)="checkOut()"><i class="fa fa-check-square" [title]="'checkout the item'"></i></a>
         </div>
     </div>
 </section>

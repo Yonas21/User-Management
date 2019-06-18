@@ -7,6 +7,7 @@ import { ShopService } from '../services/shop.service';
 import {HeaderComponent} from '../homepage/header/header.component';
 import {ShopModel} from '../models/shop.model';
 import { ProductService } from '../services/product.service';
+import {ProductModel} from '../models/product.model';
 
 @Component({
   selector: 'app-malls',
@@ -16,11 +17,9 @@ import { ProductService } from '../services/product.service';
 export class MallsComponent implements OnInit {
      malls: Array<MallModel> = [];
      products = [];
-     shopIdArray = [];
-
+     url = 'http://localhost:4000';
      isOpen = false;
      shopArray: Array<ShopModel> = [];
-
     @Input() headerComponent: HeaderComponent;
   constructor(private mallService: MallService,
               private router: Router,
@@ -35,6 +34,18 @@ export class MallsComponent implements OnInit {
           for (const i of item.shop) {
               this.shopService.getAShop(i).subscribe((shopDetial: ShopModel) => {
                    this.shopArray.push(shopDetial);
+                   console.log('product Id' + shopDetial.item);
+                   this.productService.getOneProduct(shopDetial.item).subscribe((productFromShop: ProductModel) => {
+                       const image = `${this.url}/${productFromShop.productImage}`;
+                       console.log(image);
+                       this.products.push(
+                           {
+                               name: productFromShop.name,
+                               color: productFromShop.color,
+                               price: productFromShop.price,
+                               img: image
+                           });
+                   });
               });
           }
       });

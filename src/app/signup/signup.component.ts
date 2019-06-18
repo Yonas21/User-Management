@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { Router} from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { NgFlashMessageService } from 'ng-flash-messages';
 
 @Component({
@@ -24,8 +24,14 @@ export class SignupComponent implements OnInit {
           password: ['', Validators.required],
           birthday: [''],
           gender: [''],
-          email: ['', Validators.required],
-          phoneNo: ['', Validators.required],
+          email: ['', [
+              Validators.required,
+              Validators.email
+          ]],
+          phoneNo: new FormControl('',[
+              Validators.required,
+              Validators.minLength(10)
+          ]),
           address: ['']
       });
   }

@@ -59,7 +59,13 @@
                         </div>
 
                         <div class="col-md-12 form-group">
-                            <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone No."#phoneNo>
+                            <input type="text" class="form-control" formControlName="phoneNo" id="phone" name="phone" placeholder="Phone No."#phoneNo>
+                        </div>
+
+                        <div *ngIf="createForm.controls['phoneNo'].invalid && (createForm.controls['phoneNo'].dirty || createForm.controls['phoneNo'].touched)" class="alert alert-danger">
+                            <div *ngIf="createForm.controls['phoneNo'].errors.required">
+                                Phone Number is Required.
+                            </div>
                         </div>
                         <div class="col-md-12 form-group">
                             <input type="date" class="form-control" id="birth_date" name="birth_date" placeholder="Birth Date" #birth>

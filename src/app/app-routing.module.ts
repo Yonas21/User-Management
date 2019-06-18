@@ -31,6 +31,7 @@ import { AddShopComponent } from './admin/shop/add-shop/add-shop.component';
 import { UpdateMallComponent } from './admin/mall/update-mall/update-mall.component';
 import {UpdateShopComponent} from './admin/shop/update-shop/update-shop.component';
 import {OrdersComponent} from './admin/orders/orders.component';
+import {PaymentComponent} from './payment/payment.component';
 
 
 const routes: Routes = [
@@ -135,6 +136,10 @@ const routes: Routes = [
         path: 'special-order',
         component: SpecialOrderComponent,
         canActivate: [AuthGuard]
+    },
+    {
+        path: 'payment',
+        component: PaymentComponent
     },
     {
         path: '**',

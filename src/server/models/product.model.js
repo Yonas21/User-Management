@@ -11,6 +11,11 @@ const productSchema = mongoose.Schema(
       type: Number,
       required: true
     },
+      color: {
+        type: String,
+          enum: ['green', 'orange', 'black', 'violet', 'blue', 'red','white','blur black','pink'],
+          default: 'white'
+      },
     productImage: {
       type: String,
       required: false

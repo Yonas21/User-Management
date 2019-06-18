@@ -4,7 +4,7 @@ let Product = require('../models/product.model');
 
 exports.get_all_products = (req, res, next) => {
     Product.find()
-        .select("name price _id productImage")
+        .select("_id name price color productImage")
         .exec()
         .then(results => {
              res.status(200).json(results);
@@ -23,6 +23,7 @@ exports.create_product = (req, res, next) => {
         _id: mongoose.Types.ObjectId(),
         name: req.body.name,
         price: req.body.price,
+        color: req.body.color,
         productImage: req.file.path
     });
 
@@ -34,6 +35,7 @@ exports.create_product = (req, res, next) => {
                 createdProduct: {
                     name: result.name,
                     price: result.price,
+                    color: result.color,
                     _id: result._id,
                     request: {
                         type: "GET",
@@ -54,20 +56,9 @@ exports.get_one_product = (req, res, next) => {
     const id = req.params.productId;
 
     Product.findById(id)
-        .select("name price _id productImage")
+        .select(" _id name price color productImage")
         .exec()
         .then(result => {
-            // res.status(200).json({
-            //     message: `Product with Id ${id}`,
-            //     response: {
-            //         result: result,
-            //         request: {
-            //             type: "GET",
-            //             description: "Get all Products",
-            //             url: "http://localhost:4000/products/"
-            //         }
-            //     }
-            // });
             res.status(200).json(result);
         })
         .catch(err => {
@@ -83,7 +74,8 @@ exports.update_product = (req, res, next) => {
     Product.findOneAndUpdate(id, {
         $set: {
             name: req.body.newName,
-            price: req.body.newPrice
+            price: req.body.newPrice,
+            color: req.body.newColor
         }
     })
         .exec()

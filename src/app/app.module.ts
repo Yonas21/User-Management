@@ -59,6 +59,7 @@ import { ShopMallService } from './services/shop_mall.service';
 import { ProductShopMallComponent } from './product-shop-mall/product-shop-mall.component';
 import { SpecialOrderComponent } from './special-order/special-order.component';
 import { OrdersComponent } from './admin/orders/orders.component';
+import { PaymentComponent } from './payment/payment.component';
 registerLocaleData(en);
 
 const antDesignIcons = AllIcons as {
@@ -116,7 +117,8 @@ export function provideConfig() {
       MallsComponent,
       ProductShopMallComponent,
       SpecialOrderComponent,
-      OrdersComponent
+      OrdersComponent,
+      PaymentComponent
   ],
   imports: [
     BrowserModule,

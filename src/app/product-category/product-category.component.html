@@ -33,6 +33,16 @@
                 <option value="2" >Show 14</option>
                 <option value="4">Show 16</option>
               </select>
+                <select class="show" (change)="SelectedOption($event)">
+                    <option value="all" [selected]="true">Price</option>
+                    <option value="white" >White</option>
+                    <option value="red">Red</option>
+                    <option value="green">Green</option>
+                    <option value="blue">Blue</option>
+                    <option value="orange">Orange</option>
+                    <option value="black">Black</option>
+                    <option value="violet">Violet</option>
+                </select>
             </div>
             <div class="right_page ml-auto">
               <nav class="cat_page" aria-label="Page navigation example">
@@ -70,13 +80,15 @@
               <section class="feature_products">
                   <h3 class="text-heading">Featured Products</h3>
                   <div class="card single_product" style="width: 25rem;" *ngFor="let pro of ProductArray">
-                      <div *ngIf="pro.price > smallestRange">
-                          <img class="card-img-top" height="80%" [src]="pro.img" alt="Card image cap">
-                          <div class="card-body">
-                              <h5 class="card-title">{{pro.name}}</h5>
-                              <p class="card-text"><span class="text-info">Price</span> {{pro.price}}</p>
-                              <a (click)="addWishlist()" style="margin-right: 30px"> <i class="fa fa-heart"></i></a>
-                              <a (click)="addToCart()"> <i class="fa fa-shopping-cart"></i></a>
+                      <div *ngIf="pro.price > smallestRange ">
+                          <div *ngIf="pro.color && color === pro.color">
+                              <img class="card-img-top" height="80%" [src]="pro.img" alt="Card image cap">
+                              <div class="card-body">
+                                  <h5 class="card-title">{{pro.name}}</h5>
+                                  <p class="card-text"><span class="text-info">Price</span> {{pro.price}}</p>
+                                  <a (click)="addWishlist()" style="margin-right: 30px"> <i class="fa fa-heart"></i></a>
+                                  <a (click)="addToCart()"> <i class="fa fa-shopping-cart"></i></a>
+                              </div>
                           </div>
                       </div>
                   </div>

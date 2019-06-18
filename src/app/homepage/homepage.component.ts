@@ -6,6 +6,8 @@ import {ProductService} from '../services/product.service';
 import {ProductModel} from '../models/product.model';
 import {UserModel} from '../models/user.model';
 import {DeleteModel} from '../models/delete.model';
+import {WishlistModel} from '../models/wishlist.model';
+import {CartModel} from '../models/cart.model';
 
 @Component({
     selector: 'app-homepage',
@@ -19,7 +21,8 @@ export class HomepageComponent implements OnInit {
     count = 0;
     product: ProductModel;
     user: UserModel;
-
+    carts = 0;
+    wishlists = 0;
     constructor(
         private userService: UserService,
         private router: Router,
@@ -31,7 +34,7 @@ export class HomepageComponent implements OnInit {
         this.productService.getProducts().subscribe((data: ProductModel[]) => {
             for (const oneData of data) {
                 const image = `${this.url}/${oneData.productImage}`;
-                this.product  = new ProductModel(oneData._id, oneData.name, oneData.price, image);
+                this.product  = new ProductModel(oneData._id, oneData.name, oneData.price, oneData.color, image);
                 this.products.push(this.product);
                 this.productService.id = this.product._id;
             }
@@ -42,6 +45,7 @@ export class HomepageComponent implements OnInit {
                 this.users.push(this.user);
             }
         });
+
     }
 
     addWishlist() {
@@ -66,4 +70,8 @@ export class HomepageComponent implements OnInit {
         });
     }
 
+    checkOut() {
+        console.log(`item will be checked out`);
+        this.router.navigate(['/payment']);
+    }
 }
