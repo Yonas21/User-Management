@@ -5,7 +5,6 @@ import { MallService } from '../../services/mall.service';
 import {MallModel} from '../../models/mall.model';
 import { ShopService } from '../../services/shop.service';
 import { ShopMallService} from '../../services/shop_mall.service';
-import {ShopModel} from '../../models/shop.model';
 import {Router} from '@angular/router';
 import {WishlistModel} from '../../models/wishlist.model';
 import {CartModel} from '../../models/cart.model';
@@ -37,9 +36,33 @@ export class HeaderComponent implements OnInit {
       });
       this.productService.getWishlists().subscribe((result: WishlistModel[]) => {
           this.wishlists = result.length;
+          const duplicates = [];
+          for (const data of result) {
+              // @ts-ignore
+              duplicates.push(data.item.name);
+          }
+          let count = 0;
+          for (let i = 0; i < duplicates.length ; i++) {
+              if (duplicates[i] === duplicates[i + 1]) {
+                  count += 1;
+              }
+          }
+          console.log('upper products');
       });
       this.productService.getProductFromCart().subscribe((result: CartModel[]) => {
+          console.log('.......................................................');
           this.carts = result.length;
+          const duplicates = [];
+          for (const data of result) {
+              // @ts-ignore
+              // console.log(data.item.name);
+              // @ts-ignore
+              duplicates.push(data.item.name);
+          }
+          const filtered = duplicates.filter((value, index) => {
+              return duplicates.indexOf(value) !== index;
+          });
+          console.log(filtered);
       });
   }
 
@@ -62,5 +85,6 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
   }
+
 
 }

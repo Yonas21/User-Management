@@ -37,6 +37,10 @@ let userSchema = new Schema({
     role: {
         type: String,
         default: 'user'
+    },
+    initialBalance: {
+        type: Number,
+        default: 25.00
     }
 },
     {

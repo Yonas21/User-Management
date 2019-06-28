@@ -34,9 +34,9 @@
                 <option value="4">Show 16</option>
               </select>
                 <select class="show" (change)="SelectedOption($event)">
-                    <option value="all" [selected]="true">Price</option>
+                    <option value="white" selected>Price</option>
                     <option value="white" >White</option>
-                    <option value="red">Red</option>
+                    <option value="red" >Red</option>
                     <option value="green">Green</option>
                     <option value="blue">Blue</option>
                     <option value="orange">Orange</option>
@@ -87,7 +87,11 @@
                                   <h5 class="card-title">{{pro.name}}</h5>
                                   <p class="card-text"><span class="text-info">Price</span> {{pro.price}}</p>
                                   <a (click)="addWishlist()" style="margin-right: 30px"> <i class="fa fa-heart"></i></a>
-                                  <a (click)="addToCart()"> <i class="fa fa-shopping-cart"></i></a>
+                                  <a (click)="addToCart()" style="margin-right: 30px"> <i class="fa fa-shopping-cart"></i></a>
+                                  <a (click)="checkOut()"> <i class="fa fa-check-square"></i></a>
+                              </div>
+                              <div class="form-group">
+                                  <ng-flash-message></ng-flash-message>
                               </div>
                           </div>
                       </div>

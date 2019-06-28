@@ -9,6 +9,7 @@ import { FileSelectDirective } from 'ng2-file-upload';
 import { NgxUploaderModule } from 'ngx-uploader';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { NgxPayPalModule } from 'ngx-paypal';
+import { NgxNavigationWithDataComponent } from 'ngx-navigation-with-data';
 import {
     SocialLoginModule,
     AuthServiceConfig,
@@ -142,7 +143,8 @@ export function provideConfig() {
       AuthGuard,
       UserService,
       ProductService,
-      ShopMallService
+      ShopMallService,
+      NgxNavigationWithDataComponent
   ],
   bootstrap: [AppComponent]
 })

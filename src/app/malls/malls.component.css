@@ -4,4 +4,31 @@
 .card {
     padding-left: 30px;
     margin: 20px;
+    overflow: hidden;
+}
+.text-heading {
+    text-align: center;
+}
+.single_product {
+    float: left;
+}
+.subscription-area {
+    display:block;
+    margin-top: 50px;
+}
+.clear {
+    clear : both ;
+}
+.feature_products {
+    overflow: hidden;
+}
+.parent {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.child {
+    flex: 30%; /* explanation below */
+    margin: 5px;
+    height: 100px;
 }

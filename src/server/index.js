@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 const morgan = require("morgan");
 require("dotenv").config();
 const multer = require('multer');
+const expressMailer = require('express-mailer');
 
 let userRouter = require("./routes/user.router");
 let productRouter = require("./routes/products.router");
@@ -89,6 +90,15 @@ app.post('/api/upload', upload.single('photo') ,(req, res, next) => {
         })
     }
 });
+//the email that should be sent should extend the message.
+expressMailer.extend(app, {
+    from: 'yonasalem056@gmail.com',
+    host: 'smtp.gmail.com',
+    secureConnection: true,
+    port: 465,
+    transportMethod: 'SMTP',
+
+})
 
 app.listen(PORT, function() {
     console.log("Server is running on Port:", PORT);

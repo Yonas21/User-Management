@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService} from '../services/product.service';
 import { ProductModel} from '../models/product.model';
 import {CartModel} from '../models/cart.model';
+import { NgxNavigationWithDataComponent } from 'ngx-navigation-with-data';
 
 @Component({
   selector: 'app-cart',
@@ -15,6 +16,7 @@ export class CartComponent implements OnInit {
     sum = 0;
   constructor(
       private productService: ProductService,
+      public navCtl: NgxNavigationWithDataComponent
   ) {
       this.productService.getProductFromCart().subscribe((products: CartModel[]) => {
           for (const product of products) {
@@ -39,5 +41,9 @@ export class CartComponent implements OnInit {
             }
         });
 
+    }
+
+    checkOut() {
+        this.navCtl.navigate('checkout', {sum: this.sum});
     }
 }

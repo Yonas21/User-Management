@@ -1,13 +1,12 @@
 <div class="topbar">
-
 </div>
 <div class="card" *ngFor="let item of shopArray" >
     <div class="card-body">
         <h5 class="card-title">{{item.name}}</h5>
         <p class="card-text">Phone Number: {{item.contactNo}}</p>
         <div class="card">
-            <h3 class="text-heading">Products</h3>
-            <div class="card single_product" style="width: 25rem;" *ngFor="let product of products">
+            <h3 class="card-text">Products</h3>
+            <div class="single_product" style="width: 25rem;" *ngFor="let product of products">
                 <img class="card-img-top" [src]="product.img" alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title">{{product.name}}</h5>

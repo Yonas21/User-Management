@@ -6,8 +6,7 @@ import {ProductService} from '../services/product.service';
 import {ProductModel} from '../models/product.model';
 import {UserModel} from '../models/user.model';
 import {DeleteModel} from '../models/delete.model';
-import {WishlistModel} from '../models/wishlist.model';
-import {CartModel} from '../models/cart.model';
+import { NgxNavigationWithDataComponent } from 'ngx-navigation-with-data';
 
 @Component({
     selector: 'app-homepage',
@@ -27,7 +26,8 @@ export class HomepageComponent implements OnInit {
         private userService: UserService,
         private router: Router,
         private flashMessage: NgFlashMessageService,
-        private productService: ProductService
+        private productService: ProductService,
+        public  navCtl: NgxNavigationWithDataComponent
     ) {}
 
     ngOnInit() {
@@ -71,7 +71,9 @@ export class HomepageComponent implements OnInit {
     }
 
     checkOut() {
-        console.log(`item will be checked out`);
-        this.router.navigate(['/payment']);
+        this.productService.getOneProduct(this.product._id).subscribe((productDetail: ProductModel) => {
+           this.productService.detailForPayment.push(this.product);
+           this.navCtl.navigate('checkout', {price: productDetail.price});
+        });
     }
 }

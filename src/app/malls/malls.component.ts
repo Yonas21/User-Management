@@ -34,10 +34,8 @@ export class MallsComponent implements OnInit {
           for (const i of item.shop) {
               this.shopService.getAShop(i).subscribe((shopDetial: ShopModel) => {
                    this.shopArray.push(shopDetial);
-                   console.log('product Id' + shopDetial.item);
                    this.productService.getOneProduct(shopDetial.item).subscribe((productFromShop: ProductModel) => {
                        const image = `${this.url}/${productFromShop.productImage}`;
-                       console.log(image);
                        this.products.push(
                            {
                                name: productFromShop.name,
@@ -50,4 +48,16 @@ export class MallsComponent implements OnInit {
           }
       });
   }
+
+    checkOut() {
+      console.log('check out the item');
+    }
+
+    addToCart() {
+        console.log('add to cart');
+    }
+
+    addWishlist() {
+        console.log('add to wishlist');
+    }
 }

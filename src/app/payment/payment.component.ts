@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { IPayPalConfig, ICreateOrderRequest} from 'ngx-paypal';
+import {ActivatedRoute} from '@angular/router';
+import {ProductService} from '../services/product.service';
+import { NgxNavigationWithDataComponent } from 'ngx-navigation-with-data';
 
 @Component({
   selector: 'app-payment',
@@ -11,9 +14,14 @@ export class PaymentComponent implements OnInit {
     public showSuccess = false;
     public showCancel = false;
     public showError = false;
-  constructor() { }
+  constructor(
+      private route: ActivatedRoute,
+      private productService: ProductService,
+      public navCtl: NgxNavigationWithDataComponent
+  ) {}
 
   ngOnInit() {
+      const data = 0;
       this.initConfig();
   }
 
@@ -26,11 +34,11 @@ export class PaymentComponent implements OnInit {
               purchase_units: [{
                   amount: {
                       currency_code: 'EUR',
-                      value: '9.99',
+                      value: this.navCtl.get('price'),
                       breakdown: {
                           item_total: {
                               currency_code: 'EUR',
-                              value: '9.99'
+                              value: this.navCtl.get('price')
                           }
                       }
                   },

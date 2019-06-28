@@ -27,7 +27,8 @@ exports.register = (req, res) => {
                         gender: req.body.gender,
                         email: req.body.email,
                         phoneNo: req.body.phoneNo,
-                        address: req.body.address
+                        address: req.body.address,
+                        initialBalance: req.body.initial
                     });
 
                     //save to the database
@@ -76,7 +77,8 @@ exports.authenticate = (req, res) => {
                             message: 'Authorized',
                             token: token,
                             role: payload.role,
-                            username: payload.name
+                            username: payload.name,
+                            balance: user[0].initialBalance
                         });
                     }
 
@@ -125,3 +127,8 @@ exports.getAllUsers = (req, res) => {
             })
         });
 };
+
+// exports.checkout = (req, res, next) => {
+// //     let email = req.body.
+// //     User.find()
+// // }
