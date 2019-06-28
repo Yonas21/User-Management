@@ -17,7 +17,7 @@
             <td>{{product.price}}</td>
             <td>{{product.productImage}}</td>
             <td><button class="btn btn-primary" (click)="updateProduct(product._id)">Update</button></td>
-            <td><button class="btn btn-danger" (click)="deleteProducts()">Delete</button></td>
+            <td><button class="btn btn-danger" (click)="deleteProducts(product._id)">Delete</button></td>
         </tr>
         </tbody>
     </table>

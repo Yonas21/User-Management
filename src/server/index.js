@@ -18,6 +18,7 @@ let reviewRouter = require('./routes/review.router');
 let mallRouter = require('./routes/mall.router');
 let shopRouter = require('./routes/shop.router');
 let commentRouter = require('./routes/comment.route');
+let sellsRouter = require('./routes/sells.route');
 
 mongoose.Promise = global.Promise;
 mongoose.set('useCreateIndex', true);
@@ -76,6 +77,7 @@ app.use('/review', reviewRouter);
 app.use('/shop', shopRouter);
 app.use('/mall', mallRouter);
 app.use('/comment', commentRouter);
+app.use('/sells', sellsRouter);
 
 app.post('/api/upload', upload.single('photo') ,(req, res, next) => {
     if (!req.file) {

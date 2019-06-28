@@ -47,7 +47,6 @@ export class HeaderComponent implements OnInit {
                   count += 1;
               }
           }
-          console.log('upper products');
       });
       this.productService.getProductFromCart().subscribe((result: CartModel[]) => {
           console.log('.......................................................');
@@ -62,7 +61,6 @@ export class HeaderComponent implements OnInit {
           const filtered = duplicates.filter((value, index) => {
               return duplicates.indexOf(value) !== index;
           });
-          console.log(filtered);
       });
   }
 

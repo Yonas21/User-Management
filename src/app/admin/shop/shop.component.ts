@@ -36,8 +36,8 @@ export class ShopComponent implements OnInit {
       console.log(id);
       this.router.navigate([`/admin/update-shop/${id}`]);
   }
-  deleteShop() {
-    this.shopService.deleteShop(this.shop._id).subscribe(result => {
+  deleteShop(id) {
+    this.shopService.deleteShop(id).subscribe(result => {
         console.log(result);
     });
     }

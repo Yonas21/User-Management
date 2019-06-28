@@ -4,6 +4,7 @@ import { UserService } from '../services/user.service';
 import {CheckoutModel} from '../models/checkout.model';
 import { NgxNavigationWithDataComponent } from 'ngx-navigation-with-data';
 import { NgFlashMessageService } from 'ng-flash-messages';
+import {SellsService} from '../services/sells.service';
 
 @Component({
   selector: 'app-checkout',
@@ -11,12 +12,13 @@ import { NgFlashMessageService } from 'ng-flash-messages';
   styleUrls: ['./checkout.component.css']
 })
 export class CheckoutComponent implements OnInit {
-
+    count = 0;
   constructor(
       private router: Router,
       private userService: UserService,
       public navCtl: NgxNavigationWithDataComponent,
-      private flashMessage: NgFlashMessageService
+      private flashMessage: NgFlashMessageService,
+      private sellsService: SellsService
       ) {
       // console.log(this.navCtl.data);
       // console.log(this.navCtl.get('price'));
@@ -29,6 +31,7 @@ export class CheckoutComponent implements OnInit {
         this.userService.authenticateUser(username, password).subscribe((result: CheckoutModel) => {
             const checkout = result.balance - this.navCtl.get('price');
             console.log(result.balance);
+            console.log(this.navCtl.get('price'));
             if (checkout < 0) {
                 this.flashMessage.showFlashMessage({
                     messages: ['unable to checkout, because balance is too low.'],
@@ -43,6 +46,8 @@ export class CheckoutComponent implements OnInit {
                     timeout: 4000,
                     type: 'success'
                 });
+                this.count += 1;
+                this.sellsService.countSells(this.count, this.navCtl.get('id'));
                 this.router.navigate(['/home']);
             }
         });

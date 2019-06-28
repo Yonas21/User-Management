@@ -43,7 +43,7 @@ export class MallComponent implements OnInit {
 
   ngOnInit() {
   }
-  deleteMalls() {
+  deleteMalls(id) {
       this.mallService.DeleteMalls(this.mall._id).subscribe((result: DeleteModel) => {
           if (result.message) {
               this.flashMessage.showFlashMessage({

@@ -34,8 +34,8 @@ export class ProductComponent implements OnInit {
   updateProduct(id) {
         this.router.navigate([`/admin/update-product/${id}`]);
   }
-  deleteProducts() {
-        this.productService.deleteProduct(this.product._id).subscribe((result: DeleteModel) => {
+  deleteProducts(id) {
+        this.productService.deleteProduct(id).subscribe((result: DeleteModel) => {
             if (result.message) {
                 this.flashMessage.showFlashMessage({
                     messages: [result.message],

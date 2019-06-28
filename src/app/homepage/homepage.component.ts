@@ -7,6 +7,7 @@ import {ProductModel} from '../models/product.model';
 import {UserModel} from '../models/user.model';
 import {DeleteModel} from '../models/delete.model';
 import { NgxNavigationWithDataComponent } from 'ngx-navigation-with-data';
+import {SellsService} from '../services/sells.service';
 
 @Component({
     selector: 'app-homepage',
@@ -20,14 +21,13 @@ export class HomepageComponent implements OnInit {
     count = 0;
     product: ProductModel;
     user: UserModel;
-    carts = 0;
-    wishlists = 0;
     constructor(
         private userService: UserService,
         private router: Router,
         private flashMessage: NgFlashMessageService,
         private productService: ProductService,
-        public  navCtl: NgxNavigationWithDataComponent
+        public  navCtl: NgxNavigationWithDataComponent,
+        private sellsService: SellsService
     ) {}
 
     ngOnInit() {
@@ -36,7 +36,6 @@ export class HomepageComponent implements OnInit {
                 const image = `${this.url}/${oneData.productImage}`;
                 this.product  = new ProductModel(oneData._id, oneData.name, oneData.price, oneData.color, image);
                 this.products.push(this.product);
-                this.productService.id = this.product._id;
             }
         });
         this.userService.getUsers().subscribe((result: UserModel[]) => {
@@ -48,8 +47,9 @@ export class HomepageComponent implements OnInit {
 
     }
 
-    addWishlist() {
-        this.productService.addToWishlist(this.product._id).subscribe((data: DeleteModel) => {
+    addToWishlist(productId) {
+        this.count += 1;
+        this.productService.addToWishlist(productId).subscribe((data: DeleteModel) => {
             this.flashMessage.showFlashMessage({
                 messages: [data.message],
                 dismissible: true,
@@ -57,10 +57,13 @@ export class HomepageComponent implements OnInit {
                 type: 'info'
             });
         });
+        this.sellsService.countSells(this.count, productId).subscribe(result => {
+            console.log(result);
+        });
     }
 
-    addToCart() {
-        this.productService.addToCart(this.product._id).subscribe((result: DeleteModel) => {
+    addToCart(productId) {
+        this.productService.addToCart(productId).subscribe((result: DeleteModel) => {
             this.flashMessage.showFlashMessage({
                 messages: [result.message],
                 dismissible: true,
@@ -68,12 +71,13 @@ export class HomepageComponent implements OnInit {
                 type: 'info'
             });
         });
+        this.count += 1;
+        this.sellsService.countSells(this.count, productId).subscribe(result => {
+            console.log(result);
+        });
     }
 
-    checkOut() {
-        this.productService.getOneProduct(this.product._id).subscribe((productDetail: ProductModel) => {
-           this.productService.detailForPayment.push(this.product);
-           this.navCtl.navigate('checkout', {price: productDetail.price});
-        });
+    checkOut(price, id) {
+        this.navCtl.navigate('checkout', {price, id});
     }
 }
