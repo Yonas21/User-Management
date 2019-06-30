@@ -20,29 +20,19 @@
     <div class="container-fluid">
         <h3 class="text-heading">Hot Deals of this Month</h3>
         <div class="row">
-            <div class="col-lg-6">
-                <div class="hot_deal_box">
-                    <img class="img-fluid" src="../../assets/homepage/img/product/hot_deals/deal1.jpg" alt="">
-                    <div class="content">
-                        <h2>Hot Deals of this Month</h2>
-                        <p>shop now</p>
+                    <div class="card single_product" style="width: 25rem;" *ngFor="let pro of hotDeals">
+                        <img class="card-img-top" [src]="pro.productImage" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">{{pro.name}}</h5>
+                            <p class="card-text"><span class="text-info">Price</span> {{pro.price}}</p>
+                            <a (click)="addToWishlist(pro._id)" style="margin-right: 30px" [title]="'add to wishlist'"> <i class="fa fa-heart"></i></a>
+                            <a (click)="addToCart(pro._id)"> <i class="fa fa-shopping-cart" style="margin-right: 30px" [title]="'add to cart'"></i></a>
+                            <a (click)="checkOut(pro.price, pro._id)"><i class="fa fa-check-square" [title]="'checkout the item'"></i></a>
+                        </div>
                     </div>
                     <a class="hot_deal_link" href="#"></a>
                 </div>
             </div>
-
-            <div class="col-lg-6">
-                <div class="hot_deal_box">
-                    <img class="img-fluid" src="../../assets/homepage/img/product/hot_deals/deal1.jpg" alt="">
-                    <div class="content">
-                        <h2>Hot Deals of this Month</h2>
-                        <p>shop now</p>
-                    </div>
-                    <a class="hot_deal_link" href="#"></a>
-                </div>
-            </div>
-        </div>
-    </div>
 </section>
 <!--================End Hot Deals Area =================-->
 

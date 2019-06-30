@@ -21,7 +21,7 @@ const productSchema = mongoose.Schema(
       required: false
     },
     selledCount: {
-        type: String,
+        type: Number,
         default: 0
     }
   },

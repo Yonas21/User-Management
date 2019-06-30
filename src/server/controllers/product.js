@@ -4,7 +4,7 @@ let Product = require('../models/product.model');
 
 exports.get_all_products = (req, res, next) => {
     Product.find()
-        .select("_id name price color productImage")
+        .select("_id name price color productImage selledCount")
         .exec()
         .then(results => {
              res.status(200).json(results);

@@ -21,6 +21,7 @@ export class HomepageComponent implements OnInit {
     count = 0;
     product: ProductModel;
     user: UserModel;
+    hotDeals: Array<ProductModel> = [];
     constructor(
         private userService: UserService,
         private router: Router,
@@ -45,10 +46,17 @@ export class HomepageComponent implements OnInit {
             }
         });
 
+        this.sellsService.getHotDeals().subscribe((soldItems: ProductModel[]) => {
+            for (const oneData of soldItems) {
+                const image = `${this.url}/${oneData.productImage}`;
+                this.product  = new ProductModel(oneData._id, oneData.name, oneData.price, oneData.color, image);
+                this.hotDeals.push(this.product);
+            }
+        });
+
     }
 
-    addToWishlist(productId) {
-        this.count += 1;
+    addToWishlist(productId, count) {
         this.productService.addToWishlist(productId).subscribe((data: DeleteModel) => {
             this.flashMessage.showFlashMessage({
                 messages: [data.message],
@@ -57,12 +65,10 @@ export class HomepageComponent implements OnInit {
                 type: 'info'
             });
         });
-        this.sellsService.countSells(this.count, productId).subscribe(result => {
-            console.log(result);
-        });
+        this.sellsService.countSells(productId, count).subscribe(result => console.log(result));
     }
 
-    addToCart(productId) {
+    addToCart(productId, count) {
         this.productService.addToCart(productId).subscribe((result: DeleteModel) => {
             this.flashMessage.showFlashMessage({
                 messages: [result.message],
@@ -72,8 +78,8 @@ export class HomepageComponent implements OnInit {
             });
         });
         this.count += 1;
-        this.sellsService.countSells(this.count, productId).subscribe(result => {
-            console.log(result);
+        this.sellsService.countSells(productId, count).subscribe(data => {
+            console.log(data);
         });
     }
 

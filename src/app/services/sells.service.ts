@@ -11,8 +11,12 @@ export class SellsService {
   ) { }
   countSells(count, id) {
       const payload = {
-          count
+          id
       };
+
       return this.http.post(`${this.url}/sells/${id}`, payload, {responseType: 'json'});
+  }
+  getHotDeals() {
+      return this.http.get(`${this.url}/sells`, {responseType: 'json'});
   }
 }

@@ -2,31 +2,29 @@ const Product = require('../models/product.model');
 
 exports.count_sells = (req ,res , next) => {
   let id =  req.params.productId;
-  count = 1;
+  // let count = 1;
   console.log(id);
-  Product.findById(id)
-      .then(product => {
-          console.log(product);
-          let sells = new Product({
-              selledCount : count++
-          });
-          sells.save()
-              .then(result => {
-                  res.status(200).json({
-                      result
-                  })
-              })
-              .catch(err => {
-                  res.status(500).json({
-                      message: 'unable to increment sells',
-                      error: err
-                  })
-              })
+  Product.findById(id).then(result => {
+      console.log('result ', result);
+      console.log('going to set selledCount ', Number(result.selledCount) + 1);
+      result.selledCount += 1;
+      result.save(function(err, response){
+          console.log('err ', err);
+          console.log('response ', response);
+          res.status(201).json({response});
+
       })
-      .catch(err => {
-          res.status(404).json({
-              message: `unable to find product with id ${id}`,
-              error: err
-          })
-      })
+  })
+
+};
+
+exports.findSelledProducts = (req, res, next) => {
+
+    Product.find().limit(2).sort({selledCount: -1}).exec(function (err, posts) {
+        if (err) {
+            res.status(404).json({err})
+        }
+        res.status(200).json(posts);
+    });
+
 };

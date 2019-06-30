@@ -4,4 +4,6 @@ const router = express.Router();
 
 router.post('/:productId',sellsController.count_sells);
 
+router.get('/', sellsController.findSelledProducts);
+
 module.exports = router;

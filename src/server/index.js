@@ -22,6 +22,7 @@ let sellsRouter = require('./routes/sells.route');
 
 mongoose.Promise = global.Promise;
 mongoose.set('useCreateIndex', true);
+mongoose.set('useFindAndModify', false);
 mongoose.connect(process.env.DB, { useNewUrlParser: true }).then(
     () => {
         console.log("Database is connected");
