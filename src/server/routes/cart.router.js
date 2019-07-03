@@ -2,7 +2,7 @@ const express = require('express');
 
 let cartRouter = require('../controllers/cart');
 
-let checkAuth = require('../middleware/check-auth');
+// let checkAuth = require('../middleware/check-auth');
 
 let router = express.Router();
 

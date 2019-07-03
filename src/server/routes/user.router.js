@@ -15,4 +15,6 @@ userRoutes.delete('/:userId', userController.logout);
 //find all users
 userRoutes.get('/all_users', userController.getAllUsers);
 
+userRoutes.post('/update_balance', userController.update_balance);
+
 module.exports = userRoutes;

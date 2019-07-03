@@ -8,14 +8,43 @@
         <input type="text" class="form-control" id="product_name" formControlName="name" placeholder="enter the name">
     </div>
 
+    <div *ngIf="orderForm.controls['name'].invalid && (orderForm.controls['name'].dirty || orderForm.controls['name'].touched)" class="alert alert-danger">
+        <div *ngIf="orderForm.controls['name'].errors.required">
+            Name is Required.
+        </div>
+    </div>
+
     <div class="form-group">
         <label for="product_quantity" class="col-form-label">Quantity</label>
         <input type="text" class="form-control" formControlName="quantity" id="product_quantity" placeholder="enter the quantity">
     </div>
 
+    <div *ngIf="orderForm.controls['quantity'].invalid && (orderForm.controls['quantity'].dirty || orderForm.controls['quantity'].touched)" class="alert alert-danger">
+        <div *ngIf="orderForm.controls['quantity'].errors.required">
+            Quantity is Required.
+        </div>
+    </div>
+
     <div class="form-group">
         <label for="product_description" class="col-form-label">Description</label>
         <input type="text" class="form-control" id="product_description" formControlName="description" placeholder="enter the description">
+    </div>
+
+    <div *ngIf="orderForm.controls['description'].invalid && (orderForm.controls['description'].dirty || orderForm.controls['description'].touched)" class="alert alert-danger">
+        <div *ngIf="orderForm.controls['description'].errors.required">
+            Description is Required.
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="contact_no" class="col-form-label">Phone Number</label>
+        <input type="text" class="form-control" formControlName="phone_no" id="contact_no" placeholder="enter phone number.">
+    </div>
+
+    <div *ngIf="orderForm.controls['phone_no'].invalid && (orderForm.controls['phone_no'].dirty || orderForm.controls['phone_no'].touched)" class="alert alert-danger">
+        <div *ngIf="orderForm.controls['phone_no'].errors.required">
+            Phone Number is Required.
+        </div>
     </div>
 
     <div class="form-group">

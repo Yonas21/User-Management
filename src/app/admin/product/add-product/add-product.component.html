@@ -25,11 +25,26 @@
     </div>
 
     <div class="form-group">
+        <label for="color" class="col-form-label">Color</label>
+        <input type="text" class="form-control" id="color" name="color" formControlName="color">
+    </div>
+
+    <div *ngIf="productForm.controls['color'].invalid && (productForm.controls['color'].dirty || productForm.controls['color'].touched)" class="alert alert-danger">
+        <div *ngIf="productForm.controls['color'].errors.required">
+            Color is Required.
+        </div>
+    </div>
+
+    <div class="form-group">
         <label for="photo" class="col-form-label">Enter Image</label>
         <input type="file" class="form-control" id="photo"  name="productImage" (change)="onChange($event)">
     </div>
 
     <div class="form-group">
         <button class="btn btn-primary" [disabled]="productForm.pristine || productForm.invalid" type = "submit">Submit</button>
+    </div>
+
+    <div class="form-group">
+        <ng-flash-message></ng-flash-message>
     </div>
 </form>

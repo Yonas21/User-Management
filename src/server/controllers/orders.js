@@ -5,7 +5,7 @@ let Product = require("../models/product.model");
 
 exports.orders_get_all = (req, res, next) => {
     Order.find()
-        .select("name quantity description productImage")
+        .select("name quantity phone description productImage")
         .exec()
         .then(orders => {
             res.status(200).json(orders);
@@ -23,6 +23,7 @@ exports.orders_create_order = (req, res, next) => {
                 _id: mongoose.Types.ObjectId(),
                 quantity: req.body.quantity,
                 name: req.body.name,
+                phone: req.body.phone_no,
                 description: req.body.description,
                 productImage: req.file.path
             });

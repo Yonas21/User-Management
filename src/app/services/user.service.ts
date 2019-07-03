@@ -69,6 +69,14 @@ export class UserService {
       return this.http.get(`${this.uri}/user/all_users`, {responseType: 'json'});
     }
 
+    updateBalance(username, balance) {
+      const payload = {
+          username,
+          balance
+      };
+      return this.http.post(`${this.uri}/user/update_balance`, payload, {responseType: 'json'});
+    }
+
 
 
 }

@@ -26,7 +26,7 @@ export class MallComponent implements OnInit {
               this.mallService.id = this.mall._id;
               for (const shopId of data.shop) {
                   this.shopService.getAShop(shopId).subscribe((shopDetial: ShopModel) => {
-                     this.malls.push({
+                      this.malls.push({
                          shop: shopDetial.name,
                          closing_hour: data.closing_hour,
                          name: data.name,

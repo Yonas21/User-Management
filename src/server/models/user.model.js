@@ -40,7 +40,7 @@ let userSchema = new Schema({
     },
     initialBalance: {
         type: Number,
-        default: 25.00
+        default: 1000.00
     }
 },
     {

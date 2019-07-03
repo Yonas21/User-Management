@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 let User = require('../models/user.model');
-const jwt_decoded = require('jwt-decode');
+// const jwt_decoded = require('jwt-decode');
 
 exports.register = (req, res) => {
     //check if the email is present
@@ -128,7 +128,14 @@ exports.getAllUsers = (req, res) => {
         });
 };
 
-// exports.checkout = (req, res, next) => {
-// //     let email = req.body.
-// //     User.find()
-// // }
+exports.update_balance = (req, res, next) => {
+    let username = req.body.username;
+    User.findOneAndUpdate(username, {
+        initialBalance: req.body.balance
+    }, {upsert: true})
+        .then(result => {
+            res.status(201).json(result)
+        }).catch(err => {
+            res.status(404).json(err);
+    })
+};

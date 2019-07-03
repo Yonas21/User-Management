@@ -24,6 +24,7 @@ import { AddMallComponent } from './admin/mall/add-mall/add-mall.component';
 import { MallsComponent} from './malls/malls.component';
 import { ProductShopMallComponent } from './product-shop-mall/product-shop-mall.component';
 import { SpecialOrderComponent } from './special-order/special-order.component';
+import { UpdateBalanceComponent } from './admin/update-balance/update-balance.component';
 // @ts-ignore
 import { UpdateMallComponent } from './admin/mall/update-mall/update-mall.component';
 import { AddShopComponent } from './admin/shop/add-shop/add-shop.component';
@@ -84,7 +85,11 @@ const routes: Routes = [
                     {
                         path: 'orders',
                         component: OrdersComponent
-                    }
+                    },
+            {
+                path: 'update-balance',
+                component: UpdateBalanceComponent
+            }
         ]
     },
     {

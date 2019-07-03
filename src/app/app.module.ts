@@ -61,6 +61,8 @@ import { ProductShopMallComponent } from './product-shop-mall/product-shop-mall.
 import { SpecialOrderComponent } from './special-order/special-order.component';
 import { OrdersComponent } from './admin/orders/orders.component';
 import { PaymentComponent } from './payment/payment.component';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { UpdateBalanceComponent } from './admin/update-balance/update-balance.component';
 registerLocaleData(en);
 
 const antDesignIcons = AllIcons as {
@@ -119,7 +121,8 @@ export function provideConfig() {
       ProductShopMallComponent,
       SpecialOrderComponent,
       OrdersComponent,
-      PaymentComponent
+      PaymentComponent,
+      UpdateBalanceComponent
   ],
   imports: [
     BrowserModule,
@@ -134,7 +137,8 @@ export function provideConfig() {
       NgZorroAntdModule,
       NgxUploaderModule,
       NgMultiSelectDropDownModule.forRoot(),
-      NgxPayPalModule
+      NgxPayPalModule,
+      MDBBootstrapModule.forRoot()
   ],
   providers: [
       UserService,

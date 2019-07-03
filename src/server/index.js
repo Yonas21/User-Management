@@ -7,7 +7,7 @@ const mongoose = require("mongoose");
 const morgan = require("morgan");
 require("dotenv").config();
 const multer = require('multer');
-const expressMailer = require('express-mailer');
+// const expressMailer = require('express-mailer');
 
 let userRouter = require("./routes/user.router");
 let productRouter = require("./routes/products.router");
@@ -19,6 +19,7 @@ let mallRouter = require('./routes/mall.router');
 let shopRouter = require('./routes/shop.router');
 let commentRouter = require('./routes/comment.route');
 let sellsRouter = require('./routes/sells.route');
+const contactRouter = require('./routes/contact.route');
 
 mongoose.Promise = global.Promise;
 mongoose.set('useCreateIndex', true);
@@ -79,6 +80,7 @@ app.use('/shop', shopRouter);
 app.use('/mall', mallRouter);
 app.use('/comment', commentRouter);
 app.use('/sells', sellsRouter);
+app.use('/contact', contactRouter);
 
 app.post('/api/upload', upload.single('photo') ,(req, res, next) => {
     if (!req.file) {
@@ -93,15 +95,7 @@ app.post('/api/upload', upload.single('photo') ,(req, res, next) => {
         })
     }
 });
-//the email that should be sent should extend the message.
-expressMailer.extend(app, {
-    from: 'yonasalem056@gmail.com',
-    host: 'smtp.gmail.com',
-    secureConnection: true,
-    port: 465,
-    transportMethod: 'SMTP',
 
-})
 
 app.listen(PORT, function() {
     console.log("Server is running on Port:", PORT);

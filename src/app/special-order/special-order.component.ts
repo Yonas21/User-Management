@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import {DeleteModel} from '../models/delete.model';
 import { NgFlashMessageService } from 'ng-flash-messages';
@@ -20,9 +20,26 @@ export class SpecialOrderComponent implements OnInit {
 
   ngOnInit() {
       this.orderForm = this.formBuilder.group({
-          name: new FormControl(''),
-          quantity: new FormControl(''),
-          description: new FormControl(''),
+          name: new FormControl('', [
+              Validators.required,
+              Validators.minLength(3),
+              Validators.maxLength(50)
+          ]),
+          quantity: new FormControl('',[
+              Validators.required,
+                  Validators.minLength(1),
+                  Validators.maxLength(50)
+              ]),
+          phone_no: new FormControl('',[
+              Validators.required,
+              Validators.minLength(4),
+              Validators.maxLength(15)
+          ]),
+          description: new FormControl('', [
+              Validators.required,
+              Validators.minLength(10),
+              Validators.maxLength(200)
+          ]),
           productImage: new FormControl('')
       });
   }
@@ -39,7 +56,9 @@ export class SpecialOrderComponent implements OnInit {
         formData.append('name', this.orderForm.get('name').value);
         formData.append('quantity', this.orderForm.get('quantity').value);
         formData.append('description', this.orderForm.get('description').value);
+        formData.append('phone_no', this.orderForm.get('phone_no').value);
         formData.append('productImage', this.orderForm.get('productImage').value);
+        console.log(this.orderForm.get('phone_no').value);
         this.http.post<any>(URL, formData).subscribe((result: DeleteModel) => {
           if (result) {
               this.flashMessage.showFlashMessage({

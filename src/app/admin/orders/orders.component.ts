@@ -14,7 +14,12 @@ export class OrdersComponent implements OnInit {
       this.orderService.getOrders().subscribe((orders: OrderModel[]) => {
           for (const order of orders) {
               const image = `${this.url}/${order.productImage}`;
-              this.OrderArray.push({name: order.name, quantity: order.quantity, description: order.description, img: image });
+              this.OrderArray.push({
+                  name: order.name,
+                  quantity: order.quantity,
+                  description: order.description,
+                  phone: order.phone,
+                  img: image });
           }
       });
   }
