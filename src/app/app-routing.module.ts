@@ -33,6 +33,7 @@ import { UpdateMallComponent } from './admin/mall/update-mall/update-mall.compon
 import {UpdateShopComponent} from './admin/shop/update-shop/update-shop.component';
 import {OrdersComponent} from './admin/orders/orders.component';
 import {PaymentComponent} from './payment/payment.component';
+import {ContactInfoComponent} from './admin/contact-info/contact-info.component';
 
 
 const routes: Routes = [
@@ -89,6 +90,10 @@ const routes: Routes = [
             {
                 path: 'update-balance',
                 component: UpdateBalanceComponent
+            },
+            {
+                path: 'contact-info',
+                component: ContactInfoComponent
             }
         ]
     },

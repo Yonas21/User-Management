@@ -11,13 +11,17 @@ export class ContactService {
       return this.http.get(`${this.url}/contact`, { responseType: 'json'});
   }
 
-  sendContact(name, email, subject, description) {
+  sendContact(name, email, subject, message) {
       const payload = {
           name,
           email,
           subject,
-          description
+          message
       };
       return this.http.post(`${this.url}/contact`, payload, { responseType: 'json'});
+  }
+
+  deleteContact(id) {
+      return this.http.delete(`${this.url}/contact/${id}`, {responseType: 'json'});
   }
 }

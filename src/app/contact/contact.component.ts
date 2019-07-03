@@ -15,13 +15,14 @@ export class ContactComponent implements OnInit {
   ngOnInit() {
   }
 
-  sendContact(name, email, subject, description) {
-      this.contactService.sendContact(name, email, subject, description).subscribe((result: DeleteModel) => {
+  sendContact(name, email, subject, message) {
+      this.contactService.sendContact(name, email, subject, message).subscribe((result: DeleteModel) => {
+          console.log(result);
           this.flashMessage.showFlashMessage({
               messages: [result.message],
               dismissible: true,
                timeout: 4000,
-              type: 'submit'
+              type: 'success'
           });
       });
   }

@@ -64,13 +64,16 @@
             <div class="col-md-6">
               <div class="form-group">
                 <textarea class="form-control" name="message" id="message" rows="1"
-                  placeholder="Enter Message" #description></textarea>
+                  placeholder="Enter Message" #message></textarea>
               </div>
             </div>
             <div class="col-md-12 text-right">
               <button type="submit" value="submit" class="btn submit_btn"
-                      (click)="sendContact(name.value, email.value, subject.value, description.value)">Send Message</button>
+                      (click)="sendContact(name.value, email.value, subject.value, message.value)">Send Message</button>
             </div>
+              <div class="form-group">
+                  <ng-flash-message></ng-flash-message>
+              </div>
           </form>
         </div>
       </div>
