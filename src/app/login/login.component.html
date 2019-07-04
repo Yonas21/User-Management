@@ -52,12 +52,8 @@
                             <div *ngIf="loginForm.controls['password'].errors.required">
                                 Password is Required.
                             </div>
-                        </div>
-
-                        <div class="col-md-12 form-group">
-                            <div class="creat_account">
-                                <input type="checkbox" id="f-option2" name="selector">
-                                <label for="f-option2">Keep me logged in</label>
+                            <div *ngIf="loginForm.controls['password'].hasError('minlength')">
+                                Password Should Contain At Least 4 Characters.
                             </div>
                         </div>
                         <div class="col-md-12 form-group">
@@ -77,20 +73,16 @@
 
                         <div class="flex-c-m">
                             <a href="#" class="login100-social-item bg1">
-                                <i class="fa fa-facebook" (click)="signInWithFacebook()"></i>
+                                <i class="fab fa-facebook" (click)="signInWithFacebook()"></i>
                             </a>
 
                             <a href="#" class="login100-social-item bg2">
-                                <i class="fa fa-linkedin-square" (click)="signInWithLinkedIn()"></i>
+                                <i class="fab fa-linkedin" (click)="signInWithLinkedIn()"></i>
                             </a>
 
                             <a href="#" class="login100-social-item bg3">
-                                <i class="fa fa-google" (click)="signInWithGoogle()"></i>
+                                <i class="fab fa-google-plus" (click)="signInWithGoogle()"></i>
                             </a>
-                        </div>
-
-                        <div class="form-group">
-                            <button class="btn btn-success" type = "submit" (click)="getAllUsers()"> Get All Users</button>
                         </div>
                     </form>
                 </div>

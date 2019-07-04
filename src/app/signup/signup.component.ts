@@ -3,7 +3,7 @@ import { UserService } from '../services/user.service';
 import { Router} from '@angular/router';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { NgFlashMessageService } from 'ng-flash-messages';
-
+import { MustMatch } from './confirm_password';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -21,7 +21,10 @@ export class SignupComponent implements OnInit {
       this.createForm = this.fb.group({
           firstName: ['', Validators.required],
           lastName: '',
-          password: ['', Validators.required],
+          password: ['', [Validators.required, Validators.minLength(4)]],
+          confirm_password: ['', [
+              Validators.required
+          ]],
           birthday: [''],
           gender: [''],
           email: ['', [
@@ -30,17 +33,21 @@ export class SignupComponent implements OnInit {
           ]],
           phoneNo: new FormControl('',[
               Validators.required,
-              Validators.minLength(10)
+              Validators.minLength(4)
           ]),
           address: ['']
-      });
+      }, {validator: MustMatch('password', 'confirm_password')});
   }
     getValue(event) {
       this.gender = event.target.value;
       console.log(this.gender);
     }
-    addUser(firstName, lastName, password, birthday, gender, email, phoneNo, address) {
-      this.userService.addUser(firstName, lastName, password, birthday, this.gender, email, phoneNo, address).subscribe(() => {
+    addUser(firstName, lastName, password, birthday, gender, email, phoneNo, address, confirm) {
+      let validPass;
+      if (password === confirm) {
+          validPass = confirm;
+      }
+      this.userService.addUser(firstName, lastName, validPass, birthday, this.gender, email, phoneNo, address).subscribe(() => {
           this.flashMessage.showFlashMessage({
             messages: ['user Successfully Registered.'],
             dismissible: true,

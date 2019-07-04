@@ -10,6 +10,7 @@ import { NgxUploaderModule } from 'ngx-uploader';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { NgxPayPalModule } from 'ngx-paypal';
 import { NgxNavigationWithDataComponent } from 'ngx-navigation-with-data';
+import { RatingModule } from 'ng-starrating';
 import {
     SocialLoginModule,
     AuthServiceConfig,
@@ -140,7 +141,8 @@ export function provideConfig() {
       NgxUploaderModule,
       NgMultiSelectDropDownModule.forRoot(),
       NgxPayPalModule,
-      MDBBootstrapModule.forRoot()
+      MDBBootstrapModule.forRoot(),
+      RatingModule
   ],
   providers: [
       UserService,

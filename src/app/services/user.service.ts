@@ -15,8 +15,6 @@ export class UserService {
   constructor(private http: HttpClient, private router: Router) { }
 
   addUser(firstName, lastName, password, birthday, gender, email, phoneNo, address) {
-      const headers = new HttpHeaders();
-      headers.append('Content-Type', 'Application/json');
       const user = {
        firstName,
        lastName,
@@ -27,7 +25,6 @@ export class UserService {
        phoneNo,
        address
    };
-
       return this.http.post(`${this.uri}/user/signup`, user, {responseType: 'json'});
   }
 

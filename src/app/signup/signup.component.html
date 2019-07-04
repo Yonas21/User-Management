@@ -78,7 +78,7 @@
                             <input type="checkbox" class="form-control" value="FeMale" (change)="getValue($event)" #gender>FeMale
                         </div>
 
-                        <div class="col-md-12 form-group" #password>
+                        <div class="col-md-12 form-group" >
                             <input type="password" class="form-control" id="password" formControlName="password"
                                 placeholder="Password" autocomplete="off" #password>
                         </div>
@@ -87,19 +87,26 @@
                             <div *ngIf="createForm.controls['password'].errors.required">
                                 Password is Required.
                             </div>
+                            <div *ngIf="createForm.controls['password'].hasError('minlength')">
+                                must have at least 4 characters.
+                            </div>
                         </div>
 
-                        <div class="col-md-12 form-group">
-                            <div class="creat_account">
-                                <input type="checkbox" id="f-option2" name="selector">
-                                <label for="f-option2">Keep me logged in</label>
+                        <div class="col-md-12 form-group" >
+                            <input type="password" class="form-control" id="confirm_password" formControlName="confirm_password"
+                                   placeholder="Confirm Password" autocomplete="off" #confirm>
+                        </div>
+
+                        <div *ngIf="createForm.controls['confirm_password'].invalid && (createForm.controls['confirm_password'].dirty || createForm.controls['confirm_password'].touched)" class="alert alert-danger">
+                            <div *ngIf="createForm.controls['confirm_password'].errors.required">
+                                Confirm Password is Required.
+                            </div>
+                            <div *ngIf="createForm.controls['confirm_password'].hasError('mustMatch')">
+                                Password should match.
                             </div>
                         </div>
                         <div class="col-md-12 form-group">
-                            <button type="submit"
-                            class="btn submit_btn"
-                            (click)="addUser(firstName.value, lastName.value, password.value, birth.value, gender.value, email.value, phoneNo.value, address.value, role.value)"
-                            >Register</button>
+                            <button type="submit" class="btn submit_btn" (click)="addUser(firstName.value, lastName.value, password.value, birth.value, gender.value, email.value, phoneNo.value, address.value, confirm.value)">Register</button>
                         </div>
                     </form>
                 </div>

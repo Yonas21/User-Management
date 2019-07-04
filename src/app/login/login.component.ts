@@ -95,7 +95,7 @@ export class LoginComponent implements OnInit {
     VaidateLogin() {
         this.loginForm = this.fb.group({
             username: new FormControl('', Validators.required),
-            password: new FormControl('', Validators.required)
+            password: new FormControl('', [ Validators.required, Validators.minLength(4)])
         });
     }
 }

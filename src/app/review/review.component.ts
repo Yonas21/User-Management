@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { UserService } from '../services/user.service';
 import {HttpClient} from '@angular/common/http';
+import { StarRatingComponent } from 'ng-starrating';
+import {DeleteModel} from '../models/delete.model';
+import { NgFlashMessageService } from 'ng-flash-messages';
+
 const URL = 'http://localhost:4000/review';
 @Component({
   selector: 'app-review',
@@ -16,10 +20,12 @@ export class ReviewComponent implements OnInit {
         phone: new FormControl(''),
         message: new FormControl('')
     });
+    currentRate: 8;
   constructor(
       private formBuilder: FormBuilder,
       private userService: UserService,
-      private http: HttpClient
+      private http: HttpClient,
+      private flashMessage: NgFlashMessageService
       ) {
       this.reviewForm = this.formBuilder.group({
           email: ['', Validators.required],
@@ -32,44 +38,24 @@ export class ReviewComponent implements OnInit {
   ngOnInit() {
   }
 
-    rate3() {
-      this.rate = 3;
-      console.log(this.rate);
+    onRate($event: {oldValue: number, newValue: number, starRating: StarRatingComponent}) {
+        this.rate = $event.newValue;
+        console.log(this.rate);
     }
+    // onSubmit() {
+    //   const formData = new FormData();
+    //   console.log(this.reviewForm.get('email').value);
+    //   formData.append('email', this.reviewForm.get('email').value);
+    //   formData.append('phone', this.reviewForm.get('phone').value);
+    //   formData.append('message', this.reviewForm.get('message').value);
+    //   formData.append('rate', this.rate.toString());
+    //   formData.append('token', this.token);
+    //   this.http.post(`${URL}`, formData, {responseType: 'json'}).subscribe(result => {
+    //       console.log(result);
+    //   });
+    // }
 
-    rate1() {
-      this.rate = 1;
-      console.log(this.rate);
-    }
-
-    rate2() {
-      this.rate = 2;
-      console.log(this.rate);
-    }
-
-    rate4() {
-      this.rate = 4;
-      console.log(this.rate);
-    }
-
-    rate5() {
-      this.rate = 5;
-      console.log(this.rate);
-    }
-    onSubmit() {
-      const formData = new FormData();
-      console.log(this.reviewForm.get('email').value);
-      formData.append('email', this.reviewForm.get('email').value);
-      formData.append('phone', this.reviewForm.get('phone').value);
-      formData.append('message', this.reviewForm.get('message').value);
-      formData.append('rate', this.rate.toString());
-      formData.append('token', this.token);
-      this.http.post(`${URL}`, formData, {responseType: 'json'}).subscribe(result => {
-          console.log(result);
-      });
-    }
-
-    addComment(email: string, phone: string, message: string, rate: string, token: string) {
+    addComment(email: string, phone: string, message: string) {
         const commentPayload = {
             email,
             phone,
@@ -78,8 +64,15 @@ export class ReviewComponent implements OnInit {
             token: this.token
         };
         console.log(this.token);
-        this.http.post(`${URL}`, commentPayload, {responseType: 'json'}).subscribe(result => {
-            console.log(result);
+        this.http.post(`${URL}`, commentPayload, {responseType: 'json'}).subscribe((result: DeleteModel) => {
+            this.flashMessage.showFlashMessage({
+                messages: [result.message],
+                dismissible: true,
+                timeout: 4500,
+                type: 'success'
+            });
         });
     }
+
+
 }

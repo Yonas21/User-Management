@@ -1,40 +1,7 @@
 <div class="review_box">
     <h4>Add a Review</h4>
     <p>Your Rating:</p>
-    <ul class="list">
-        <li>
-            <a (click)="rate1()">
-                <i class="fa fa-star"></i>
-            </a>
-        </li>
-        <li>
-            <a (click)="rate2()">
-                <i class="fa fa-star"></i>
-            </a>
-        </li>
-        <li>
-            <a (click)="rate3()">
-                <i class="fa fa-star"></i>
-            </a>
-        </li>
-        <li>
-            <a (click)="rate4()">
-                <i class="fa fa-star"></i>
-            </a>
-        </li>
-        <li>
-            <a (click)="rate5()">
-                <i class="fa fa-star"></i>
-            </a>
-        </li>
-    </ul>
-    <div [ngSwitch]="rate" style="display: inline">
-        <p *ngSwitchCase="rate === 1">Poor</p>
-        <p *ngSwitchCase="rate === 2">Not Enough</p>
-        <p *ngSwitchCase="rate === 3">Good</p>
-        <p *ngSwitchCase="rate === 4">Very Good</p>
-        <p *ngSwitchCase="rate === 5">Excellent</p>
-    </div>
+    <star-rating value="5" checkedcolor="yellow" uncheckedcolor="black" size="18px"    readonly="false" (rate)="onRate($event)"></star-rating>
     <form class="row contact_form"  method="post" [formGroup] = "reviewForm">
         <div class="col-md-12">
             <div class="form-group">
@@ -55,7 +22,12 @@
         <div class="col-md-12 text-right">
             <button type="submit" value="submit"
                     class="btn submit_btn"
-            (click)="addComment(email.value, phone.value, message.value, rate, token)">Submit Now</button>
+            (click)="addComment(email.value, phone.value, message.value)">Submit Now</button>
         </div>
+
+        <div class="col-md-12 text-right">
+            <ng-flash-message></ng-flash-message>
+        </div>
+
     </form>
 </div>
