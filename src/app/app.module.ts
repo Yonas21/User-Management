@@ -65,6 +65,7 @@ import { PaymentComponent } from './payment/payment.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { UpdateBalanceComponent } from './admin/update-balance/update-balance.component';
 import { ContactInfoComponent } from './admin/contact-info/contact-info.component';
+import { CheckoutInfoComponent } from './admin/checkout-info/checkout-info.component';
 registerLocaleData(en);
 
 const antDesignIcons = AllIcons as {
@@ -125,7 +126,8 @@ export function provideConfig() {
       OrdersComponent,
       PaymentComponent,
       UpdateBalanceComponent,
-      ContactInfoComponent
+      ContactInfoComponent,
+      CheckoutInfoComponent
   ],
   imports: [
     BrowserModule,

@@ -5,6 +5,7 @@ import {CheckoutModel} from '../models/checkout.model';
 import { NgxNavigationWithDataComponent } from 'ngx-navigation-with-data';
 import { NgFlashMessageService } from 'ng-flash-messages';
 import {SellsService} from '../services/sells.service';
+import { DeleteModel } from '../models/delete.model';
 
 @Component({
   selector: 'app-checkout',
@@ -30,8 +31,10 @@ export class CheckoutComponent implements OnInit {
     checkOutFromAccount(username, password) {
         this.userService.authenticateUser(username, password).subscribe((result: CheckoutModel) => {
             const checkout = result.balance - this.navCtl.get('price');
-            console.log(result.balance);
-            console.log(this.navCtl.get('price'));
+            console.log(result);
+            console.log(this.navCtl.get('id'));
+            // console.log(this.navCtl.get('price'));
+            // console.log(checkout);
             if (checkout < 0) {
                 this.flashMessage.showFlashMessage({
                     messages: ['unable to checkout, because balance is too low.'],
@@ -41,13 +44,21 @@ export class CheckoutComponent implements OnInit {
                 });
             } else {
                 this.flashMessage.showFlashMessage({
-                    messages: ['successfully checkedout'],
+                    messages: [result.message],
                     dismissible: true,
                     timeout: 4000,
                     type: 'success'
                 });
                 this.count += 1;
                 this.sellsService.countSells(this.count, this.navCtl.get('id'));
+                this.userService.updateBalance(username, checkout).subscribe((result: DeleteModel) =>{
+                    this.flashMessage.showFlashMessage({
+                        messages: [result.message],
+                        dismissible: true,
+                        timeout: 4000,
+                        type: 'info'
+                    });
+                })
                 this.router.navigate(['/home']);
             }
         });

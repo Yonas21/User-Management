@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { NgFlashMessageService } from 'ng-flash-messages';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import { DeleteModel } from 'src/app/models/delete.model';
 
 @Component({
   selector: 'app-update-balance',
@@ -29,10 +30,9 @@ export class UpdateBalanceComponent implements OnInit {
   }
 
   updateBalance(username, balance) {
-      this.userService.updateBalance(username, balance).subscribe(result => {
-          console.log(result);
+      this.userService.updateBalance(username, balance).subscribe((result: DeleteModel) => {
           this.flashMessage.showFlashMessage({
-              messages: ['balance update successfully'],
+              messages: [result.message],
               dismissible: true,
               timeout: 4000,
               type: 'success'

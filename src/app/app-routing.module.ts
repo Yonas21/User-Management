@@ -34,7 +34,7 @@ import {UpdateShopComponent} from './admin/shop/update-shop/update-shop.componen
 import {OrdersComponent} from './admin/orders/orders.component';
 import {PaymentComponent} from './payment/payment.component';
 import {ContactInfoComponent} from './admin/contact-info/contact-info.component';
-
+import { CheckoutInfoComponent } from './admin/checkout-info/checkout-info.component';
 
 const routes: Routes = [
     {
@@ -94,6 +94,10 @@ const routes: Routes = [
             {
                 path: 'contact-info',
                 component: ContactInfoComponent
+            },
+            {
+                path: 'checkout-info',
+                component: CheckoutInfoComponent
             }
         ]
     },
