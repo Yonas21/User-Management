@@ -35,7 +35,10 @@ export class UserService {
       };
       return this.http.post(`${this.uri}/user/login`, user, { responseType: 'json' });
   }
-
+  // get a user for checkout information
+    getAUser(username) {
+      return this.http.get(`${this.uri}/user/${username}`, {responseType: 'json'});
+    }
    logout() {
       this.token = '';
       window.localStorage.removeItem('user-token');

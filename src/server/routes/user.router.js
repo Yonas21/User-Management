@@ -9,6 +9,8 @@ userRoutes.post('/signup', userController.register);
 //log into our account
 userRoutes.post('/login', userController.authenticate);
 
+//get one user
+userRoutes.get('/:username', userController.get_one_user);
 //delete the user route handler
 userRoutes.delete('/:userId', userController.logout);
 

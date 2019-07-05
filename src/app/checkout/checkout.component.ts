@@ -6,6 +6,7 @@ import { NgxNavigationWithDataComponent } from 'ngx-navigation-with-data';
 import { NgFlashMessageService } from 'ng-flash-messages';
 import {SellsService} from '../services/sells.service';
 import { DeleteModel } from '../models/delete.model';
+import { ProductService } from '../services/product.service';
 
 @Component({
   selector: 'app-checkout',
@@ -19,7 +20,8 @@ export class CheckoutComponent implements OnInit {
       private userService: UserService,
       public navCtl: NgxNavigationWithDataComponent,
       private flashMessage: NgFlashMessageService,
-      private sellsService: SellsService
+      private sellsService: SellsService,
+      private productService: ProductService
       ) {
       // console.log(this.navCtl.data);
       // console.log(this.navCtl.get('price'));
@@ -58,6 +60,9 @@ export class CheckoutComponent implements OnInit {
                         timeout: 4000,
                         type: 'info'
                     });
+                });
+                this.productService.checkoutInfo(username, this.navCtl.get('id')).subscribe(result => {
+                    console.log(result);
                 })
                 this.router.navigate(['/home']);
             }

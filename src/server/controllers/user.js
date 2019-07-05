@@ -112,6 +112,15 @@ exports.authenticate = (req, res) => {
         });
 };
 
+exports.get_one_user = (req, res, next) => {
+  User.find({email: req.params.username})
+      .then(result => {
+          res.status(200).json(result)
+      })
+      .catch(err => {
+          res.status(404).json(err)
+      })
+};
 //just if the admin want to delete the user
 exports.logout = (req, res) => {
     User.remove({ _id: req.params.userId })
@@ -145,19 +154,6 @@ exports.getAllUsers = (req, res) => {
 
 exports.update_balance = (req, res, next) => {
     let username = req.body.username;
-    // User.findOneAndUpdate(
-    //     username,
-    //     {
-    //         initialBalance: req.body.balance
-    //     },
-    //     { upsert: true }
-    // )
-    //     .then(result => {
-    //         res.status(201).json(result);
-    //     })
-    //     .catch(err => {
-    //         res.status(404).json(err);
-    //     });
     User.find({email: req.body.username})
     .exec().
     then(userDetails => {

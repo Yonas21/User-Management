@@ -55,4 +55,15 @@ export class ProductService {
     getProductFromCart() {
       return this.http.get(`${this.url}/carts`, {responseType: 'json'});
     }
+
+    checkoutInfo(username, product) {
+      const formData = new FormData();
+      formData.append('user', username);
+      formData.append('product', product);
+      const id = username + ' ' + product;
+      return this.http.post<any>(`${this.url}/checkout/${id}`, formData, {responseType: 'json'});
+    }
+    getcheckoutInfo() {
+      return this.http.get(`${this.url}/checkout`, {responseType: 'json'});
+    }
 }
