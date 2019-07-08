@@ -19,15 +19,18 @@
     <div class="container-fluid">
         <h3 class="text-heading">Hot Deals of this Month</h3>
         <div class="row">
-                    <div class="card single_product" style="width: 25rem;" *ngFor="let pro of hotDeals">
-                        <img class="card-img-top" [src]="pro.productImage" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">{{pro.name}}</h5>
-                            <p class="card-text"><span class="text-info">Price</span> {{pro.price}}</p>
-                            <a (click)="addToWishlist(pro._id)" style="margin-right: 30px" [title]="'add to wishlist'"> <i class="fa fa-heart"></i></a>
-                            <a (click)="addToCart(pro._id)"> <i class="fa fa-shopping-cart" style="margin-right: 30px" [title]="'add to cart'"></i></a>
-                            <a (click)="checkOut(pro.price, pro._id)"><i class="fa fa-check-square" [title]="'checkout the item'"></i></a>
+                    <div class="card single_product" style="width: 25rem;" *ngFor="let pro of hotDeals" >
+                        <div (click)="findProductDetail(pro._id)">
+                            <img class="card-img-top" [src]="pro.productImage" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">{{pro.name}}</h5>
+                                <p class="card-text"><span class="text-info">Price</span> {{pro.price}}</p>
+                                <a (click)="addToWishlist(pro._id)" style="margin-right: 30px" [title]="'add to wishlist'"> <i class="fa fa-heart"></i></a>
+                                <a (click)="addToCart(pro._id)"> <i class="fa fa-shopping-cart" style="margin-right: 30px" [title]="'add to cart'"></i></a>
+                                <a (click)="checkOut(pro.price, pro._id)"><i class="fa fa-check-square" [title]="'checkout the item'"></i></a>
+                            </div>
                         </div>
+
                     </div>
                     <a class="hot_deal_link" href="#"></a>
                 </div>
@@ -62,7 +65,7 @@
 <!--================Feature Product Area =================-->
 <section class="feature_products">
     <h3 class="text-heading">Featured Products</h3>
-    <div class="card single_product" style="width: 25rem;" *ngFor="let pro of products">
+    <div class="card single_product" style="width: 25rem;" *ngFor="let pro of products" (click)="findProductDetail(pro._id)">
         <img class="card-img-top" [src]="pro.productImage" alt="Card image cap">
         <div class="card-body">
             <h5 class="card-title">{{pro.name}}</h5>
@@ -94,7 +97,7 @@
                         <input type="email" name="EMAIL" placeholder="Email address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email address'"
                                required="">
                         <button type="submit" class="newsl-btn" >Get Started</button>
-                        <div class="info"></div>
+                        <div class="info" ></div>
                     </form>
                 </div>
             </div>

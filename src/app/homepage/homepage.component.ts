@@ -86,4 +86,8 @@ export class HomepageComponent implements OnInit {
     checkOut(price, id) {
         this.navCtl.navigate('checkout', {price, id});
     }
+
+    findProductDetail(productId) {
+        this.navCtl.navigate('product_detail', {productId});
+    }
 }

@@ -5,6 +5,9 @@
     margin: 25px;
     float: left;
 }
+.single_product:hover {
+
+}
 .subscription-area {
     display:block;
     margin-top: 50px;

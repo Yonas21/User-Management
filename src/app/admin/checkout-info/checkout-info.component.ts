@@ -12,15 +12,15 @@ import {UserModel} from '../../models/user.model';
 })
 export class CheckoutInfoComponent implements OnInit {
     checkoutInfoArray = [];
+    count = 0;
   constructor(private productService: ProductService, private userService: UserService) {
       this.productService.getcheckoutInfo().subscribe((result: CheckoutInfoModel[]) => {
+          this.count = result.length;
           for (const data of result) {
               this.productService.getOneProduct(data.productInfo).subscribe((oneProduct: ProductModel) => {
-                  console.log(oneProduct);
                   this.checkoutInfoArray.push({productName: oneProduct.name});
               });
               this.userService.getAUser(data.userInfo).subscribe((oneUser: UserModel) => {
-                  console.log(oneUser[0].firstName);
                   this.checkoutInfoArray.push(
                       {id: data._id},
                       {firstName: oneUser[0].firstName},
@@ -29,6 +29,7 @@ export class CheckoutInfoComponent implements OnInit {
               });
           }
       });
+      console.log(this.checkoutInfoArray);
   }
 
   ngOnInit() {

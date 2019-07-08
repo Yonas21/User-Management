@@ -4,6 +4,7 @@ import { ProductModel } from '../models/product.model';
 import { CommentService } from '../services/comment.service';
 import {CommentModel} from '../models/comment.model';
 import * as jwt_decode from 'jwt-decode';
+import { NgxNavigationWithDataComponent } from 'ngx-navigation-with-data';
 import {ReviewModel} from '../models/review.model';
 import {ReviewResponseModel} from '../models/reviewResponse.model';
 
@@ -13,11 +14,12 @@ import {ReviewResponseModel} from '../models/reviewResponse.model';
   styleUrls: ['./product-detail.component.css']
 })
 export class ProductDetailComponent implements OnInit {
-    products: ProductModel[];
+    product: Array<ProductModel> = [];
     image: string;
     count = 0;
     sum = 0;
     overall = 0;
+    productDetails: ProductModel;
     url = 'http://localhost:4000';
     comments: Array<CommentModel> = [];
     reviews: Array<ReviewModel> = [];
@@ -27,12 +29,14 @@ export class ProductDetailComponent implements OnInit {
     username = [];
   constructor(
       private productService: ProductService,
-      private commentService: CommentService
+      private commentService: CommentService,
+      private navCtl: NgxNavigationWithDataComponent
       ) {
-      this.productService.getProducts().subscribe((result: ProductModel[]) => {
-         for (const data of result) {
-             console.log(data);
-         }
+      const id = this.navCtl.get('productId');
+      this.productService.getOneProduct(id).subscribe((singleProduct: ProductModel) => {
+         const image = `${this.url}/${singleProduct.productImage}`;
+         this.productDetails  = new ProductModel(singleProduct._id, singleProduct.name, singleProduct.price, singleProduct.color, image);
+         this.product.push(this.productDetails);
       });
       this.commentService.getComments().subscribe((result: CommentModel[]) => {
           for (const data of result) {
@@ -66,20 +70,6 @@ export class ProductDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-  }
-
-  getAllProducts() {
-      this.productService.getProducts().subscribe((data: ProductModel[]) => {
-         this.products = data;
-         console.log('data requested');
-         for (let i = 0; i < this.products.length ; i++) {
-              this.image = `http://localhost:4000/${this.products[16].productImage}`;
-              console.log(this.image);
-              console.log(this.products.length);
-          }
-
-         console.log(this.products);
-      });
   }
   addToCart() {
       console.log(`add to cart`);

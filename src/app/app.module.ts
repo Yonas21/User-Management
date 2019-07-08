@@ -18,6 +18,7 @@ import {
     FacebookLoginProvider,
     LinkedInLoginProvider
 } from 'angularx-social-login';
+import { MatTableModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { SignupComponent } from './signup/signup.component';
@@ -144,7 +145,8 @@ export function provideConfig() {
       NgMultiSelectDropDownModule.forRoot(),
       NgxPayPalModule,
       MDBBootstrapModule.forRoot(),
-      RatingModule
+      RatingModule,
+      MatTableModule
   ],
   providers: [
       UserService,

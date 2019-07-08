@@ -3,8 +3,10 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import { DeleteModel } from '../../../models/delete.model';
 import { NgFlashMessageService} from 'ng-flash-messages';
+import { ProductService } from '../../../services/product.service';
+import {ProductModel} from '../../../models/product.model';
 
-const URL = 'http://localhost:4000/products';
+const URL = 'http://localhost:4000/';
 @Component({
   selector: 'app-update-product',
   templateUrl: './update-product.component.html',
@@ -16,13 +18,20 @@ export class UpdateProductComponent implements OnInit {
         newName: new FormControl(''),
         newPrice: new FormControl('')
     });
-    files = null;
+    singleProduct: Array<ProductModel> = [];
+    product: ProductModel;
     constructor(
         private http: HttpClient,
         private formBuilder: FormBuilder,
-        private flashMessage: NgFlashMessageService
+        private flashMessage: NgFlashMessageService,
+        private productService: ProductService
     ) {
-
+        const id = window.location.pathname.substr(22, 24);
+        this.productService.getOneProduct(id).subscribe((oneProduct: ProductModel) => {
+            const image = `${URL}/${oneProduct.productImage}`;
+            this.product  = new ProductModel(oneProduct._id, oneProduct.name, oneProduct.price, oneProduct.color, image);
+            this.singleProduct.push(this.product);
+        });
     }
     ngOnInit() {
         this.productForm = this.formBuilder.group({
